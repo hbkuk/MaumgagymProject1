@@ -1,0 +1,15 @@
+[To Do]
+	- 사용자 페이지( 메인, 로그인 )
+	- 관리자 페이지
+	- ERD
+	- git
+
+[Success]
+
+	(01/20)
+	- Git Hub에 repository 생성 완료
+	- gitignore 설정 완료
+	
+	(01/21)
+	- header, footer 생성
+	- 폴더 구조 정리

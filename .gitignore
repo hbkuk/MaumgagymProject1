@@ -134,3 +134,5 @@ Temporary Items
 *.icloud
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,macos
+Maumgagym/.classpath
+Maumgagym/.settings/org.eclipse.wst.common.project.facet.core.xml

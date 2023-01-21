@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-index.jsp 페이지
+index.jsp 페이지입니다.
 </body>
 </html>

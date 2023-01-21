@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body> 
-test.jsp 입니다.
+<body>
+
 </body>
 </html>

@@ -5,7 +5,7 @@
 	if( session.getAttribute("userID") != null ) {
 		userID = ( String ) session.getAttribute("userID");
 	} else {
-		userID = "tester1";	
+		userID = "tester1";
 	}
 %>    
 <jsp:include page="./main/main.jsp">

@@ -4,10 +4,19 @@
 
 <hr/>
 	
-<div class="container">
-		<br/><br/><br/>
-		<p class="h1" >공지/이벤트 샘플 게시판</p>
-		<br/>
+		<br/><br/>
+		
+	<div class="container text-center">
+         <p class="h1 text-center" >"HOT EVENT"</p><br/>
+		 <div >
+	        <div class="col">
+	         	<img src="./images/event1_image.jpg" class="img-responsive rounded center" >
+	         </div>
+	     </div>
+    </div>
+    
+    <br/><br/>
+	<div class="container">
 		<div class="dropdown">
 			  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
 			  분류

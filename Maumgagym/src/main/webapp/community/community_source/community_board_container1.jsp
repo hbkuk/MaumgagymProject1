@@ -6,7 +6,6 @@
 
 <main>
   <div class="container py-4">
-	<h1>커뮤니티 샘플</h1> <br/>
     <div class="row align-items-md-stretch">
       <div class="col-md-6">
         <div class="h-100 p-5 text-bg-primary rounded-3">
@@ -73,7 +72,7 @@
 			<td>하태현</td>
 			<td class="text-start">🔥 2023년 계묘년 뜨는 food! 입맛과 건강을 동시에 챙기고싶으신 부운~</td>
 			<td>2023-01-22</td>
-			<td>100</td>
+			<td>150</td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
@@ -83,7 +82,7 @@
 			<td>엄기준</td>
 			<td class="text-start">🔥 2023년, 가장 주목받고 있는 운동은?!</td>
 			<td>2023-01-22</td>
-			<td>59</td>
+			<td>120</td>
 			<td>&nbsp;</td>
 		<tr>
 			<td>&nbsp;</td>

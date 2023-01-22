@@ -8,31 +8,17 @@
 		
 	<div class="container text-center">
          <p class="h1 text-center" >"HOT EVENT"</p><br/>
-		 <div >
-	        <div class="col">
-	         	<img src="./images/event1_image.jpg" class="img-responsive rounded center" >
-	         </div>
-	     </div>
+	     <a href=""><img src="./images/event1_image.jpg" class="img-responsive rounded"></a>
     </div>
     
-    <br/><br/>
+    <br/>
 	<div class="container">
-		<div class="dropdown">
-			  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-			  분류
-			  </button>
-				  <ul class="dropdown-menu">
-				    <li><a class="dropdown-item" href="#" selected>전체보기</a></li>
-				    <li><a class="dropdown-item" href="#">공지사항</a></li>
-				    <li><a class="dropdown-item" href="#">이벤트</a></li>
-				  </ul>
-		</div>
 	    <br/><br/>			
 		<table class="table table-striped table-hover text-center">
 		<tr>
 			<th scope="col">&nbsp;</th>
 			<th scope="col">번호</th>
-			<th scope="col">공지사항/이벤트</th>
+			<th scope="col">분류</th>
 			<th scope="col">제목</th>
 			<th scope="col">글쓴이</th>
 			<th scope="col">등록일</th>
@@ -41,7 +27,7 @@
 		</tr>		
 		<tr>
 			<td>&nbsp;</td>
-			<td scope="row">1</td>
+			<td scope="row">5</td>
 			<td class="text-muted">공지사항</td>
 			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
 			<td>공지사항 입니다.1</td>
@@ -52,7 +38,7 @@
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td scope="row">2</td>
+			<td scope="row">4</td>
 			<td class="text-muted">공지사항</td>
 			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
 			<td>공지사항 입니다.2</td>
@@ -75,7 +61,7 @@
 		</tr>			
 		<tr>
 			<td>&nbsp;</td>
-			<td scope="row">4</td>
+			<td scope="row">2</td>
 			<td class="text-muted">이벤트</td>
 		<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
 			<td>이벤트 입니다.1</td>
@@ -86,7 +72,7 @@
 		</tr>		
 		<tr>
 			<td>&nbsp;</td>
-			<td scope="row">5</td>
+			<td scope="row">1</td>
 			<td class="text-muted">이벤트</td>
 			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
 			<td>이벤트 입니다.2</td>
@@ -96,6 +82,18 @@
 			<td>&nbsp;</td>
 		</tr>
 	</table>
+	
+	<div class="text-end">
+			  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+			  분류
+			  </button>
+				  <ul class="dropdown-menu">
+				    <li><a class="dropdown-item" href="#">전체보기</a></li>
+				    <li><a class="dropdown-item" href="#">공지사항</a></li>
+				    <li><a class="dropdown-item" href="#">이벤트</a></li>
+				  </ul>
+	</div> 
+	
 	<br/><br/><br/>
 		<ul class="pagination justify-content-center">
 		  <li class="page-item"><a class="page-link" href="#">Previous</a></li>

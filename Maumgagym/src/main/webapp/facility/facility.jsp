@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<link href="../resources/asset/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="../resources/asset/css/search_list.css" rel="stylesheet" />
+	<link href="../resources/asset/css/facility_list.css" rel="stylesheet" />
 	<!-- Font Awesome 5 CSS -->
 	<link rel='stylesheet'
 		href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>

@@ -31,15 +31,15 @@
 		<form class="row domain-search bg-pblue">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-8">
                     <p class="h3">실시간 전체글 <span class="count">5</span>개</p>
                 </div>
-                <div class="col-md-9">
-                    <div class="input-group">
-                        <input type="search" placeholder="키워드를 입력해보세요" class="form-control mr">
-                        <span class="input-group-addon"><input type="submit" value="검색" class="btn btn-primary"></span>
-                    </div>
-                </div>
+		        <div class="col-md-4">
+		            <div class="input-group">
+		                <input type="text" id="search" class="form-control" >
+		                <button class="btn btn-outline-primary" type="button" id="btn_search">찾기</button>
+		            </div>
+		        </div>
             </div>
         </div>
     </form>

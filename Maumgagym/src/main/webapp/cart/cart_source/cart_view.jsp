@@ -1,20 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-   	<br /><br />
-	<br /><br />
+    <br>
+
 	<div class="container text-center">
+	
 		  <div class="row">
-		    <div class="col-sm-3"><h3>카트</h3></div>
+		    <div class="col-sm-3"><h3>이용권구매</h3></div>
 		    <div class="col-sm-5" ></div>
-		    <div class="col-sm-4" style="font-size: 14px">0개/0개</div>
+		    <div class="col-sm-4" style="font-size: 15px">0개/0개</div>
 		  </div>
-	<br /><br />
-  		  <div class="row">
-		    <div class="col-sm-3"><h6>이용권선택</h6></div>
-		    <div class="col-sm-5" ></div>
-		    <div class="col-sm-4"></div>
-		  </div>
+
 	
 	<br /><br />
 	<br /><br />
@@ -23,10 +18,10 @@
 	  <div class="row">
 	  <div class="col-6 col-md-2"></div>
 	  	 <div class="col-6 col-md-8">
-			<div class="card mb-3" style="max-width: 900px;">
+			<div class="card mb-3" style="max-width: 800px;">
 		 		 <div class="row g-0">
 		  		 <div class="col-md-4">
-		   		<img src="../resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg" class="owl-carousel-image img-fluid" alt="">
+		   		<img src="../resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg" class="owl-carousel-image img-fluid" alt="" style="height: 180px">
 		 </div>	
 		    <div class="col-md-8">
 		      <div class="card-body">
@@ -84,7 +79,7 @@
 							    <div class="col">80,000 원</div>
 							  </div>
 							 <div class="row">
-							    <div class="col">마음다짐 회원 할인</div>
+							    <div class="col">마음가짐 회원 할인</div>
 							    <div class="col"></div>
 							    <div class="col"></div>
 							    <div class="col">-18,000 원</div>
@@ -108,7 +103,7 @@
 							    <div class="col">240,000 원</div>
 							  </div>
 							  <div class="row">
-							    <div class="col">마음다짐 회원 할인</div>
+							    <div class="col">마음가짐 회원 할인</div>
 							    <div class="col"></div>
 							    <div class="col"></div>
 							    <div class="col">-24,000 원</div>
@@ -132,7 +127,7 @@
 							    <div class="col">299,000 원</div>
 							  </div>
 							  <div class="row">
-							    <div class="col">마음다짐 회원 할인</div>
+							    <div class="col">마음가짐 회원 할인</div>
 							    <div class="col"></div>
 							    <div class="col"></div>
 							    <div class="col">-15,000 원</div>
@@ -148,5 +143,6 @@
 		    </div>
 		    <div class="col-sm-2"></div>
 		  </div>
-		  
+	  </div>
+</div>
 	

@@ -2,8 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <%
-	//String userID = null;
-	String userID = request.getParameter("userID"); 
+	String userID = null;
+
+	if( request.getParameter( "userID" ) != null && !"null".equals( request.getParameter( "userID" ) ) ) {
+		userID = request.getParameter( "userID" );
+	} 
+	
 %>       
     <!-- header navbar -->
 
@@ -20,7 +24,7 @@
 	                <li class="nav-item px-4 navbar_992_show"><a class="nav-link" href="#!">고객센터</a></li>
 	            </ul>
 	            <%
-	            	if( userID == null ) {	
+	            	if( userID == null ) {
 	            %>
 	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
 	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>
@@ -32,10 +36,10 @@
 	            	} else { 
 	            %>
 	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
-	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">내정보</span></button>
+	              <i class="bi bi-chat-left-dots"></i>
 	            </a>
 	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
-	              <button type="button" class="btn btn-light rounded-pill"><span style="font-size:smaller;">알림</span></button>
+	              <i class="bi bi-person"></i>
 	            </a>
        	        <%
 	            	}

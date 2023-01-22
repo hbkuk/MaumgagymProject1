@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <%
-	String userID = request.getParameter("userID");     
+	String userID = null;
+	//String userID = request.getParameter("userID");
 %>
  
 <!DOCTYPE html>

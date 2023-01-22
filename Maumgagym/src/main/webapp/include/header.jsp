@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%
+	//String userID = null;
 	String userID = request.getParameter("userID"); 
 %>       
     <!-- header navbar -->

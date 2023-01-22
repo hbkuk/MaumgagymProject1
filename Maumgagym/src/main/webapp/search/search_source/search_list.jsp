@@ -23,7 +23,7 @@
 				<div class="col">
 					<div class="card h-100 shadow-sm">
 						<img
-							src=""
+							src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg"
 							class="card-img-top" alt="...">
 						<div class="label-top1 shadow-sm ">NEW</div>
 						<div class="card-body">

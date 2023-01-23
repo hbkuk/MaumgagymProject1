@@ -26,7 +26,8 @@
 	    <link rel="stylesheet" href="./resources/asset/css/owl.theme.default.min.css"/>
 	
 	    <link href="./resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
-        
+	    <!-- nav bar -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	</head>
 	
 	<body>
@@ -39,6 +40,7 @@
 	<!-- main 컨텐츠 -->
 
 	<jsp:include page="./cart_source/cart_view.jsp"/>
+	<jsp:include page="./cart_source/cart_view_jquery.jsp" />
 	<jsp:include page="../include/footer.jsp" />
 	
     

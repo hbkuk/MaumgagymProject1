@@ -112,7 +112,7 @@ ul li {
   font-weight: var(--font-weight-light);
 }
 
-/* a, 
+a, 
 button {
   touch-action: manipulation;
   transition: all 0.3s;
@@ -126,7 +126,7 @@ a {
 
 a:hover {
   color: var(--link-hover-color);
-} */
+}
 
 b,
 strong {

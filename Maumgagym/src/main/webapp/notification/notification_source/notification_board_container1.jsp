@@ -8,7 +8,7 @@
 		
 	<div class="container text-center">
          <p class="h1 text-center" >"HOT EVENT"</p><br/>
-	     <a href=""><img src="./images/event1_image.jpg" class="img-responsive rounded"></a>
+	     <a href="#"><img src="./images/event1_image.jpg" class="img-responsive rounded"></a>
     </div>
     
     <br/>

@@ -21,7 +21,7 @@
 			<div class="card mb-3" style="max-width: 800px;">
 		 		 <div class="row g-0">
 		  		 <div class="col-md-4">
-		   		<img src="../resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg" class="owl-carousel-image img-fluid" alt="" style="height: 180px">
+		   		<img src="./resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg" class="owl-carousel-image img-fluid" alt="" style="height: 180px">
 		 </div>	
 		    <div class="col-md-8">
 		      <div class="card-body">

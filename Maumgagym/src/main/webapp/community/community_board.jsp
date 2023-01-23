@@ -12,6 +12,10 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0"/>
 	<title>Insert title here</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<style type ="text/css">
 	</style>
 	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"></script>
@@ -25,6 +29,9 @@
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
 	</jsp:include>
+	
+	<!--  search  -->
+	<jsp:include page="./community_source/main_search.jsp"/>
 
 	<!-- 공지/이벤트 게시판 템플릿 -->
 	<jsp:include page="./community_source/community_board_container1.jsp"/>

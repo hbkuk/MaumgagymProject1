@@ -5,14 +5,15 @@
 <hr/>
 	
 		<br/><br/>
-		
+	<!--
 	<div class="container text-center">
          <p class="h1 text-center" >"HOT EVENT"</p><br/>
 	     <a href="#"><img src="./resources/asset/images/event1_image.jpg" style="width:1000px; height:100%;" class="img-responsive rounded"></a>
     </div>
+     -->
     <br/>
 	<div class="container">
-	    <br/><br/>
+	    <br/>
 	    <div class="text-end">
 			  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
 			  분류

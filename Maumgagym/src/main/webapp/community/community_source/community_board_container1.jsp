@@ -18,7 +18,7 @@
         <div class="h-100 p-5 bg-info border rounded-3">
           <h1>[운동] HOT 여기주목!</h1>
           <p class="h3">2023년, 가장 주목받고 있는 운동은?!</p><br/>
-          <button class="btn btn-outline-secondary" type="button">보러가기</button>
+          <button class="btn btn-outline-light" type="button">보러가기</button>
         </div>
       </div>
     </div>
@@ -41,10 +41,11 @@
 		        </div>
             </div>
         </div>
-    </form>
+       </form>
 		
 	    <br/><br/>			
-		<table class="table table-striped table-hover text-center">
+		<table class="table table-hover text-center">
+		 <thead class="table-primary">
 		<tr>
 			<th scope="col">&nbsp;</th>
 			<th scope="col">번호</th>
@@ -54,7 +55,8 @@
 			<th scope="col">등록일</th>
 			<th scope="col">조회</th>
 			<th scope="col">&nbsp;</th>
-		</tr>	
+		</tr>
+		</thead>	
 		<tr>
 			<td>&nbsp;</td>
 			<td scope="row">6</td>

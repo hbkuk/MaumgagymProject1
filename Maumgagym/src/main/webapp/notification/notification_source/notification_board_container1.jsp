@@ -12,8 +12,20 @@
     </div>
     <br/>
 	<div class="container">
-	    <br/><br/>			
-		<table class="table table-striped table-hover text-center">
+	    <br/><br/>
+	    <div class="text-end">
+			  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+			  분류
+			  </button>
+				  <ul class="dropdown-menu">
+				    <li><a class="dropdown-item" href="#">전체보기</a></li>
+				    <li><a class="dropdown-item" href="#">공지사항</a></li>
+				    <li><a class="dropdown-item" href="#">이벤트</a></li>
+				  </ul>
+		</div> 
+		<br/>
+		<table class="table table-hover text-center">
+		<thead class="table-primary">
 		<tr>
 			<th scope="col">&nbsp;</th>
 			<th scope="col">번호</th>
@@ -23,7 +35,8 @@
 			<th scope="col">등록일</th>
 			<th scope="col">조회</th>
 			<th scope="col">&nbsp;</th>
-		</tr>		
+		</tr>
+		</thead>
 		<tr>
 			<td>&nbsp;</td>
 			<td scope="row">5</td>
@@ -81,17 +94,6 @@
 			<td>&nbsp;</td>
 		</tr>
 	</table>
-	
-	<div class="text-end">
-			  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-			  분류
-			  </button>
-				  <ul class="dropdown-menu">
-				    <li><a class="dropdown-item" href="#">전체보기</a></li>
-				    <li><a class="dropdown-item" href="#">공지사항</a></li>
-				    <li><a class="dropdown-item" href="#">이벤트</a></li>
-				  </ul>
-	</div> 
 	
 	<br/><br/><br/>
 		<ul class="pagination justify-content-center">

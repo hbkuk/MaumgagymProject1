@@ -25,6 +25,7 @@
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
 	</jsp:include>
+	
 
 	<!-- 공지/이벤트 게시판 템플릿 -->
 	<jsp:include page="./community_source/community_board_container1.jsp"/>

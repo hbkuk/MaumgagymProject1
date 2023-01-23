@@ -35,7 +35,7 @@
 							<h5 class="card-title">역삼 엑스파인 필라테스</h5>
 							<div> 서울 강남구 역삼동</div>
 							<div class="text-center my-4">
-								<a href="#" class="btn btn-warning">회원권 예약</a>
+								<a href="#" class="btn btn-primary">회원권 예약</a>
 							</div>
 							<div class="clearfix mb-1">
 								<span class="float-start"><i
@@ -60,7 +60,7 @@
 							<h5 class="card-title">역삼 엑스파인 필라테스</h5>
 							<div> 서울 강남구 역삼동</div>
 							<div class="text-center my-4">
-								<a href="#" class="btn btn-warning">회원권 예약</a>
+								<a href="#" class="btn btn-primary">회원권 예약</a>
 							</div>
 							<div class="clearfix mb-1">
 								<span class="float-start"><i
@@ -85,7 +85,7 @@
 							<h5 class="card-title">역삼 엑스파인 필라테스</h5>
 							<div> 서울 강남구 역삼동</div>
 							<div class="text-center my-4">
-								<a href="#" class="btn btn-warning">회원권 예약</a>
+								<a href="#" class="btn btn-primary">회원권 예약</a>
 							</div>
 							<div class="clearfix mb-1">
 								<span class="float-start"><i
@@ -110,7 +110,7 @@
 							<h5 class="card-title">역삼 엑스파인 필라테스</h5>
 							<div> 서울 강남구 역삼동</div>
 							<div class="text-center my-4">
-								<a href="#" class="btn btn-warning">회원권 예약</a>
+								<a href="#" class="btn btn-primary">회원권 예약</a>
 							</div>
 							<div class="clearfix mb-1">
 								<span class="float-start"><i

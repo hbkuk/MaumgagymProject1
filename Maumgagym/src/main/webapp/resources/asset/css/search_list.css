@@ -147,8 +147,8 @@ body {
 	}
 }
 
-.btn-warning {
-	background: none #4d79ff;
+.btn1 {
+	background: #4d79ff;
 	color: #ffffff;
 	fill: #ffffff;
 	border: none;
@@ -158,8 +158,8 @@ body {
 	border-radius: 100px
 }
 
-.btn-warning:hover {
-	background: none #1a53ff;
+.btn1:hover {
+	background: #1a53ff;
 	color: #ffffff;
 	box-shadow: -1px 6px 13px rgba(26, 83, 255, 0.45)
 }

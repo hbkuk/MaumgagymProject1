@@ -17,7 +17,7 @@
 		</div>
 	</form>
 	<div class="caption">
-		<a href="./signUp.jsp">아직 회원이 아니세요?</a>
+		<a href="./createAccountPage.jsp">아직 회원이 아니세요?</a>
 	</div>
 	<div class="caption">
 		<a href="./forgetId.jsp">아이디가 기억나지 않으세요?</a> | <a href="./forgetPw.jsp">비밀번호가 기억나지 않으세요?</a>

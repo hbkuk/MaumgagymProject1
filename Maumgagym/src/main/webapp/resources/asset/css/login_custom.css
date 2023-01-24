@@ -18,6 +18,8 @@ body::before {
     background: #fff;
 }
 
+/* login page */
+
 .login_form {
   position: relative;
   z-index:  2;
@@ -95,6 +97,4 @@ h1 {
 	text-decoration: underline;
 }
 
-
-
-
+/* /login page */

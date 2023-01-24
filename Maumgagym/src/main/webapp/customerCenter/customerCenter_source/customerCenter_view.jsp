@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
         <br><br>
         <div class="container">
-								  <a href="#gym"button type="button" class="btn btn-outline-primary">운동시설</a></button>
 
 
 <!-- nav bar -->

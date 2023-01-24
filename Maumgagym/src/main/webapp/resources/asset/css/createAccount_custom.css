@@ -4,6 +4,20 @@ a {
     color: #222;
 }
 
+#logoContainer {
+
+  text-align: center;
+  padding-bottom: 30px;
+	
+}
+
+img#logo {
+
+  width: 270px;
+  aspect-ratio: auto 1/1;
+	
+}
+
 .member {
     /* border: 1px solid #000; */
     width: 500px;

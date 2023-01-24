@@ -8,8 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<title>Maumgagym</title>
 	    <link href="./resources/asset/css/createAccount_custom.css" rel="stylesheet"/>
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./resources/asset/css/bootstrap.min.css" rel="stylesheet" />
         <!-- jquery-->
         <script src="http://code.jquery.com/jquery-latest.js"></script> 
 		<script type="text/javascript">

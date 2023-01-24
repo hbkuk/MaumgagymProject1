@@ -2,29 +2,43 @@
     pageEncoding="UTF-8"%>
         <br><br>
         <div class="container">
-				<div class="d-flex align-items-start">
-				  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-					    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">자주 묻는 질문(FAQ)</button>
-					    <br>
-					    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">1:1 문의하기</button>
-				  </div>
-				  <div class="tab-content" id="v-pills-tabContent">
-				  
-				  <!-- FAQ -->
-				    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-				    
-				     <div class="tab-wrapper">
-				     		<div class="container">
-		
-							    <div class="btn-group" role="group" aria-label="Basic outlined example">
-								  <a href="#maumgagym"button type="button" class="btn btn-outline-primary">마음가짐</a></button>
-								  <a href="#gym"button type="button" class="btn btn-outline-primary">운동시설</a></button>
-								  <a href="#trainer"button type="button" class="btn btn-outline-primary">트레이너</a></button>
-								  <a href="#pay" button type="button" class="btn btn-outline-primary">결제/환불</a></button>
-								  <a href="#member" button type="button" class="btn btn-outline-primary">회원</a></button>
-								</div>
-								<br><br><br>
-								 <div class="qna-wrapper" id="maumgagym">
+
+
+<!-- nav bar -->
+				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">자주 묻는 질문(FAQ)</button>
+				  </li>
+				  &emsp;
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">1:1 문의하기</button>
+				  </li>
+				</ul>
+				
+				<br><br><br>
+			<div class="tab-content" id="pills-tabContent">
+				
+				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+				  <!-- FAQ nav -->
+							  <ul class="nav nav-tabs nav-justified">
+							    <li class="nav-item">
+							      <a class="nav-link" href="#maumgagym">마음가짐</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" href="#gym">운동시설</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" href="#trainer">트레이너</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" href="#pay">결제/환불</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" href="#member">회원</a>
+							    </li>
+							  </ul>
+								  <div class="qna-wrapper" id="maumgagym">
+								  <br><br><br>
 						            <h3>Q. 마음가짐은 어떤 서비스인가요?</h3>
 						            <div>
 						                A. 마음가짐은 운동시설 정보를 알고 싶을 때, 원하는 운동시설의 정보를 간편하게 얻고 불편한 상담 없이 터치 몇 번으로 바로 결제까지 할 수 있는 서비스입니다.
@@ -302,14 +316,11 @@
 						                단, 회원권 이용 중에는 탈퇴가 불가능하며, 회원권 이용기간이 종료된 이후에 탈퇴가 가능합니다.
 						            </div>
 						        </div>
-			
-			    		  </div>
-			    	  </div>
-					    
-				    </div>
-				    <!-- 1:1문의하기 -->
-				    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-				    	<table class="table table-striped"  style="table-layout: fixed">
+						        
+						    
+				  </div>
+				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+				  		<table class="table table-striped"  style="table-layout: fixed">	
 								<tr>
 									<th class="text-center" width="5%">글번호</th>
 									<th class="text-center" width="5%">카테고리</th>
@@ -325,8 +336,16 @@
 									<td class="text-center">답변대기</td>
 								</tr>
 						</table>
-				   	 </div>
-				  </div>
+						<br>
+						<!-- button -->
+							 <div class="col-lg-12 col-sm-12 text-lg-end text-center">
+							 <button type="button" class="btn btn-outline-primary">작성하기</button>
+							 </div>
+					</div>
+					
+					
 			</div>
-	 </div>
-	
+		</div>
+		
+        
+        

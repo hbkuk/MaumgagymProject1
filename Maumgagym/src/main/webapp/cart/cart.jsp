@@ -40,7 +40,7 @@
 	<!-- main 컨텐츠 -->
 
 	<jsp:include page="./cart_source/cart_view.jsp"/>
-	<jsp:include page="./cart_source/cart_view_jquery.jsp" />
+	<jsp:include page="./jquery/cart_view_jquery.jsp" />
 	<jsp:include page="../include/footer.jsp" />
 	
     

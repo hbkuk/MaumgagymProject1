@@ -43,6 +43,7 @@
 		    <div class="col-sm-8">
 		    		<nav>
 					  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+					  <!-- jquery 버튼 영역 -->
 					    <button1 class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">1개월</button1>
 					    <button2 class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">3개월</button2>
 					    <button3 class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">6개월</button3>

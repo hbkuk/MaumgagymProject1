@@ -33,12 +33,11 @@
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
 	</jsp:include>	
-	<jsp:include page="./customerCenter_source/main_search.jsp"/>
+	<jsp:include page="./cart_source/main_search.jsp"/>
 	
 	
 	<!-- main 컨텐츠 -->
-
-	<jsp:include page="./customerCenter_source/customerCenter_view.jsp"/>
+	<jsp:include page="./cart_source/pay_view.jsp"/>
 	<jsp:include page="../include/footer.jsp" />
 	
 

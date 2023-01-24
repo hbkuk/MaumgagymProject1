@@ -3,7 +3,9 @@
 <form action="./signUp_Json/signUp_ok.jsp" id = "sfrm" method="post" name="sfrm" >
 	<div class="member">
 	    <!-- 1. 로고 -->
-	    <h1><a href="./homePage.jsp"><img class="logo" src="./resources/asset/images/logo_1.jpg"/></a></h1>
+	   	<div id = "logoContainer">
+			<a href="./homePage.jsp"><img id = "logo" src="./resources/asset/images/logo_1.jpg"/></a>
+		</div>
 	
 	    <!-- 2. 필드 -->
 	    <div class="field">

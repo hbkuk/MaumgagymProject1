@@ -7,15 +7,11 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<title>Maumgagym</title>
-	    <link href="./resources/asset/css/login_custom.css" rel="stylesheet"/>
+	    <link href="./resources/asset/css/search_custom.css" rel="stylesheet"/>
+	    <script src="http://code.jquery.com/jquery-latest.js"></script> 
 	</head>
 	
 	<body>
-
-	<jsp:include page="./login_source/login_form.jsp"/>
-
-    <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
-   	<!-- Bootstrap core JS-->
-    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
+	<jsp:include page="./searchPassword_source/searchPassword_form.jsp"/>
 	</body>
 </html> 

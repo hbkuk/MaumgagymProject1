@@ -1,2 +1,49 @@
 <데이터베이스 테이블&컬럼명>
 
+<<하태현>> 
+create table tag (
+	seq    	INT  			PRIMARY KEY AUTO_INCREMENT,
+	name    VARCHAR(10)   	NOT NULL
+);
+
+insert into tag (tag_name) values ('마음가짐 추천');
+
+
+create table member (
+	seq     INT 	unsigned  	PRIMARY KEY AUTO_INCREMENT,
+	nickname  	    VARCHAR(10)	 	NOT NULL,
+	id  		    VARCHAR(10) 	NOT NULL,
+	password        VARCHAR(10) 	NOT NULL,
+	member_name 	VARCHAR(5) 		NOT NULL,
+	birth 		    VARCHAR(10)  	NOT NULL,
+	gender 	      	VARCHAR(2) 		NOT NULL,
+	email 	        VARCHAR(20) 	NOT NULL
+);
+
+insert into member values(0,'티안쓰안쓰' , 'xogus1484' , '1234' , '하태현', '1993-03-24' , '여' , 'xogus1484@naver.com' );
+
+
+create table member_login(
+	seq    	 	 BIGINT  	unsigned 	  PRIMARY KEY  AUTO_INCREMENT,
+	date  	     DATETIME  			 	  NOT NULL,
+	ip           VARCHAR(15)  		      NOT NULL,
+	member_seq   INT   		unsigned, 
+	CONSTRAINT FOREIGN KEY (member_seq)  REFERENCES member (member_seq)
+);
+
+
+insert into member_login values (0, now() , '000.000.000.000' , 1); 
+
+create table review (
+	seq 		 	INT		 unsigned  		PRIMARY KEY AUTO_INCREMENT,
+	subject  		VARCHAR(50)  			NOT NULL,
+	content  		VARCHAR(2000) 			NOT NULL,
+	date  			DATETIME 				NOT NULL,
+	writer  		VARCHAR(12)  			NOT NULL,
+	star_score  	FLOAT(2,1)  			NOT NULL,
+	status  		INT(2) 					NOT NULL,
+	글번호 			INT ,
+	CONSTRAINT FOREIGN KEY (글번호)  REFERENCES 글번호테이블 (글번호)
+);
+
+insert into review values (0, '리뷰제목' , '리뷰내용', now() , '글쓴이' , 5.0 , 1 , 1 );

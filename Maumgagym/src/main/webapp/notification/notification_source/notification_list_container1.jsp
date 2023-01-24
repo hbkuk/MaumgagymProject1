@@ -4,7 +4,7 @@
 
 <hr/>
 	
-		<br/><br/>
+	<br/><br/>
 	<!--
 	<div class="container text-center">
          <p class="h1 text-center" >"HOT EVENT"</p><br/>
@@ -58,7 +58,7 @@
 			<td scope="row">5</td>
 			<td class="text-muted">공지사항</td>
 			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
-			<td>공지사항 입니다.1</td>
+			<td><a href="./notification_viewPage.jsp" style="text-decoration-line: none;">공지사항 입니다.1</a></td>
 			<td>하태현</td>
 			<td>2017-01-31</td>
 			<td>0</td>	

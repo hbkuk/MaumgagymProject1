@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
     
 
-<jsp:include page="./notification/notification_board.jsp" />
+<jsp:include page="./community/community_view.jsp" />
     

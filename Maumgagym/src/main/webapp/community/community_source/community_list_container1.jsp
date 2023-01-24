@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<hr/><br/><br/>
+<hr/><br/>
 
 <main>
   <div class="container py-4">
@@ -62,7 +62,7 @@
 			<td scope="row">6</td>
 			<td class="text-muted">공지</td>	
 			<td>마음가짐</td>
-			<td class="text-start fw-bold">✔️ 커뮤니티 관련 공지사항 입니다. 반드시 확인해주시고 이용해주세요 :)</td>
+			<td class="text-start fw-bold"><a href="./community_viewPage.jsp" style="text-decoration-line: none;">✔️ 커뮤니티 관련 공지사항 입니다. 반드시 확인해주시고 이용해주세요 :)</a></td>
 			<td>2023-01-01</td>
 			<td>543</td>
 			<td>&nbsp;</td>
@@ -118,6 +118,10 @@
 			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
 		</tr>
 	</table>
+			<div class="text-end">
+				   <input type="button" value="쓰기" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='./community_write.jsp'"/>
+			</div>
+	
 	<br/><br/><br/>
 		<ul class="pagination justify-content-center">
 		  <li class="page-item"><a class="page-link" href="#">Previous</a></li>

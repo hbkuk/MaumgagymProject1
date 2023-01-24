@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-	String userID = request.getParameter("userID"); 
+	String userID = null;
 %>   
 <!DOCTYPE html>
 <html>
@@ -16,6 +16,7 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="./resources/asset/css/notification.css" rel="stylesheet" type="text/css" />
 	<style type ="text/css">
 	</style>
 	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"></script>
@@ -31,11 +32,11 @@
 	</jsp:include>
 	
 	<!--  search  -->
-	<jsp:include page="./community_source/main_search.jsp"/>
-
-	<!-- 공지/이벤트 게시판 템플릿 -->
-	<jsp:include page="./community_source/community_board_container1.jsp"/>
+	<jsp:include page="./notification_source/main_search.jsp"/>
 	
+	<!-- 공지/이벤트 게시판 템플릿 -->
+	<jsp:include page="./notification_source/notification_list_container1.jsp"/>
+
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 	

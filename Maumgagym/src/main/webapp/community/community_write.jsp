@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+	pageEncoding="UTF-8"%>
 <%
 	String userID = null;
 %>   
@@ -16,28 +15,42 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<style type ="text/css">
-	</style>
-	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"></script>
+    <link href="./resources/asset/css/community.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"> </script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-	<script type ="text/javascript">
-	</script>
+	  
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+	 <!-- 서머노트를 위해 추가해야할 부분  -->
+	 <script src="./community/summerNote/summernote-lite.js"></script>
+	 <script src="./community/summerNote/summernote-ko-KR.js"></script>
+	 <link rel="stylesheet" href="./community/summerNote/summernote-lite.css">
 </head>
 <body>
-    
-    <!--  header -->
+
+	<!--  header -->
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
 	</jsp:include>
 	
 	<!--  search  -->
-	<jsp:include page="./notification_source/main_search.jsp"/>
+	<jsp:include page="./community_source/main_search.jsp"/>
 	
-	<!-- 공지/이벤트 게시판 템플릿 -->
-	<jsp:include page="./notification_source/notification_board_container1.jsp"/>
+	<!-- write 페이지 -->
+	<jsp:include page="./community_source/community_write_container1.jsp"/>
 
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 	
+	
+	
+	<script>
+		$('#summernote').summernote({
+			  height: 450,
+			  lang: "ko-KR"
+			});
+	 </script>
+
 </body>
 </html>

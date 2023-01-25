@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <br><br>
+    
+    <hr><br><br>
         <div class="container">
 	        <div class="container text-center">
 
@@ -207,6 +208,7 @@
 			    
 			    
 			      <!-- 여기까지 col4 -->
-			  </div>
+				  </div>
+  		  	  <br><br>
 			</div>
         </div>

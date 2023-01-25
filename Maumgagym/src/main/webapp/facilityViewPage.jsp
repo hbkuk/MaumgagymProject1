@@ -9,6 +9,6 @@
 	}
 %>        
 
-<jsp:include page="./facility/facility.jsp">
+<jsp:include page="./facility/facilityView.jsp">
 	<jsp:param name="userID" value="<%= userID %>"/>
 </jsp:include>

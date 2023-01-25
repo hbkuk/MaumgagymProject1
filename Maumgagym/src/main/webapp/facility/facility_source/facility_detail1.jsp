@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <hr />
-<div class="container">
+<div class="container mb-5">
 	<div class="row justify-content-center">
 
 		<div class="col-lg-10 col-12">
@@ -50,7 +50,7 @@
 							</select>
 						</div>
 						
-						<button type="button" class="btn btn-primary w-100">회원권 예약</button>
+						<button type="button" class="btn btn-primary btn-lg w-100">회원권 예약</button>
 					</div>
 				</div>
 			</div>

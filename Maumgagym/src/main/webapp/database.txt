@@ -187,3 +187,60 @@ insert into pic_tb values(0, 'image2.png', 5, 2);
 insert into pic_tb values(0, 'image3.png', 10, 3);
 
 =======================================================================
+
+
+
+
+
+<댓글>  comment
+
+create table comment (
+seq int primary key auto_increment,
+content varchar(1000) not null,
+writer varchar(50) not null,
+wdate datetime not null,
+status int not null,
+board_seq
+CONSTRAINT FOREIGN KEY (board_seq)  REFERENCES board (board_seq)
+);
+
+insert into comment values(0, "가나다라", "글쓴이", now(), 1, 0);
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+<댓글 그룹 번호> comment_group
+
+create table comment_group(
+gcm int not null,
+board_seq,
+gcms int not null,
+gcml int not null
+CONSTRAINT FOREIGN KEY (글번호)  REFERENCES 글번호테이블 (글번호)
+);
+
+insert into g_comment values(0, last_insert_id(), 0, 0);
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+<댓글 수정> comment_modify
+
+
+create table comment_modify(
+seq int not null primary key auto_increment,
+modify_seq int not null,
+modify_date datetime not null
+);
+
+insert into mdfy_comment values(0, 0, now());
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+<댓글 삭제> comment_delete
+
+
+
+create table comment_delete(
+seq int not null primary key auto_increment,
+delete_seq int not null,
+delete_date datetime not null
+);
+
+insert into del_comment values(0, 0, now());

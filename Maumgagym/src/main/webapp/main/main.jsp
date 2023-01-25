@@ -37,6 +37,9 @@
 	<!-- main 컨텐츠 -->
 
 	<jsp:include page="./main_source/main_view.jsp"/>
+
+
+	<!-- /main 컨텐츠 -->
 	<jsp:include page="../include/footer.jsp" />
 	
    	<!-- Bootstrap core JS-->

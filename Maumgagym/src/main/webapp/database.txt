@@ -164,7 +164,7 @@ partner
 	sido			varchar(100)	not null
 	gugun			varchar(100)	
 	roadname		varchar(100)	not null
-	buildingnumber	varchar(100)	not null
+	buildingnumber		varchar(100)	not null
 	address			varchar(100)	not null
 	board_seq		int				FK, not null 	
 
@@ -174,9 +174,8 @@ insert into partner_tb values(0, '역삼 엑스파인 필라테스', '서울특�
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-
-사진
-pic
+이미지
+image
 	seq			int				PK, auto_increment
 	name		varchar(200)	not null
 	size		int				not null

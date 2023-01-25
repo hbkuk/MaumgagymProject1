@@ -4,9 +4,11 @@
 
 <hr/>
 	
-	<br/><br/><br/><br/>
-	<div class="container">
+	<br/><br/><br/>
+	<div class="container px-3 px-lg-5">
 			<!--게시판-->
+			<p class="h2" style="font-weight: bold;">제목이 들어감.</p>
+			<br/><br/>
 			<div class="board_view">
 				<table class="table text-start table-bordered">
 				<tr>
@@ -32,9 +34,9 @@
 					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='./communityPage.jsp'" />
 				</div>
 				<div class="col-md-6 text-end">
-					<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="" />
-					<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="" />
-					<input type="button" value="쓰기" class="btn btn-primary" style="cursor: pointer;" onclick="" />
+					<input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="location.href='./community_modifyPage.jsp'" />
+					<input type="button" value="삭제" class="btn btn-outline-danger" style="cursor: pointer;" onclick="" />
+				<!--<input type="button" value="쓰기" class="btn btn-outline-info" style="cursor: pointer;" onclick="" />  -->	
 				</div> 
 			</div>
 			<!--//게시판-->

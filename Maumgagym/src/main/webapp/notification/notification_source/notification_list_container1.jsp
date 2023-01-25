@@ -12,13 +12,14 @@
     </div>
      -->
     <br/>
-	<div class="container">
-	    <br/>
+	<div class="container px-3 px-lg-5">
+        <p class="h2" style="font-weight: bold;">공지사항/이벤트</p>
+	    <br/><br/>
 	    <form class="row domain-search bg-pblue">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="h4">실시간 전체글 <span class="count">5</span>개</p>
+                    <p class="h5">실시간 전체글 <span class="count">5</span>개</p>
                 </div>
 			    <div class="col-md-2 text-end">
 					  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
@@ -113,11 +114,11 @@
 	
 	<br/><br/><br/>
 		<ul class="pagination justify-content-center">
-		  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+		  <li class="page-item"><a class="page-link" href="#"><</a></li>
 		  <li class="page-item active"><a class="page-link" href="#">1</a></li>
 		  <li class="page-item"><a class="page-link" href="#">2</a></li>
 		  <li class="page-item"><a class="page-link" href="#">3</a></li>
-		  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+		  <li class="page-item"><a class="page-link" href="#">></a></li>
 		</ul>
 	</div>	
 </div>

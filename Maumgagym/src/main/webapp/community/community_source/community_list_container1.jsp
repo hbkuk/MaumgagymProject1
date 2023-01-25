@@ -2,10 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<hr/><br/>
+<hr/><br/><br/>
 
 <main>
-  <div class="container py-4">
+  <div class="container px-3 px-lg-5">
+  <br/>
+ <p class="h2" style="font-weight: bold;">커뮤니티</p><br/><br/>
     <div class="row align-items-md-stretch">
       <div class="col-md-6">
         <div class="h-100 p-5 text-bg-primary rounded-3">
@@ -25,13 +27,13 @@
   </div>
 </main>
 
-<div class="container">
-		<br/>
+<div class="container px-3 px-lg-5">
+		<br/><br/>
 		<form class="row domain-search bg-pblue">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <p class="h4">실시간 전체글 <span class="count">5</span>개</p>
+                    <p class="h5">실시간 전체글 <span class="count">5</span>개</p>
                 </div>
 		        <div class="col-md-4">
 		            <div class="input-group">
@@ -43,7 +45,7 @@
         </div>
        </form>
 		
-	    <br/><br/>			
+	    <br/>		
 		<table class="table table-hover text-center">
 		 <thead class="table-primary">
 		<tr>
@@ -124,11 +126,11 @@
 	
 	<br/><br/><br/>
 		<ul class="pagination justify-content-center">
-		  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+		  <li class="page-item"><a class="page-link" href="#"><</a></li>
 		  <li class="page-item active"><a class="page-link" href="#">1</a></li>
 		  <li class="page-item"><a class="page-link" href="#">2</a></li>
 		  <li class="page-item"><a class="page-link" href="#">3</a></li>
-		  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+		  <li class="page-item"><a class="page-link" href="#">></a></li>
 		</ul>
 	</div>	
 </div>

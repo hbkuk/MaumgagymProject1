@@ -5,7 +5,7 @@
 <hr/>
 	
 	<br/><br/><br/><br/>
-	<div class="container">
+	<div class="container px-3 px-lg-5">
 			<!--게시판-->
 			<div class="board_view">
 				<table class="table text-start table-bordered">

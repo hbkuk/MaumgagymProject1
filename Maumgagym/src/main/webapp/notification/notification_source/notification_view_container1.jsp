@@ -4,9 +4,11 @@
 
 <hr/>
 	
-	<br/><br/><br/><br/>
-	<div class="container">
+	<br/><br/><br/>
+	<div class="container px-3 px-lg-5">
 			<!--게시판-->
+			<p class="h2" style="font-weight: bold;">제목이 들어감.</p>
+			<br/>
 			<div class="board_view">
 				<table class="table text-start table-bordered">
 				<tr>

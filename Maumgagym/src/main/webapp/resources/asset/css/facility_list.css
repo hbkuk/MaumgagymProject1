@@ -26,18 +26,29 @@ body {
 	max-width: 1550px
 }
 
-.nav-pill .nav-link.active {
-    color: #404040;
-    background-color: light;
+.d-flex .flex-column {
+	font-weight: bold;
+}
+ 
+.nav-pill .nav-link {
+	color: #000000;
+	font-size: 20px;
+	border-radius: 10px;
+	padding-bottom: 15px;
+}
+
+.active:hover {
+	background-color: #1a53ff;
+	box-shadow: -1px 6px 19px rgba(77, 121, 255, 0.35);
 }
 
 .nav .nav-item {
 	padding-bottom: 5px;
 }
-.nav-item:hover {
-	transform: scale(1.05);
-	box-shadow: 0 5px 10px rgba(0, 0, 0, .06), 0 2px 4px rgba(0, 0, 0, .03);
-	border-radius: 0.5rem;
+
+.category .nav-link .active {
+	color: #000000;
+	background-color: #ccebff !important;
 }
 
 .card {

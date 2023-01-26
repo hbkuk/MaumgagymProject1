@@ -36,25 +36,29 @@
 
 					<div class="col-lg-7 col-12">
 						<div class="custom-block-info">
-
-							<!-- 문제 -->
+<!-- 찜하기&링크 -->
 							<div class="mb-2 pb-3">
+									<!-- 업체이름 -->
 								<h3 class="mb-3">
-									우리집 근처 운동시설 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <span
-										class="material-symbols-sharp"> add_reaction </span> <span
-										class="material-symbols-outlined"> share </span>
+									을지로 헬스보이짐&GDR아카데미
 								</h3>
+							
+							<!-- 별 문제 -->
+								<div class="mb-2 pb-3">
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span>&emsp;<h6 style="display:inline">5.0</h6>
+								</div>
 							</div>
-							<!-- 문제 -->
+							<div class="text-end">
+							    <i class="bi-heart" style="font-size:25px; color: red; cursor: pointer;"></i>
+								&nbsp;
+								<span class="material-symbols-outlined"> share </span>
+							</div>
+							<br>
 							<div class="mb-2 pb-3">
-								<h6>5.0</h6>
-								<span class="material-symbols-outlined"> star_rate </span> <span
-									class="material-symbols-outlined"> star_rate </span> <span
-									class="material-symbols-outlined"> star_rate </span> <span
-									class="material-symbols-outlined"> star_rate </span> <span
-									class="material-symbols-outlined"> star_rate </span>
-							</div>
-							<!-- 문제 -->
 							<p class="fw-bold">후기</p>
 							<div class="card">
 								<div class="card-body">시설이 좋아요</div>
@@ -70,7 +74,6 @@
 									<option value="3">6개월</option>
 									<option value="3">1년</option>
 								</select>
-							</div>
 						</div>
 					</div>
 				</div>

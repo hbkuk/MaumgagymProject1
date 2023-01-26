@@ -20,33 +20,33 @@
                                                 <thead>
                                                     <tr>
                                                         <th>제목</th>
-                                                        <th>작성자</th>
+                                                        <th class="w-25 text-end">작성자</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="text-bold-500">제목 ...1</td>
-                                                        <td>닉네임 1</td>
+                                                        <td class="text-bold-500">제목이 ......... 길 수도 있을테니 이정도 크기로?</td>
+                                                        <td class="text-end">닉네임 1</td>
 
                                                     </tr>
                                                     <tr>
                                                      	<td class="text-bold-500">제목 ...2</td>
-                                                        <td>닉네임 2</td>
+                                                        <td class="text-end">닉네임 2</td>
 
                                                     </tr>
                                                     <tr>
                                                      	<td class="text-bold-500">제목 ...3</td>
-                                                     	<td>닉네임 3</td>
+                                                     	<td class="text-end">닉네임 3</td>
 
                                                     </tr>
                                                     <tr>
                                                     	<td class="text-bold-500">제목 ...4</td>
-                                                        <td>닉네임 4</td>
+                                                        <td class="text-end">닉네임 4</td>
 
                                                     </tr>
                                                     <tr>
                                                    		<td class="text-bold-500">제목 ...5</td>
-                                                   		<td>닉네임 5</td>
+                                                   		<td class="text-end">닉네임 5</td>
 
                                                     </tr>
                                                 </tbody>
@@ -70,33 +70,33 @@
                                                 <thead>
                                                     <tr>
                                                         <th>제목</th>
-                                                        <th>작성자</th>
+                                                        <th class="w-25 text-end">작성자</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="text-bold-500">제목 ...1</td>
-                                                        <td>닉네임 1</td>
+                                                        <td class="text-bold-500">제목이 ......... 길 수도 있을테니 이정도 크기로?</td>
+                                                        <td class="text-end">닉네임 1</td>
 
                                                     </tr>
                                                     <tr>
                                                      	<td class="text-bold-500">제목 ...2</td>
-                                                        <td>닉네임 2</td>
+                                                        <td class="text-end">닉네임 2</td>
 
                                                     </tr>
                                                     <tr>
                                                      	<td class="text-bold-500">제목 ...3</td>
-                                                     	<td>닉네임 3</td>
+                                                     	<td class="text-end">닉네임 3</td>
 
                                                     </tr>
                                                     <tr>
                                                     	<td class="text-bold-500">제목 ...4</td>
-                                                        <td>닉네임 4</td>
+                                                        <td class="text-end">닉네임 4</td>
 
                                                     </tr>
                                                     <tr>
                                                    		<td class="text-bold-500">제목 ...5</td>
-                                                   		<td>닉네임 5</td>
+                                                   		<td class="text-end">닉네임 5</td>
 
                                                     </tr>
                                                 </tbody>

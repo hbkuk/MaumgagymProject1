@@ -42,19 +42,18 @@
 								<h3 class="mb-3">
 									을지로 헬스보이짐&GDR아카데미
 								</h3>
-							</div>
-							<!-- 별 문제 -->
-						
-							<div class="mb-2 pb-3">
-								<span class="material-symbols-outlined"> star_rate </span> 
-								<span class="material-symbols-outlined"> star_rate </span> 
-								<span class="material-symbols-outlined"> star_rate </span> 
-								<span class="material-symbols-outlined"> star_rate </span> 
-								<span class="material-symbols-outlined"> star_rate </span>&emsp;<h6 style="display:inline">5.0</h6>
-							</div>
 							
+							<!-- 별 문제 -->
+								<div class="mb-2 pb-3">
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span> 
+									<span class="material-symbols-outlined"> star_rate </span>&emsp;<h6 style="display:inline">5.0</h6>
+								</div>
+							</div>
 							<div class="text-end">
-							    <i class="bi-heart" style="font-size:30px; color: red; cursor: pointer;"></i>
+							    <i class="bi-heart" style="font-size:25px; color: red; cursor: pointer;"></i>
 								&nbsp;
 								<span class="material-symbols-outlined"> share </span>
 							</div>

@@ -30,7 +30,7 @@
 				<td colspan="4">
 					<div class="card-header bg-light">
 					        <i class="fa-sharp fa-solid fa-comment"></i> <b>댓글달기</b>
-					</div>
+					</div><br/>
 					<div class="container">
 						<ul class="list-group list-group-flush">
 						    <li class="list-group-item">
@@ -46,7 +46,7 @@
 						    </div>-->
 							<div class="text-end">
 							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-							<button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">댓글쓰기</button>
+							<button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();"><i class="fa-solid fa-floppy-disk"></i>&nbsp;댓글쓰기</button>
 						    </div>
 						    </li>
 						</ul>

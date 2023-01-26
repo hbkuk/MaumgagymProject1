@@ -28,8 +28,9 @@
 	    <link href="./resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
 	    <!-- nav bar -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        
-        
+        <!-- 좋아요 -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
         <!-- icon -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -48,6 +49,7 @@
 
 	<jsp:include page="./view_source/view.jsp"/>
 	<jsp:include page="../include/footer.jsp" />
+	<jsp:include page="./jquery/view_jquery.jsp" />
 	
     
     <!-- JAVASCRIPT FILES -->

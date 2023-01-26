@@ -26,6 +26,33 @@
 				<tr>
 					<td colspan="4" height="320" valign="top" style="padding: 20px; line-height: 160%">내용나옴</td>
 				</tr>
+				<tr>
+				<td colspan="4">
+					<div class="card-header bg-light">
+					        <i class="fa-sharp fa-solid fa-comment"></i> <b>댓글달기</b>
+					</div>
+					<div class="container">
+						<ul class="list-group list-group-flush">
+						    <li class="list-group-item">
+						<!--<div class="row">
+							<div class="col-md-4">
+								<label for="replyId"><i class="fa-sharp fa-solid fa-user"></i></label>
+								<input type="text" class="form-control" placeholder="Enter yourId" id="replyId">
+							</div>
+							<div class="col-md-4">
+								<label for="replyPassword" class="ml-4"><i class="fa fa-unlock-alt"></i></label>
+								<input type="password" class="form-control ml-2" placeholder="Enter password" id="replyPassword">
+							</div> 
+						    </div>-->
+							<div class="text-end">
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+							<button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">댓글쓰기</button>
+						    </div>
+						    </li>
+						</ul>
+					</div>
+				</td>
+				</tr>
 				</table>
 			</div>
 			

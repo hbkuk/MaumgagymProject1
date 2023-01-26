@@ -34,7 +34,7 @@
 				<tr>
 				<td colspan="4">
 					<div class="card-header bg-light">
-					        <i class="fa-sharp fa-solid fa-comment"></i> <b>댓글달기</b>
+					       <b>0 개의 댓글</b>&nbsp;<i class="fa-sharp fa-solid fa-comment"></i>
 					</div><br/>
 					<div class="container">
 						<ul class="list-group list-group-flush">

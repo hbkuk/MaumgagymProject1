@@ -142,8 +142,12 @@
 						      </div>
 				  	</div>
 		    </div>
-		    <div class="col-sm-2"></div>
-		    <br><br>
+		    <div class="col-sm-2">
+		    </div>
+		    <br><br><br>
+					  <button type="button" class="btn btn-outline-primary btn-lg">&nbsp;더 돌아보기&nbsp;</button>
+					  &emsp;
+					  <button type="button" class="btn btn-primary btn-lg">&nbsp;결제하기&nbsp;</button>
 		  </div>
 	  </div>
 </div>

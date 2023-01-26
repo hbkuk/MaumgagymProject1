@@ -6,9 +6,14 @@
 	
 	<br/><br/><br/>
 	<div class="container px-3 px-lg-5">
-			<!--게시판-->
 			<p class="h2" style="font-weight: bold;">제목이 들어감.</p>
-			<br/><br/>
+			<div class="text-end">
+				<b>좋아요</b>
+				    <i class="bi-heart" style="font-size:30px; color: red; cursor: pointer;"></i>
+			</div>
+	</div>
+	<div class="container px-3 px-lg-5">
+			<!--게시판-->
 			<div class="board_view">
 				<table class="table text-start table-bordered">
 				<tr>
@@ -29,7 +34,7 @@
 				<tr>
 				<td colspan="4">
 					<div class="card-header bg-light">
-					        <i class="fa-sharp fa-solid fa-comment"></i> <b>댓글달기</b>
+					       <b>0 개의 댓글</b>&nbsp;<i class="fa-sharp fa-solid fa-comment"></i>
 					</div><br/>
 					<div class="container">
 						<ul class="list-group list-group-flush">

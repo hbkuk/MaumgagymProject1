@@ -28,6 +28,7 @@ body {
 
 .d-flex .flex-column {
 	font-weight: bold;
+	margin-right: 20px;
 }
  
 .nav-pill .nav-link {
@@ -38,7 +39,8 @@ body {
 }
 
 .active:hover {
-	background-color: #1a53ff;
+	color: #fff;
+	background-color: #0D6EFD;
 	box-shadow: -1px 6px 19px rgba(77, 121, 255, 0.35);
 }
 

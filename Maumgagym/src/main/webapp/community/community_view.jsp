@@ -14,8 +14,12 @@
 	<!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="./resources/asset/css/notification.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
 	<style type ="text/css">
 	</style>
 	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"></script>
@@ -38,7 +42,20 @@
 	<!-- view 페이지 -->
 	<jsp:include page="./community_source/community_view_container2.jsp"/>
 	
+ 	<script>
+        var i = 0;
+        $('i').on('click',function(){
+            if(i==0){
+                $(this).attr('class','bi-heart-fill');
+                i++;
+            }else if(i==1){
+                $(this).attr('class','bi-heart');
+                i--;
+            }
 
+        });
+
+    </script>
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 

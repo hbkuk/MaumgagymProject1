@@ -11,7 +11,30 @@
 <div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f293c216237addee3e388f7900b458a"></script>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <script>
+
+
+/* <!-- 지도 api에서 업체 정보를 마커에 지정하기 위한 스크립트 작성 
+1. html 문서가 로딩 되면 이 스크립트가 생성된다.
+2. 이 스크립트는 업체 정보를 가져오기 위함이다. */
+	
+	
+/* 	$.ajax({
+		url: './facilityList.jsp',
+		type: 'get',
+/* 			data: {
+			get 방식 전송 데이터명 : $('해당 값 선택을 위한 태그').val(),		// 지도 찾기를 눌렀을 때, 모든 지도에 facility가 표시
+		}, 
+		dataType: 'json',
+		success: function( position ) {
+			
+			position = position;
+			
+		}
+	}); */
 
 /*지도로 찾기*************************************************************************/
 
@@ -78,7 +101,7 @@ function displayMarker(locPosition, message) {
 }
 
 //마커를 표시할 위치와 title 객체 배열입니다 
-var positions = [
+/* var positions = [
     {
         title: '테스트 1 / 휴메이크 휘트니스 강남점', 
         latlng: new kakao.maps.LatLng(37.492098, 127.0297971)
@@ -87,7 +110,21 @@ var positions = [
         title: '테스트 2 / 리얼핏', 
         latlng: new kakao.maps.LatLng(37.4900845, 127.0305764)
     },
-];
+]; */
+
+var positions = $.ajax({
+					url: './facilityList.jsp',
+					type: 'get',
+				/* 			data: {
+						get 방식 전송 데이터명 : $('해당 값 선택을 위한 태그').val(),		// 지도 찾기를 눌렀을 때, 모든 지도에 facility가 표시
+					}, */
+					dataType: 'json',
+					success: function( position ) {
+						
+						position = position;
+						
+					}
+				});
 
 //마커 이미지의 이미지 주소입니다
 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 

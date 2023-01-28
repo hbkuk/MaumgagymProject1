@@ -67,13 +67,13 @@
 							<br>
 							<div class="mb-2 pb-3">
 								<p class="fw-bold">옵션 선택</p>
-								<select class="form-select" aria-label="Default select example">
-									<option selected>헬스 이용권</option>
-									<option value="1">1개월</option>
-									<option value="2">3개월</option>
-									<option value="3">6개월</option>
-									<option value="3">1년</option>
-								</select>
+					<select onChange="change(this.options[this.selectedIndex].value)" class="form-select" aria-label="Default select example">
+					 <option>::: 헬스 이용권 :::</option>
+					 <option value="selectBox01">1개월</option>
+					 <option value="selectBox02">3개월</option>
+					 <option value="selectBox03">6개월</option>
+					 <option value="selectBox04">1년</option>
+					</select>
 						</div>
 					</div>
 				</div>
@@ -245,22 +245,68 @@
 				<div class="card sticky-top" style="width: 20rem;">
 					<div class="card-header">예상결제가격</div>
 					<ul class="list-group list-group-flush text-center">
-						<li class="list-group-item"><br>
-							<p>
-								상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>270,000
-									원</span>
-							</p>
-							<p>
-								마음가짐 회원 할인&emsp;&emsp;&emsp;<span>- 60,000 원</span>
-							</p>
-							<hr> <br>
-						<p class="text-primary">
-								<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;210,000 원</b>
-							</p>
 
+								<table width="320" border="0" cellpadding="0" cellspacing="0">
+									<tr id=view1 style="display: none;">
+										<td height="30" align="left">
+										<br>
+											<p>
+												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+												<span>130,000 원</span>
+											</p>
+											<p>
+												마음가짐 회원 할인&emsp;&emsp;&emsp;
+												<span> &emsp;&emsp;&emsp;&nbsp;0 원</span>
+											</p>
+											<hr><br>
+											<p class="text-primary">
+												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>130,000 원</span></b>
+											</p></td>
+									</tr>
+									<tr id=view2 style="display: none;">
+										<td height="30" align="left"><br>
+											<p>
+												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+												<span>290,000 원</span>
+											</p>
+											<p>
+												마음가짐 회원 할인&emsp;&emsp;&emsp;
+												<span>- 20,000 원</span>
+											</p>
+											<hr> <br>
+											<p class="text-primary">
+												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>270,000 원</span></b>
+											</p></td>
+									</tr>
+									<tr id=view3 style="display: none;">
+										<td height="30" align="left"><br>
+											<p>
+												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <span>420,000 원</span>
+											</p>
+											<p>
+												마음가짐 회원 할인&emsp;&emsp;&emsp; <span>- 30,000 원</span>
+											</p>
+											<hr> <br>
+											<p class="text-primary">
+												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>390,000 원</span></b>
+											</p></td>
+									</tr>
+									<tr id=view4 style="display: none;">
+										<td height="30" align="left"><br>
+											<p>
+												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <span>620,000 원</span>
+											</p>
+											<p>
+												마음가짐 회원 할인&emsp;&emsp;&emsp; <span>- 30,000 원</span>
+											</p>
+											<hr> <br>
+											<p class="text-primary">
+												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>590,000 원</span></b>
+											</p></td>
+									</tr>
+								</table>
 
-						</li>
-						<!-- 장바구니 결제버튼 -->
+								<!-- 장바구니 결제버튼 -->
 						<li class="list-group-item">
 							<div class="d-grid gap-3">
 								<button type="button" class="btn btn-outline-primary btn-block">카트담기</button>

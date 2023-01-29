@@ -93,48 +93,36 @@
 
 			<!-- 회원권 관리-->
 			<hr class="mt-0 mb-4">
-			<div class="col-xl-12">
-				<!-- 회원권 구매 내역-->
-				<div class="card mb-4">
-					<div class="card-header fs-5 fw-bolder">회원권 구매 내역</div>
-					<div class="card-body">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img
-									src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Big)Xpine.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-							<div class="col-md-8" style="padding-left: 50px">
-								<h3 class="card-title fw-semibold">역삼 엑스파인 필라테스</h3>
-								<br>
-								<p class="card-text fs-5">6:1 필라테스 (주2회)</p>
-								<p class="card-text fs-7">
-									1개월 <span> (0월0일 ~ 0월0일)</span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 결제 내역 -->
-				<br/><br/>
-				<h5>결제 내역</h5>
-				<table class="table">
-					<tbody>
-						<tr>
-							<th scope="row">결제일</th>
-							<td>2023년1월26일</td>
-							<th>결제금액</th>
-							<td>200,000원</td>
-						</tr>
-						<tr>
-							<th scope="row">결제수단</th>
-							<td>신용카드</td>
-							<th>결제상태</th>
-							<td>결제완료</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<table class="table table-hover text-center">
+				<thead>
+					<tr>
+						<th scope="col">회원권 번호</th>
+						<th scope="col">회원 이름</th>
+						<th scope="col">회원권 기간</th>
+						<th scope="col">회원권 상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">20230001</th>
+						<td>황병국</td>
+						<td>2023.01.01 ~ 2023.01.31</td>
+						<td>만료</td>
+					</tr>
+					<tr>
+						<th scope="row">20230002</th>
+						<td>김종희</td>
+						<td>2023.02.01 ~ 2023.04.30</td>
+						<td>정상</td>
+					</tr>
+					<tr>
+						<th scope="row">20230003</th>
+						<td>하태현</td>
+						<td>2023.02.01 ~ 2023.07.31</td>
+						<td>정지</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
 			aria-labelledby="contact-tab" tabindex="0">...</div>

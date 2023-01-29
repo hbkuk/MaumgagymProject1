@@ -10,55 +10,41 @@
 <body>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-
 <script>
 
-	let myLatitude;
-	let mylongitude;
+	let myLatitude = 0;
+	let mylongitude = 0;
+	let roopNum = 0;
 	
 	function myPosition() {
 		if (navigator.geolocation) {
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		    	myLatitude = position.coords.latitude,
 		    	mylongitude = position.coords.longitude;
-		    	
-				console.log( myLatitude );
-				console.log( mylongitude );
+		    	getFacilityList( myLatitude, mylongitude ); 
+				
 		      });
+			};
 		};
-	};
-	
-	function getFacilityList() {
+		
+	function getFacilityList( myLatitude, mylongitude ) {
 		$.ajax({
-		    url:'https://dapi.kakao.com/v2/local/search/keyword.json?x=' + myLatitude + '&y=' + mylongitude + '&radius=2000&query=' + encodeURIComponent('헬스장'),
+		    url:'https://dapi.kakao.com/v2/local/search/keyword.json?x=' + mylongitude + '&y=' + myLatitude + '&radius=1000&query=' + encodeURIComponent('헬스장'),
 		    type:'GET',
 		    headers: {'Authorization' : 'KakaoAK 57707c5358471602c86ac2dd1ec80f90'},
 			success:function(data){
-				//console.log(data);
-		        //console.log( myLatitude );
-		        //console.log( mylongitude );
+				console.log(data);
+				
+				// 결과는 https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword 을 통해 정의된 항목 
 			},
 			error : function(e){
 				console.log(e);
 			}
-	});
+		});
 	};
 	
+	myPosition();
 	
-
-	async function run() {
-		
-		console.log( '시작' );
-		await myPosition();
-		console.log( myLatitude );
-		console.log( mylongitude );
-		await getFacilityList();
-		console.log( '끝' );
-		
-	}
-	
-	run();
-
 </script>
 </body>
 </html>

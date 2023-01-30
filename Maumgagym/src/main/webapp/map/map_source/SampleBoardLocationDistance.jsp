@@ -29,7 +29,7 @@
 		
 	function getFacilityList( myLatitude, mylongitude ) {
 		$.ajax({
-		    url:'https://dapi.kakao.com/v2/local/search/keyword.json?x=' + mylongitude + '&y=' + myLatitude + '&radius=1000&query=' + encodeURIComponent('필라테스'),
+		    url:'https://dapi.kakao.com/v2/local/search/keyword.json?x=' + mylongitude + '&y=' + myLatitude + '&radius=1000&query=' + encodeURIComponent('헬스장'),
 		    type:'GET',
 		    headers: {'Authorization' : 'KakaoAK 57707c5358471602c86ac2dd1ec80f90'},
 			success:function(data){

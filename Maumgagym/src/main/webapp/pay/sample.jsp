@@ -24,7 +24,9 @@
 		    IMP.request_pay({
 		      pg: "kcp.T0000",
 		      pay_method: "card",
-		      merchant_uid: "ORD20180131-0000010",   // 주문번호
+		      
+		      
+		      merchant_uid: "ORD20180131-0000012",   // 주문번호
 		      name: "노르웨이 회전 의자",
 		      amount: 64900,                         // 숫자 타입
 		      buyer_email: "gildong@gmail.com",

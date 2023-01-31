@@ -1,5 +1,93 @@
+<%@page import="com.to.member.MemberTO"%>
+<%@page import="com.to.board.BoardTO"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="javax.naming.NamingException"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	
+	request.setCharacterEncoding( "utf-8" );
+	
+	Connection conn = null;
+	ResultSet rs = null;
+	PreparedStatement pstmt = null;
+	
+	//String strDong = request.getParameter( "seq" );	// 컨트롤러 또는 파라미터를 통해서 받음.
+	String seq = "2";
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	try {
+		
+		Context initCtx = new InitialContext();
+		Context envCtx = (Context)initCtx.lookup( "java:comp/env" );
+		DataSource dataSource = (DataSource)envCtx.lookup( "jdbc/mariadb1" );
+		
+		conn = dataSource.getConnection();
+		
+		
+		System.out.println( "DB 연결 성공");
+		
+		// 쿼리문을 StringBuilder 객체를 통해 담습니다.
+		StringBuilder sbSQL = new StringBuilder();
+		
+		sbSQL.append( " select b.title, b.content, " );
+		sbSQL.append( " 	m.sido, m.gugun, m.road_name, m.building_number, m.address, m.phone, ms.name, ms.price, ms.period " );
+		sbSQL.append( " 		from board b  " );
+		sbSQL.append( " 			left outer join member m on ( b.write_seq = m.seq ) " );
+		sbSQL.append( " 				left outer join membership ms on( b.seq = ms.board_seq ) " );
+		sbSQL.append( " 					where b.seq = ? " );
+		
+		// 변수에 대입합니다.
+ 		String sql = sbSQL.toString(); 
+ 					
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, seq );
+		
+		rs = pstmt.executeQuery();
+		
+		while( rs.next()) {
+			
+			// 글
+			BoardTO bto = new BoardTO();
+			bto.setTitle( rs.getString("b.title") );
+			bto.setContent( rs.getString("b.content") );
+			
+			// 작성자(회원)
+			MemberTO mto = new MemberTO();
+			mto.setSido( rs.getString("m.sido") );
+			mto.setGugun( rs.getString("m.gugun") );
+			mto.setRoad_name( rs.getString("m.road_name") );
+			mto.setBuilding_number( rs.getString("m.building_number") );
+			mto.setAddress( rs.getString("m.address") );
+			mto.setPhone( rs.getString("m.phone") );
+			mto.setName( rs.getString("m.name") );
+			
+			
+			// 회원권 가격(boardTO에 통합)
+			//bto.setMembership_name( new String[] );
+			
+		}
+		
+	} catch( NamingException e) {
+		System.out.println( e.getMessage());
+	} catch( SQLException e) {
+		System.out.println( e.getMessage());
+	} finally {
+		if( conn != null );
+		if( pstmt != null );
+		if( rs != null );
+	}
+
+
+%>
 	
 <hr>
 <br>

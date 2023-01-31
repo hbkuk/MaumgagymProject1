@@ -14,13 +14,13 @@ public class BoardTO {
 	int write_seq;
 	String write_date;
 	String status;
-	int[] tags;
+	int tags;
 	int view_count;
 	int like_count;
-	String[] images;
-	double[] images_size;
-	String[] membership_name;
-	int[] membership_price;
-	int[] period;
+	String images;
+	double images_size;
+	String membership_name;
+	int membership_price;
+	int period;
 
 }

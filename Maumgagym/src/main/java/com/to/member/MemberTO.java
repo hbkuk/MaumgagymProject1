@@ -18,6 +18,7 @@ public class MemberTO {
 	String email;
 	
 	String zipcode;
+	String sido;
 	String gugun;
 	String road_name;
 	String building_number;

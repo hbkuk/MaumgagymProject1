@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="com.to.review.ReviewTO"%>
 <%@page import="com.to.board.MemberShipTO"%>
 <%@page import="com.to.member.MemberTO"%>
@@ -22,7 +24,7 @@
 	PreparedStatement pstmt = null;
 	
 	//String strDong = request.getParameter( "seq" );	// 컨트롤러 또는 파라미터를 통해서 받음.
-	String seq = "2";
+	String seq = "1";
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
@@ -59,12 +61,17 @@
 		
 		rs = pstmt.executeQuery();
 		
+		
+		// 각기 다른 TO를 넣기위함.
+		Map< String, Object > mainMap = new HashMap<>();
+		
 		while( rs.next()) {
 			
 			// 글
 			BoardTO bto = new BoardTO();
 			bto.setTitle( rs.getString("b.title") );
 			bto.setContent( rs.getString("b.content") );
+			mainMap.put( "bto", bto );
 			
 			// 작성자(회원)
 			MemberTO mto = new MemberTO();
@@ -75,10 +82,19 @@
 			mto.setAddress( rs.getString("m.address") );
 			mto.setPhone( rs.getString("m.phone") );
 			
+			mainMap.put( "mto", mto );
+			
+			// 리뷰
 			ReviewTO rvTO = new ReviewTO();
 			rvTO.setAvg_star_score( rs.getFloat("avg( rv.star_score )") );
 			
+			mainMap.put( "rvTO", rvTO );
+			
 		}
+		
+		//BoardTO bto = (BoardTO) mainMap.get( "bto" );
+		//System.out.println( "1" + bto.getTitle() );
+		//System.out.println( "1" + bto.getContent() );
 		
 		
 		
@@ -134,7 +150,7 @@
 		
 		while( rs.next()) {
 			
-			BoardTO bto = new BoardTO();
+			bto = new BoardTO();
 			bto.setTitle( rs.getString("b2.title") );
 			
 			
@@ -144,7 +160,6 @@
 		StringBuilder sbImage = new StringBuilder();
 		
 		// 조인을 통해 이미지 파일을 가져옵니다.
-		
 		sbImage.append( " select img.name " );
 		sbImage.append( " 		from board b left outer join image img " );
 		sbImage.append( " 			on (b.seq = img.board_seq ) " );
@@ -160,8 +175,35 @@
 		
 		while( rs.next()) {
 			
-			BoardTO bto = new BoardTO();
-			bto.setImage( rs.getString("b2.title") );			
+			bto = new BoardTO();
+			bto.setImage( rs.getString("img.name") );			
+			
+		}
+		
+		StringBuilder sbReview = new StringBuilder();
+		
+		// 조인을 통해 리뷰를 가져옵니다.
+		sbReview.append( " SELECT rv.title, rv.content, rv.write_date, rv.star_score " );
+		sbReview.append( " 		FROM review rv " );
+		sbReview.append( " 			LEFT OUTER JOIN board b " );
+		sbReview.append( " 					ON ( rv.board_seq = b.seq ) " );
+		sbReview.append( " 						where rv.board_seq = ? AND rv.status = 1" );
+		
+		// 변수에 대입합니다.
+ 		sql = sbReview.toString(); 
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, seq );
+		
+		rs = pstmt.executeQuery();
+		
+		while( rs.next()) {
+			
+			ReviewTO rvto = new ReviewTO();
+			rvto.setTitle( rs.getString("rv.title") );
+			rvto.setContent( rs.getString("rv.content") );
+			rvto.setWrite_date( rs.getString("rv.write_date") );
+			rvto.setStar_score( rs.getFloat( "rv.star_score"));
 			
 		}
 		
@@ -626,6 +668,8 @@
 			</div>
 		</div>
 	</div>
+</div>
+</div>
 </div>
 
 

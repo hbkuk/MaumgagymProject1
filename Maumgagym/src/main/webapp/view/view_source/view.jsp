@@ -68,13 +68,37 @@
 			mto.setBuilding_number( rs.getString("m.building_number") );
 			mto.setAddress( rs.getString("m.address") );
 			mto.setPhone( rs.getString("m.phone") );
-			mto.setName( rs.getString("m.name") );
 			
 			
 			// 회원권 가격(boardTO에 통합)
-			//bto.setMembership_name( new String[] );
+			bto.setMembership_name( rs.getString("ms.name") );
+			bto.setMembership_price( rs.getInt("ms.price") );
+			bto.setMembership_period( rs.getInt("ms.period") );
+			
+			
+			
+			// 출력 확인하기
+			System.out. println( bto.getTitle() );
+			System.out. println( bto.getContent() );
+			
+			System.out. println( mto.getSido() );
+			System.out. println( mto.getGugun() );
+			System.out. println( mto.getRoad_name() );
+			System.out. println( mto.getBuilding_number() );
+			System.out. println( mto.getAddress() );
+			System.out. println( mto.getPhone() );
+			System.out. println( mto.getName() );
+			
+			System.out. println( bto.getMembership_name() );
+			System.out. println( bto.getMembership_price() );
+			System.out. println( bto.getMembership_period() );
+					
+
+			
 			
 		}
+		
+
 		
 	} catch( NamingException e) {
 		System.out.println( e.getMessage());
@@ -536,5 +560,6 @@
 		</div>
 	</div>
 </div>
+
 
 

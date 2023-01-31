@@ -21,6 +21,6 @@ public class BoardTO {
 	double images_size;
 	String membership_name;
 	int membership_price;
-	int period;
+	int membership_period;
 
 }

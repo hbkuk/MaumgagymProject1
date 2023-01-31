@@ -113,6 +113,7 @@
 		}
 		
 		
+		
 		StringBuilder sbNotice = new StringBuilder();
 		
 		// 셀프 조인을 통해 업체가 작성한 공지함으로 가져옵니다.
@@ -136,6 +137,31 @@
 			BoardTO bto = new BoardTO();
 			bto.setTitle( rs.getString("b2.title") );
 			
+			
+		}
+		
+		
+		StringBuilder sbImage = new StringBuilder();
+		
+		// 조인을 통해 이미지 파일을 가져옵니다.
+		
+		sbImage.append( " select img.name " );
+		sbImage.append( " 		from board b left outer join image img " );
+		sbImage.append( " 			on (b.seq = img.board_seq ) " );
+		sbImage.append( " 					where b.seq = ? " );
+		
+		// 변수에 대입합니다.
+ 		sql = sbImage.toString(); 
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, seq );
+		
+		rs = pstmt.executeQuery();
+		
+		while( rs.next()) {
+			
+			BoardTO bto = new BoardTO();
+			bto.setImage( rs.getString("b2.title") );			
 			
 		}
 		

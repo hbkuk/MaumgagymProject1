@@ -55,7 +55,7 @@
 			<th scope="col">글쓴이</th>
 			<th scope="col">제목</th>
 			<th scope="col">등록일</th>
-			<th scope="col">조회</th>
+			<th scope="col">좋아요</th>
 			<th scope="col">&nbsp;</th>
 		</tr>
 		</thead>	

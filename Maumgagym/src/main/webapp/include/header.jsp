@@ -26,7 +26,7 @@
 	            <%
 	            	if( userID == null ) {
 	            %>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
+	            <a class="navbar-brand ps-3 navbar_992_none" href="./loginPage.jsp">
 	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>
 	            </a>
 	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
@@ -35,7 +35,7 @@
        	        <%
 	            	} else { 
 	            %>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
+	            <a class="navbar-brand ps-3 navbar_992_none" href="./searchIDPage.jsp">
 	              <i class="bi bi-chat-left-dots"></i>
 	            </a>
 	            <a class="navbar-brand ps-3 navbar_992_none" href="#">

@@ -23,5 +23,7 @@
 	</div>
 	<div class="caption">
 		<a href="./searchIDPage.jsp">아이디가 기억나지 않으세요?</a> | <a href="./searchPasswordPage.jsp">비밀번호가 기억나지 않으세요?</a>
-	</div>
+	</div><br/>
+	
+	<a href="javascript:kakaoLogin();"><img src="./member/login_source/kakao_login_medium_wide.png" style width="100%;"></a>
 </div>

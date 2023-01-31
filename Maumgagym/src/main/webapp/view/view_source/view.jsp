@@ -1,3 +1,5 @@
+<%@page import="com.to.review.ReviewTO"%>
+<%@page import="com.to.board.MemberShipTO"%>
 <%@page import="com.to.member.MemberTO"%>
 <%@page import="com.to.board.BoardTO"%>
 <%@page import="java.sql.SQLException"%>
@@ -35,19 +37,23 @@
 		
 		System.out.println( "DB 연결 성공");
 		
-		// 쿼리문을 StringBuilder 객체를 통해 담습니다.
-		StringBuilder sbSQL = new StringBuilder();
+		StringBuilder sbBoardInfo = new StringBuilder();
 		
-		sbSQL.append( " select b.title, b.content, " );
-		sbSQL.append( " 	m.sido, m.gugun, m.road_name, m.building_number, m.address, m.phone, ms.name, ms.price, ms.period " );
-		sbSQL.append( " 		from board b  " );
-		sbSQL.append( " 			left outer join member m on ( b.write_seq = m.seq ) " );
-		sbSQL.append( " 				left outer join membership ms on( b.seq = ms.board_seq ) " );
-		sbSQL.append( " 					where b.seq = ? " );
+		// 우선 글번호를 통해 기업정보를 가져옵니다.
+		// member 테이블 - board 테이블 조인 후 select 
+		sbBoardInfo.append( " select b.title, b.content, " );
+		sbBoardInfo.append( " 	m.sido, m.gugun, m.road_name, m.building_number, m.address, m.phone, avg( rv.star_score )" );
+		sbBoardInfo.append( " 			from board b  " );
+		sbBoardInfo.append( " 				left outer join member m on ( b.write_seq = m.seq ) " );
+		sbBoardInfo.append( " 					right outer join review rv " );
+		sbBoardInfo.append( " 						on( b.seq = rv.board_seq) " );
+		sbBoardInfo.append( " 							where b.seq = ? " );
+		
 		
 		// 변수에 대입합니다.
- 		String sql = sbSQL.toString(); 
- 					
+ 		String sql = sbBoardInfo.toString(); 
+ 		
+		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, seq );
 		
@@ -69,36 +75,71 @@
 			mto.setAddress( rs.getString("m.address") );
 			mto.setPhone( rs.getString("m.phone") );
 			
+			ReviewTO rvTO = new ReviewTO();
+			rvTO.setAvg_star_score( rs.getFloat("avg( rv.star_score )") );
 			
-			// 회원권 가격(boardTO에 통합)
-			bto.setMembership_name( rs.getString("ms.name") );
-			bto.setMembership_price( rs.getInt("ms.price") );
-			bto.setMembership_period( rs.getInt("ms.period") );
+		}
+		
+		
+		
+		StringBuilder sbMemberShip = new StringBuilder();
+		
+		// 우선 글번호를 통해 등록된 회원권 대한 정보를 가져옵니다.
+		sbMemberShip.append( " select ms.name, ms.price, ms.period " );
+		sbMemberShip.append( " 		from board b left outer join membership ms " );
+		sbMemberShip.append( " 			on( b.seq = ms.board_seq) " );
+		sbMemberShip.append( " 					where b.seq = ? " );
+		
+		// 변수에 대입합니다.
+ 		sql = sbMemberShip.toString(); 
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, seq );
+		
+		rs = pstmt.executeQuery();
+		
+		while( rs.next()) {
 			
+			// 멤버쉽에 대한 정보 가져오기
+			MemberShipTO msto = new MemberShipTO();
+			msto.setMembership_name( rs.getString("ms.name") );
+			msto.setMembership_price( rs.getInt("ms.price") );
+			msto.setMembership_period( rs.getInt("ms.price") );
 			
+			System.out.println( msto.getMembership_name() );
+			System.out.println( msto.getMembership_price() );
+			System.out.println( msto.getMembership_period() );
 			
-			// 출력 확인하기
-			System.out. println( bto.getTitle() );
-			System.out. println( bto.getContent() );
+		}
+		
+		
+		StringBuilder sbNotice = new StringBuilder();
+		
+		// 셀프 조인을 통해 업체가 작성한 공지함으로 가져옵니다.
+		
+		sbNotice.append( " select b2.title " );
+		sbNotice.append( " 		from board b1 left outer join board b2 " );
+		sbNotice.append( " 			on( b1.write_seq = b2.write_seq ) " );
+		sbNotice.append( " 					where b2.category_seq = 13 or b2.category_seq = 14 and b1.seq = ? " );
+		sbNotice.append( " 						order by b1.seq desc " );
+		
+		// 변수에 대입합니다.
+ 		sql = sbNotice.toString(); 
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, seq );
+		
+		rs = pstmt.executeQuery();
+		
+		while( rs.next()) {
 			
-			System.out. println( mto.getSido() );
-			System.out. println( mto.getGugun() );
-			System.out. println( mto.getRoad_name() );
-			System.out. println( mto.getBuilding_number() );
-			System.out. println( mto.getAddress() );
-			System.out. println( mto.getPhone() );
-			System.out. println( mto.getName() );
-			
-			System.out. println( bto.getMembership_name() );
-			System.out. println( bto.getMembership_price() );
-			System.out. println( bto.getMembership_period() );
-					
-
+			BoardTO bto = new BoardTO();
+			bto.setTitle( rs.getString("b2.title") );
 			
 			
 		}
 		
-
+		
 		
 	} catch( NamingException e) {
 		System.out.println( e.getMessage());
@@ -560,6 +601,7 @@
 		</div>
 	</div>
 </div>
+
 
 
 

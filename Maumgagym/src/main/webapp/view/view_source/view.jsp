@@ -293,7 +293,7 @@
  	int selectLopNum = 0;
   	for( MemberShipTO msto : msList ) {
   		selectLopNum++;
-  		sbMembershipInfo.append( "<option value='selectBox" + selectLopNum +"'>" + msto.getMembership_period() + "개월권" +"</option>" );
+  		sbMembershipInfo.append( "<option value='" + msto.getMembership_seq() +"'>" + msto.getMembership_period() + "개월권" +"</option>" );
  	}
   	
   	// 공지 관련
@@ -466,7 +466,7 @@
 							<div class="mb-2 pb-3">
 							<div class="mb-2 pb-3">
 								<p class="fw-bold">옵션 선택</p>
-					<select onChange="change(this.options[this.selectedIndex].value)" class="form-select" aria-label="Default select example">
+					<select name= "memberShip" onChange="change(this.options[this.selectedIndex].text)" class="form-select" aria-label="Default select example">
 					 <option>헬스 이용권을 선택하세요.</option>
 					 
 					<%= sbMembershipInfo.toString() %>
@@ -601,7 +601,11 @@
 							</div>
 							<p></p>
 							<div class="d-grid gap-3">
-								<button type="button" class="btn btn-primary btn-block">결제하기</button>
+							
+							<form action="./pay" method="post" id="payForm">
+							    선택한 회원권 번호 : <input id="selected_mb_seq" type="hidden" name="mb_seq" value=""><br>
+							</form>
+							<button type="submit" form="payForm" class="btn btn-primary btn-block">결제하기</button>
 							</div>
 						</li>
 					</ul>

@@ -13,12 +13,23 @@
 
         });
     </script>
+    
+    <script>
+    
+   		$("select[name=memberShip]").change(function(){
+   			
+    	  $('#selected_mb_seq').val( $(this).val() );
+    	  console.log( $('#selected_mb_seq').val() );
+    	  
+    	});
+   		
+    </script>
 
   
   	<script>
-	function change(style) {
-	    
-	   if( style == "selectBox1" )
+	function change(index) {
+		
+	   if( index == "1개월권" )
 		   {
 	       view1.style.display = "inline"
 		   view2.style.display = "none"
@@ -26,7 +37,7 @@
 		   view4.style.display = "none"
 	
 		   }
-	   if( style == "selectBox2" )
+	   if( index == "3개월권" )
 	      {
 	       view1.style.display = "none"
 		   view2.style.display = "inline"
@@ -34,14 +45,14 @@
 		   view4.style.display = "none"
 	
 		   }
-	   if( style == "selectBox3" )
+	   if( index == "6개월권" )
 	      {
 	       view1.style.display = "none"
 		   view2.style.display = "none"
 		   view3.style.display = "inline"
 		   view4.style.display = "none"
 		   }
-	   if( style == "selectBox4" )
+	   if( index == "12개월권" )
 	      {
 	       view1.style.display = "none"
 		   view2.style.display = "none"

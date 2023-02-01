@@ -18,10 +18,28 @@
     
    		$("select[name=memberShip]").change(function(){
    			
-    	  $('#selected_mb_seq').val( $(this).val() );
-    	  console.log( $('#selected_mb_seq').val() );
+    	 console.log( $("#memberShip option:checked").text() );
+    	  
+    	  $('#confirmMebership').text( "선택하신 회원권은 " + $("#memberShip option:checked").text() +" 입니다. 정말로 결제하시겠습니까?" );
     	  
     	});
+   		
+    </script>
+    
+    <script>
+    
+    
+    $('#payBtn').click(function(){
+    	
+    	if( document.getElementById("memberShip").selectedIndex == 0 ) {
+    	    alert("회원권을 선택해주세요.");
+    	    return false;
+    		}
+    	
+    	$('#myModal').modal("show");
+    });
+    
+    
    		
     </script>
 
@@ -61,3 +79,4 @@
 		   }
 	   	}
 	</script>
+	

@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
 	<!--  STEP 1 -->
 	<!-- jQuery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	<!-- iamport.payment.js -->
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
 	
 	<script type="text/javascript">
 	
@@ -77,8 +73,30 @@
 	
 	</script>
 
-</head>
-<body>
-	<button onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
-</body>
-</html>
+			
+	<!-- The Modal -->
+	<div class="modal fade" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">결제 확인</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div id="confirmMebership" class="modal-body">
+	      </div>
+	
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	      	<button type="button" class=" btn btn-primary"  data-bs-dismiss="modal" onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소하기</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+
+

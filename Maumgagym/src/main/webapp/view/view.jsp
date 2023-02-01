@@ -51,6 +51,8 @@
 	</jsp:include>	
 	<jsp:include page="./view_source/main_search.jsp"/>
 	
+	<jsp:include page="../pay/pay.jsp"/>
+	
 	
 	<!-- main 컨텐츠 -->
 

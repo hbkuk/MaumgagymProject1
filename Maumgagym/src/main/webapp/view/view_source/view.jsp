@@ -466,11 +466,11 @@
 							<div class="mb-2 pb-3">
 							<div class="mb-2 pb-3">
 								<p class="fw-bold">옵션 선택</p>
-					<select name= "memberShip" onChange="change(this.options[this.selectedIndex].text)" class="form-select" aria-label="Default select example">
-					 <option>헬스 이용권을 선택하세요.</option>
-					 
-					<%= sbMembershipInfo.toString() %>
-					</select>
+							<select id="memberShip" name= "memberShip" onChange="change(this.options[this.selectedIndex].text)" class="form-select" aria-label="Default select example">
+							 <option>이용권을 선택하세요.</option>
+							 
+							<%= sbMembershipInfo.toString() %>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -601,11 +601,7 @@
 							</div>
 							<p></p>
 							<div class="d-grid gap-3">
-							
-							<form action="./pay" method="post" id="payForm">
-							    선택한 회원권 번호 : <input id="selected_mb_seq" type="hidden" name="mb_seq" value=""><br>
-							</form>
-							<button type="submit" form="payForm" class="btn btn-primary btn-block">결제하기</button>
+							<button id="payBtn" type="button" form="payForm" class="btn btn-primary btn-block">결제하기</button>
 							</div>
 						</li>
 					</ul>

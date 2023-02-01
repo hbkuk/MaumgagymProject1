@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.apache.el.lang.ELSupport"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.to.review.ReviewTO"%>
@@ -24,9 +26,10 @@
 	PreparedStatement pstmt = null;
 	
 	//String strDong = request.getParameter( "seq" );	// 컨트롤러 또는 파라미터를 통해서 받음.
-	String seq = "1";
+	String seq = "2";
 	
 	StringBuilder sbHtml = new StringBuilder();
+	Map<String, Object> mainMap = null;
 	
 	try {
 		
@@ -37,7 +40,7 @@
 		conn = dataSource.getConnection();
 		
 		
-		System.out.println( "DB 연결 성공");
+		//System.out.println( "DB 연결 성공");
 		
 		StringBuilder sbBoardInfo = new StringBuilder();
 		
@@ -63,7 +66,7 @@
 		
 		
 		// 각기 다른 TO를 넣기위함.
-		Map< String, Object > mainMap = new HashMap<>();
+		mainMap = new HashMap<>();
 		
 		while( rs.next()) {
 			
@@ -85,10 +88,10 @@
 			mainMap.put( "mto", mto );
 			
 			// 리뷰
-			ReviewTO rvTO = new ReviewTO();
-			rvTO.setAvg_star_score( rs.getFloat("avg( rv.star_score )") );
+			ReviewTO rvto = new ReviewTO();
+			rvto.setAvg_star_score( rs.getFloat("avg( rv.star_score )") );
 			
-			mainMap.put( "rvTO", rvTO );
+			mainMap.put( "rvto", rvto );
 			
 		}
 		
@@ -114,6 +117,8 @@
 		
 		rs = pstmt.executeQuery();
 		
+		ArrayList<MemberShipTO> msList = new ArrayList<>();
+		
 		while( rs.next()) {
 			
 			// 멤버쉽에 대한 정보 가져오기
@@ -122,11 +127,11 @@
 			msto.setMembership_price( rs.getInt("ms.price") );
 			msto.setMembership_period( rs.getInt("ms.price") );
 			
-			System.out.println( msto.getMembership_name() );
-			System.out.println( msto.getMembership_price() );
-			System.out.println( msto.getMembership_period() );
+			msList.add(msto);
 			
 		}
+		
+		mainMap.put( "msList", msList);
 		
 		
 		
@@ -150,7 +155,7 @@
 		
 		while( rs.next()) {
 			
-			bto = new BoardTO();
+			BoardTO bto = new BoardTO();
 			bto.setTitle( rs.getString("b2.title") );
 			
 			
@@ -175,7 +180,7 @@
 		
 		while( rs.next()) {
 			
-			bto = new BoardTO();
+			BoardTO bto = new BoardTO();
 			bto.setImage( rs.getString("img.name") );			
 			
 		}
@@ -218,7 +223,44 @@
 		if( pstmt != null );
 		if( rs != null );
 	}
+	
+	
+	// DB 커넥션 결과 담은 것을 출력하기 위함.
+	// 추후 DAO 클래스로 분리할 것
+	
+	// 글 관련
+	BoardTO bto = (BoardTO) mainMap.get( "bto" );
+	String title = bto.getTitle();
+	//String 
+	
+	
+	// 글을 등록한 업체 관련 
+	MemberTO mto = (MemberTO) mainMap.get( "mto" );
+	String sido = mto.getSido();
+	String gugun = mto.getGugun();
+	String road_name = mto.getRoad_name();
+	String building_number = mto.getBuilding_number();
+	String address = mto.getAddress();
+	String phone = mto.getPhone();
+	
+	String fullAdress = String.format("%s %s %s %s %s", sido, gugun, road_name, building_number, address );
+	
 
+	// 리뷰 관련
+	ReviewTO rvto = (ReviewTO) mainMap.get("rvto");
+	Float avgStarScore = rvto.getAvg_star_score();
+	
+	int floatStarCountIntConvert = (int) (avgStarScore * 10);
+
+ 	// 회원권 관련
+ 	ArrayList<MemberShipTO> msArry = (ArrayList) mainMap.get( "msArry" );
+ 	
+ 	
+ 	msArry.size();
+ 	
+ 	
+
+	
 
 %>
 	
@@ -245,12 +287,10 @@
 									style=""> 
 									<br><br><br>
 								<div class="mb-2 pb-3">
-									<small class="text-muted">서울특별시 중구 서소문로 115, 한산빌딩 1층 고투
-										시청점</small>
+									<span class="material-symbols-outlined">Home</span><small class="text-muted">&nbsp;<%= fullAdress %></small>
 								</div>
 								<div class="mb-2 pb-3">
-									<span class="material-symbols-outlined">phone_in_talk</span><span
-										class="text-muted">&nbsp;02-774-8733</span>
+									<span class="material-symbols-outlined">phone_in_talk</span><span class="text-muted">&nbsp;<%= phone %></span>
 								</div>
 							</div>
 						</div>
@@ -262,16 +302,35 @@
 							<div class="mb-2 pb-3">
 									<!-- 업체이름 -->
 								<h3 class="mb-3">
-									을지로 헬스보이짐&GDR아카데미
+									<%= title %>
 								</h3>
 							
 							<!-- 별 문제 -->
 								<div class="mb-2 pb-3">
-									<span class="material-symbols-outlined"> star_rate </span> 
-									<span class="material-symbols-outlined"> star_rate </span> 
-									<span class="material-symbols-outlined"> star_rate </span> 
-									<span class="material-symbols-outlined"> star_rate </span> 
-									<span class="material-symbols-outlined"> star_rate </span>&emsp;<h6 style="display:inline">5.0</h6>
+									<% 
+										int j = 0;
+										for( int i = 1; i <= 5; i++ ) { 
+									%>
+									
+									<% 		if( i < floatStarCountIntConvert / 10 ) { %>
+									
+												<i class="material-icons" style="font-size:48px;color:#FFCD3C">star</i>
+												
+									<% 		} else {  
+													if( floatStarCountIntConvert % 10 == 5 && j != 1 ) {
+													j++;
+													i++;
+									%>					
+													<i class="material-icons" style="font-size:48px;color:#FFCD3C">star_half</i>
+									<% 					
+												}	  
+									%>	
+												<i class="material-icons" style="font-size:48px;color:#c3c5c5">star_border</i>
+								 	<% 			
+								 				};
+											};
+									%>
+								 	
 								</div>
 							</div>
 							<div class="text-end">
@@ -283,14 +342,15 @@
 							<div class="mb-2 pb-3">
 							<p class="fw-bold">후기</p>
 							<div class="card">
-								<div class="card-body">시설이 좋아요</div>
+								<div class="card-body">보류</div>
 							</div>
 
 							<br>
 							<div class="mb-2 pb-3">
 								<p class="fw-bold">옵션 선택</p>
 					<select onChange="change(this.options[this.selectedIndex].value)" class="form-select" aria-label="Default select example">
-					 <option>::: 헬스 이용권 :::</option>
+					 <option>헬스 이용권을 선택하세요.</option>
+					 
 					 <option value="selectBox01">1개월</option>
 					 <option value="selectBox02">3개월</option>
 					 <option value="selectBox03">6개월</option>

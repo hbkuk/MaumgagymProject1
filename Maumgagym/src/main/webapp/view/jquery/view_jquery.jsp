@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 	<script>
         var i = 0;
-        $('i').on('click',function(){
+        $('.bi-heart').on('click',function(){
             if(i==0){
                 $(this).attr('class','bi-heart-fill');
                 i++;

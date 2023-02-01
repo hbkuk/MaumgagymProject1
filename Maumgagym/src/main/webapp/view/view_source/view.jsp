@@ -27,7 +27,7 @@
 	PreparedStatement pstmt = null;
 	
 	//String strDong = request.getParameter( "seq" );	// 컨트롤러 또는 파라미터를 통해서 받음.
-	String seq = "2";
+	String seq = "1";
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
@@ -209,10 +209,11 @@
 		StringBuilder sbReview = new StringBuilder();
 		
 		// 조인을 통해 리뷰를 가져옵니다.
-		sbReview.append( " SELECT rv.title, rv.content, rv.write_date, rv.star_score " );
+		sbReview.append( " SELECT rv.title, rv.content, rv.write_date, rv.star_score, m.nickname " );
 		sbReview.append( " 		FROM review rv " );
 		sbReview.append( " 			LEFT OUTER JOIN board b " );
-		sbReview.append( " 					ON ( rv.board_seq = b.seq ) " );
+		sbReview.append( " 					ON ( rv.board_seq = b.seq ) left outer join member m" );
+		sbReview.append( " 					ON ( rv.writer_seq = m.seq )" );
 		sbReview.append( " 						where rv.board_seq = ? AND rv.status = 1" );
 		
 		// 변수에 대입합니다.
@@ -223,15 +224,23 @@
 		
 		rs = pstmt.executeQuery();
 		
+		ArrayList<ReviewTO> reviewList = new ArrayList<>();
+		
 		while( rs.next()) {
 			
 			ReviewTO rvto = new ReviewTO();
+			rvto.setNickname( rs.getString("m.nickname") );
 			rvto.setTitle( rs.getString("rv.title") );
 			rvto.setContent( rs.getString("rv.content") );
 			rvto.setWrite_date( rs.getString("rv.write_date") );
 			rvto.setStar_score( rs.getFloat( "rv.star_score"));
 			
+			reviewList.add(rvto);
+			
+			
 		}
+		
+		mainMap.put("reviewList", reviewList);
 		
 		
 		
@@ -293,9 +302,11 @@
   	// 이미지 관련
   	 ArrayList<BoardTO> imageList = (ArrayList) mainMap.get("imageList");
   	
+  	// 이미지 
+  	BoardTO btoMainImage = imageList.get(0);
+  	
   	
   	StringBuilder sbMembershipPriceInfo = new StringBuilder();
-  	
   	
   	
   	int priceLopNum = 0;
@@ -309,6 +320,74 @@
   		sbMembershipPriceInfo.append( "			</p>" );
   		sbMembershipPriceInfo.append( "			<hr><br></td>" );
   		sbMembershipPriceInfo.append( "	</tr>" );
+  		
+  	}
+  	
+  	// 리뷰 관련
+  	 ArrayList<ReviewTO> reviewList = (ArrayList) mainMap.get("reviewList");
+  	
+  	StringBuilder sbReviewInfo = new StringBuilder();
+  	
+  	
+	//Float avgStarScore = rvto.getAvg_star_score();
+	
+	//int floatStarCountIntConvert = (int) (avgStarScore * 10);
+	
+	
+  	
+  	for( ReviewTO rvto2 : reviewList ) {
+  		
+  		String nickname = rvto2.getNickname();
+  		String writeDate = rvto2.getWrite_date();
+  		String content = rvto2.getContent();
+  		
+  		Float starScore = rvto2.getStar_score();
+  		int floatStarCountIntConvert2 = (int) (starScore * 10);
+  		
+		int j = 0;
+		
+		
+  		
+		sbReviewInfo.append( "	 	<div class='d-flex justify-content-between mb-2'>");
+		sbReviewInfo.append( "  		<div class='d-flex flex-row align-items-center'>");
+		sbReviewInfo.append( "    			<span class='small mb-0 ms-2'><i class='material-icons'>account_circle</i>&nbsp;" + nickname +"1</span> <span class='text-end'></span>");
+		sbReviewInfo.append( "	  		</div>");
+		sbReviewInfo.append( "	  		<div class='d-flex flex-row align-items-center'>");
+		sbReviewInfo.append( "	    		<small>&nbsp;" + writeDate +"</small>");
+	 	sbReviewInfo.append( " 		</div>");
+	 	sbReviewInfo.append( "		</div>");
+		
+	 	sbReviewInfo.append( "		<div class='d-flex justify-content-between mb-3'>");
+	 	sbReviewInfo.append( "			<div class='d-flex flex-row align-items-center'>");
+	 	sbReviewInfo.append( "				<p class='small mb-0 ms-2'> " + content +" </p>");
+	 	sbReviewInfo.append( "			</div>");
+	 	sbReviewInfo.append( "			<div class='d-flex flex-row align-items-center'>");
+	 	
+		for( int i = 1; i <= 5; i++ ) { 
+		if( i <= floatStarCountIntConvert2 / 10 ) {
+			
+			sbReviewInfo.append( "		<i class='material-icons' style='color:#FFCD3C'>star</i> ");
+			
+		} else {  
+			
+				if( floatStarCountIntConvert2 % 10 == 5 && j != 1 ) {
+					
+				j++;
+				i++;
+				
+				sbReviewInfo.append( "	<i class='material-icons' style='color:#FFCD3C'>star_half</i> ");
+				
+			}	  
+				
+				sbReviewInfo.append( "<i class='material-icons' style='color:#c3c5c5'>star_border</i> ");
+			};
+				
+		}; 
+		sbReviewInfo.append( "			</div>");
+	 	sbReviewInfo.append( "		</div>");
+	 	sbReviewInfo.append( "		<hr>");
+  		
+  		
   		
   	}
 
@@ -330,12 +409,8 @@
 					<div class="col-lg-5 col-12">
 						<div class="custom-block-icon-wrap">
 							<div
-								class="custom-block-image-wrap custom-block-image-detail-page">
-								<img
-									src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-									class="custom-block-image img-fluid" alt=""
-									style=""> 
-									<br><br><br>
+								class="custom-block-image-wrap custom-block-image-detail-page mb-5">
+								<img src="./upload/<%=btoMainImage.getImage()%>" class="custom-block-image img-fluid mb-5"> 
 								<div class="mb-2 pb-3">
 									<span class="material-symbols-outlined">Home</span><small class="text-muted">&nbsp;<%= fullAdress %></small>
 								</div>
@@ -362,7 +437,7 @@
 										for( int i = 1; i <= 5; i++ ) { 
 									%>
 									
-									<% 		if( i < floatStarCountIntConvert / 10 ) { %>
+									<% 		if( i <= floatStarCountIntConvert / 10 ) { %>
 									
 												<i class="material-icons" style="font-size:48px;color:#FFCD3C">star</i>
 												
@@ -383,19 +458,12 @@
 								 	
 								</div>
 							</div>
-							<div class="text-end">
+							<div class="text-end mb-5">
 							    <i class="bi-heart" style="font-size:25px; color: red; cursor: pointer;"></i>
 								&nbsp;
 								<span class="material-symbols-outlined"> share </span>
 							</div>
-							<br>
 							<div class="mb-2 pb-3">
-							<p class="fw-bold">후기</p>
-							<div class="card">
-								<div class="card-body">보류</div>
-							</div>
-
-							<br>
 							<div class="mb-2 pb-3">
 								<p class="fw-bold">옵션 선택</p>
 					<select onChange="change(this.options[this.selectedIndex].value)" class="form-select" aria-label="Default select example">
@@ -501,29 +569,12 @@
 							<div class="row">
 
 								<div class="table-responsive">
-										
-										
-						                <div class="card mb-4 card-comment">
+								
+										<div class="card mb-4 card-comment">
 						                  <div class="card-body">
-						                  	<div class="d-flex justify-content-between">
-						                  	
-						                  	</div>
-						                  	<span class="small mb-0 ms-2"><i class="material-icons">account_circle</i>&nbsp;회원 1</span> <span class="text-end"><small>&nbsp;2021.01.02</small></span>
-						                    <p>저는 매우 좋았어요. 다음번에 등록하려구요. 짱입니다.</p>
-						                    <div class="d-flex justify-content-between">
-						                      <div class="d-flex flex-row align-items-center">
-						                      </div>
-						                      <div class="d-flex flex-row align-items-center">
-						                        <i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>
-						                      </div>
-						                    </div>
+											<%=sbReviewInfo.toString() %> 
 						                  </div>
 						                </div>
-											
-											
-											
-											
-											
 								</div>
 							</div>
 						</div>

@@ -18,7 +18,7 @@
   	<script>
 	function change(style) {
 	    
-	   if( style == "selectBox01" )
+	   if( style == "selectBox1" )
 		   {
 	       view1.style.display = "inline"
 		   view2.style.display = "none"
@@ -26,7 +26,7 @@
 		   view4.style.display = "none"
 	
 		   }
-	   if( style == "selectBox02" )
+	   if( style == "selectBox2" )
 	      {
 	       view1.style.display = "none"
 		   view2.style.display = "inline"
@@ -34,14 +34,14 @@
 		   view4.style.display = "none"
 	
 		   }
-	   if( style == "selectBox03" )
+	   if( style == "selectBox3" )
 	      {
 	       view1.style.display = "none"
 		   view2.style.display = "none"
 		   view3.style.display = "inline"
 		   view4.style.display = "none"
 		   }
-	   if( style == "selectBox04" )
+	   if( style == "selectBox4" )
 	      {
 	       view1.style.display = "none"
 		   view2.style.display = "none"

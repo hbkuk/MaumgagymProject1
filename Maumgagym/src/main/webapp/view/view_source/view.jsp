@@ -30,6 +30,8 @@
 	String seq = "2";
 	
 	StringBuilder sbHtml = new StringBuilder();
+	
+	
 	Map<String, Object> mainMap = null;
 	
 	try {
@@ -68,6 +70,7 @@
 		
 		// 각기 다른 TO를 넣기위함.
 		mainMap = new HashMap<>();
+		
 		
 		while( rs.next()) {
 			
@@ -243,6 +246,8 @@
 	}
 	
 	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	// DB 커넥션 결과 담은 것을 출력하기 위함.
 	// 추후 DAO 클래스로 분리할 것
 	
@@ -275,10 +280,11 @@
  	
  	StringBuilder sbMembershipInfo = new StringBuilder();
  	
+ 	// 회원권에 대한 selectBox 순서대로 만들기 위함.
+ 	int selectLopNum = 0;
   	for( MemberShipTO msto : msList ) {
-  		
-  		sbMembershipInfo.append( "<option value='" + msto.getMembership_seq() +"'>" + msto.getMembership_period() + "개월권" +"</option>" );
-	  		
+  		selectLopNum++;
+  		sbMembershipInfo.append( "<option value='selectBox" + selectLopNum +"'>" + msto.getMembership_period() + "개월권" +"</option>" );
  	}
   	
   	// 공지 관련
@@ -287,6 +293,24 @@
   	// 이미지 관련
   	 ArrayList<BoardTO> imageList = (ArrayList) mainMap.get("imageList");
   	
+  	
+  	StringBuilder sbMembershipPriceInfo = new StringBuilder();
+  	
+  	
+  	
+  	int priceLopNum = 0;
+  	for( MemberShipTO msto : msList ) {
+  		priceLopNum ++;	
+  		sbMembershipPriceInfo.append( "<tr id=view" + priceLopNum + " style='display: none;'>" );
+  		sbMembershipPriceInfo.append( "		<td height='30' align='left'>" );
+  		sbMembershipPriceInfo.append( "		<br>" );
+  		sbMembershipPriceInfo.append( "			<p class='text-primary'>" );
+  		sbMembershipPriceInfo.append( "				마음가짐 회원가&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class='fw-bold'>" + String.format("%,d 원", msto.getMembership_price()) + "</span>" );
+  		sbMembershipPriceInfo.append( "			</p>" );
+  		sbMembershipPriceInfo.append( "			<hr><br></td>" );
+  		sbMembershipPriceInfo.append( "	</tr>" );
+  		
+  	}
 
 %>
 	
@@ -477,44 +501,32 @@
 							<div class="row">
 
 								<div class="table-responsive">
-									<table
-										class="table text-center border-light table-borderless table-sm">
-										<thead class="border-light">
-											<tr>
-												<th scope="col"></th>
-												<th scope="col"><br> <br> <strong>아직
-														이용후기가 없습니다<br>첫 번째로 후기를 남겨보세요!
-												</strong><br> <br></th>
-											</tr>
-										</thead>
-									</table>
+										
+										
+						                <div class="card mb-4 card-comment">
+						                  <div class="card-body">
+						                  	<div class="d-flex justify-content-between">
+						                  	
+						                  	</div>
+						                  	<span class="small mb-0 ms-2"><i class="material-icons">account_circle</i>&nbsp;회원 1</span> <span class="text-end"><small>&nbsp;2021.01.02</small></span>
+						                    <p>저는 매우 좋았어요. 다음번에 등록하려구요. 짱입니다.</p>
+						                    <div class="d-flex justify-content-between">
+						                      <div class="d-flex flex-row align-items-center">
+						                      </div>
+						                      <div class="d-flex flex-row align-items-center">
+						                        <i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>
+						                      </div>
+						                    </div>
+						                  </div>
+						                </div>
+											
+											
+											
+											
+											
 								</div>
 							</div>
 						</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					</div>
 				</div>
 			</div>
@@ -527,64 +539,8 @@
 					<div class="card-header">예상결제가격</div>
 					<ul class="list-group list-group-flush text-center">
 
-								<table width="320" border="0" cellpadding="0" cellspacing="0">
-									<tr id=view1 style="display: none;">
-										<td height="30" align="left">
-										<br>
-											<p>
-												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-												<span>130,000 원</span>
-											</p>
-											<p>
-												마음가짐 회원 할인&emsp;&emsp;&emsp;
-												<span> &emsp;&emsp;&emsp;&nbsp;0 원</span>
-											</p>
-											<hr><br>
-											<p class="text-primary">
-												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>130,000 원</span></b>
-											</p></td>
-									</tr>
-									<tr id=view2 style="display: none;">
-										<td height="30" align="left"><br>
-											<p>
-												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-												<span>290,000 원</span>
-											</p>
-											<p>
-												마음가짐 회원 할인&emsp;&emsp;&emsp;
-												<span>- 20,000 원</span>
-											</p>
-											<hr> <br>
-											<p class="text-primary">
-												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>270,000 원</span></b>
-											</p></td>
-									</tr>
-									<tr id=view3 style="display: none;">
-										<td height="30" align="left"><br>
-											<p>
-												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <span>420,000 원</span>
-											</p>
-											<p>
-												마음가짐 회원 할인&emsp;&emsp;&emsp; <span>- 30,000 원</span>
-											</p>
-											<hr> <br>
-											<p class="text-primary">
-												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>390,000 원</span></b>
-											</p></td>
-									</tr>
-									<tr id=view4 style="display: none;">
-										<td height="30" align="left"><br>
-											<p>
-												상품금액&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <span>620,000 원</span>
-											</p>
-											<p>
-												마음가짐 회원 할인&emsp;&emsp;&emsp; <span>- 30,000 원</span>
-											</p>
-											<hr> <br>
-											<p class="text-primary">
-												<b>최종 결제 금액&emsp;&emsp;&emsp;&emsp;&emsp;<span>590,000 원</span></b>
-											</p></td>
-									</tr>
+								<table width="320" border="0" cellpadding="0">
+								<%= sbMembershipPriceInfo.toString() %>
 								</table>
 
 								<!-- 장바구니 결제버튼 -->

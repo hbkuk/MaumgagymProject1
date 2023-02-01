@@ -23,7 +23,12 @@
 	</div>
 	<div class="caption">
 		<a href="./searchIDPage.jsp">아이디가 기억나지 않으세요?</a> | <a href="./searchPasswordPage.jsp">비밀번호가 기억나지 않으세요?</a>
-	</div><br/>
-	
-	<a href="javascript:kakaoLogin();"><img src="./member/login_source/kakao_login_medium_wide.png" style width="100%;"></a>
+	</div>
+	<div class="btn-area">
+		<a onclick="kakaoLogin();"><img src="./resources/asset/images/member_login/kakao_login_medium_wide.png" /></a>
+	</div>
+	<div class="btn-area">
+		<button onclick="kakaoLogout();" class="custom-btn btn-12" type="button"><span>카카오 로그아웃</span><span>로그인 아웃하기</span></button>
+	</div>
+		
 </div>

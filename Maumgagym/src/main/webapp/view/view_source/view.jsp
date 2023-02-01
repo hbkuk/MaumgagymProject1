@@ -1,3 +1,4 @@
+<%@page import="org.apache.catalina.tribes.membership.Membership"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.el.lang.ELSupport"%>
 <%@page import="java.util.HashMap"%>
@@ -104,7 +105,7 @@
 		StringBuilder sbMemberShip = new StringBuilder();
 		
 		// 우선 글번호를 통해 등록된 회원권 대한 정보를 가져옵니다.
-		sbMemberShip.append( " select ms.name, ms.price, ms.period " );
+		sbMemberShip.append( " select ms.seq, ms.name, ms.price, ms.period " );
 		sbMemberShip.append( " 		from board b left outer join membership ms " );
 		sbMemberShip.append( " 			on( b.seq = ms.board_seq) " );
 		sbMemberShip.append( " 					where b.seq = ? " );
@@ -123,9 +124,10 @@
 			
 			// 멤버쉽에 대한 정보 가져오기
 			MemberShipTO msto = new MemberShipTO();
+			msto.setMembership_seq( rs.getInt("ms.seq") );
 			msto.setMembership_name( rs.getString("ms.name") );
 			msto.setMembership_price( rs.getInt("ms.price") );
-			msto.setMembership_period( rs.getInt("ms.price") );
+			msto.setMembership_period( rs.getInt("ms.period") );
 			
 			msList.add(msto);
 			
@@ -139,11 +141,12 @@
 		
 		// 셀프 조인을 통해 업체가 작성한 공지함으로 가져옵니다.
 		
-		sbNotice.append( " select b2.title " );
+		sbNotice.append( " select b2.title, b2.seq" );
 		sbNotice.append( " 		from board b1 left outer join board b2 " );
 		sbNotice.append( " 			on( b1.write_seq = b2.write_seq ) " );
 		sbNotice.append( " 					where b2.category_seq = 13 or b2.category_seq = 14 and b1.seq = ? " );
 		sbNotice.append( " 						order by b1.seq desc " );
+		sbNotice.append( " 						limit 0, 4 " );
 		
 		// 변수에 대입합니다.
  		sql = sbNotice.toString(); 
@@ -153,13 +156,19 @@
 		
 		rs = pstmt.executeQuery();
 		
+		ArrayList<BoardTO> noticeList = new ArrayList<>();
+		
 		while( rs.next()) {
 			
 			BoardTO bto = new BoardTO();
+			bto.setSeq( rs.getInt("b2.seq") );
 			bto.setTitle( rs.getString("b2.title") );
 			
+			noticeList.add( bto );
 			
 		}
+		
+		mainMap.put("noticeList", noticeList);
 		
 		
 		StringBuilder sbImage = new StringBuilder();
@@ -178,12 +187,21 @@
 		
 		rs = pstmt.executeQuery();
 		
+		
+		ArrayList<BoardTO> imageList = new ArrayList<>();
+		
 		while( rs.next()) {
 			
 			BoardTO bto = new BoardTO();
-			bto.setImage( rs.getString("img.name") );			
+			bto.setImage( rs.getString("img.name") );
+			
+			imageList.add( bto );
 			
 		}
+		
+		mainMap.put("imageList", imageList);
+		
+		
 		
 		StringBuilder sbReview = new StringBuilder();
 		
@@ -253,14 +271,22 @@
 	int floatStarCountIntConvert = (int) (avgStarScore * 10);
 
  	// 회원권 관련
- 	ArrayList<MemberShipTO> msArry = (ArrayList) mainMap.get( "msArry" );
+ 	ArrayList<MemberShipTO> msList = (ArrayList) mainMap.get( "msList" );
  	
+ 	StringBuilder sbMembershipInfo = new StringBuilder();
  	
- 	msArry.size();
- 	
- 	
-
-	
+  	for( MemberShipTO msto : msList ) {
+  		
+  		sbMembershipInfo.append( "<option value='" + msto.getMembership_seq() +"'>" + msto.getMembership_period() + "개월권" +"</option>" );
+	  		
+ 	}
+  	
+  	// 공지 관련
+  	 ArrayList<BoardTO> noticeList = (ArrayList) mainMap.get("noticeList");
+  	
+  	// 이미지 관련
+  	 ArrayList<BoardTO> imageList = (ArrayList) mainMap.get("imageList");
+  	
 
 %>
 	
@@ -351,10 +377,7 @@
 					<select onChange="change(this.options[this.selectedIndex].value)" class="form-select" aria-label="Default select example">
 					 <option>헬스 이용권을 선택하세요.</option>
 					 
-					 <option value="selectBox01">1개월</option>
-					 <option value="selectBox02">3개월</option>
-					 <option value="selectBox03">6개월</option>
-					 <option value="selectBox04">1년</option>
+					<%= sbMembershipInfo.toString() %>
 					</select>
 						</div>
 					</div>
@@ -380,36 +403,28 @@
 						<strong>시설정보</strong>
 					</div>
 					<div class="card-body">
-						<br> <br>
-						<p class="text-center">
-							<strong>을지로3가역 인근 프리미엄 헬스장😊<br> 헬스보이짐 을지로점을 영상으로
-								구경해보세요.</strong></p>
-						<div class="card">
-							<div class="card-body ">
-								<p class="text-center">골프 맛집! 쇠질 맛집! 인증샷 맛집! 운동맛집 헬스보이짐이
-									을지로에 상륙했습니다:) 뉴텍기반의 머신, 스텝밀 보유, 러닝10대, 사이클4대 여성전용스트레칭zone과
-									필라테스1:1 private 룸까지!! 게다가 시설 어느 곳을 가도 포토존이 한 가득! 이제 헬스보이짐과 함께
-									힙지로에서 운동도 즐기고 오운완 인증도 마음껏 즐겨보세요💪</p>
-							</div>
-						</div>
-						<br><br><br>
 						<h6>공지사항</h6>
 						<div class="row">
-							<div><br>- 헬스 12개월 구매 시 헬스보이 블랙/골드지점 이용 가능(단일회원권에만 해당)</div>
-							<div><br>- 다짐에서 결제하면 가입비 전부 면제!</div>
-							<div><br>- 골프 회원: 매월 2만원 추가 시 헬스 이용 가능!</div>
-							<div><br>- 18개월 VIP상품(개인락커, 운동복 지원)- 별도 문의 필요합니다:)</div>
+						<%	for ( BoardTO btoNotice : noticeList ) { %>
+							
+							<a href="./view.jsp?%<%=btoNotice.getSeq()%>"><br>- <%=btoNotice.getTitle() %></a>
+						
+						<% 	} %>
 						</div>
-						<br><br>
 						<hr>
-						<br><br>
-						<h6>운영시간</h6>
+						<h6>운영시간 및 운동시설 소개</h6>
+						<div class="card">
+							<div class="card-body ">
+								<p class="text-center">
+								<%= bto.getContent() %>
+								</p>
+							</div>
+						</div>
 						<div class="row">
 							<div><br>[평 일] 06:00~24:00</div>
 							<div><br>[주 말] 10:00~19:00</div>
 							<div><br>[공휴일] 10:00~19:00</div>
 						</div>
-						<br><br>
 						<hr>
 						<br>
 						<h6>사진</h6>
@@ -422,32 +437,19 @@
 										<th scope="col">
 										<br>
 										<!-- 사진 -->
-											<div class="custom-block-icon-wrap">
+											<%	for ( BoardTO btoImage : imageList ) { %>
+											<div class="custom-block-icon-wrap mb-5">
 												<div
 													class="custom-block-image-wrap custom-block-image-detail-page">
-													<img
-														src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-														class="custom-block-image img-fluid" alt="" style="">
+													
+													<img src="./upload/<%=btoImage.getImage()%>" class="custom-block-image img-fluid">
 												</div>
 											</div> 
-											<!-- 사진 태그 끝-->
+											<% 	} %>
 											<br>
-											<!-- 사진 -->
-											<div class="custom-block-icon-wrap">
-												<div
-													class="custom-block-image-wrap custom-block-image-detail-page">
-													<img
-														src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-														class="custom-block-image img-fluid" alt="" style="">
-												</div>
-											</div>
-										<!-- 사진 태그 끝-->
 										</tr>
 									</thead>
 								</table>
-						<br> <br> <br> <br> <br> <br> <br>
-						<br> <br> <br> <br> <br> <br> <br>
-						<br> <br> <br> <br> <br> <br> <br>
 							</div>
 						</div>
 						<hr>
@@ -466,9 +468,6 @@
 							</div>
 								<!-- 요 부분이 살아 있어야 중앙에 들어감 -->
 						</div>
-						<br> <br> <br> <br> <br> <br> <br>
-						<br> <br> <br> <br> <br> <br> <br>
-						<br> <br> <br> <br> <br> <br> <br>
 					</div>
 					<!-- 이용후기 부분 -->
 					<div class="card-footer text-muted">

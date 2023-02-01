@@ -37,7 +37,7 @@
 	
 	
 	<!-- main 컨텐츠 -->
-	<jsp:include page="./customerCenter_source/customerCenter_view.jsp"/>
+	<jsp:include page="./customerCenter_source/customerCenter_main.jsp"/>
 	<jsp:include page="../include/footer.jsp" />
 	
 

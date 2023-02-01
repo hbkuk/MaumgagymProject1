@@ -27,9 +27,20 @@
 	    <link rel="stylesheet" href="./resources/asset/css/owl.theme.default.min.css"/>
 	
 	    <link href="./resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
+	    
+	    <!-- 결제 -->
+	      <!-- jQuery -->
+	  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	  <!-- iamport.payment.js -->
+	  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	</head>
 	
 	<body>
+	
+	<!-- 결제 -->
+	<jsp:include page="./jquery/pay_view_jquery.jsp" />
+	
+	
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
 	</jsp:include>	

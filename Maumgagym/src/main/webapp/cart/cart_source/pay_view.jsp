@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     
     <hr><br><br>
         <div class="container">
@@ -43,12 +44,13 @@
 							  <div class="card-header">
 							    구매자 정보
 							  </div>
+							  
 							  <ul class="list-group list-group-flush">
 							    <li class="list-group-item">
 							    
 							    		<form class="row g-3">
 							    		  <div class="col-12">
-										    <label for="inputName" class="form-label">이름</label>
+   										    <label for="inputName" class="form-label">이름</label>
 										    <input type="text" class="form-control" id="name">
 										  </div>
 										  
@@ -67,19 +69,19 @@
 										        <label class="form-check-label" for="gridRadios2">
 										          여자
 										        </label>
+										        
 										      </div>
 										    </div>
-										  
 										  
 										  <div class="col-md-12">
 										    <label for="inputEmail4" class="form-label">Email</label>
 										    <input type="email" class="form-control" id="inputEmail4">
 										  </div>
 										  <div class="col-md-12">
-										    <label for="inputPhone" class="form-label">연락처</label>
+										  <label for="inputPhone" class="form-label">연락처</label>
 										    <input type="tel" class="form-control" id="inputPhone" placeholder="ex) 010-3456-7890">
 										  </div>
-										
+									
 										  <div class="col-md-5">
 										    <label for="inputState" class="form-label">주소</label>
 										    <select id="inputState" class="form-select">
@@ -103,15 +105,14 @@
 										    <label for="inputAddress2" class="form-label">상세주소</label>
 										    <input type="text" class="form-control" id="inputAddress2" placeholder="ex) 한빛로 한빛아파트 101동 101호">
 										  </div>
-										  
 										  <div class="col-12">
-										  <br>
+									   <br>
 										  	<form action="/action_page.php">
 											  <label for="start-day">운동시작일 :</label>
 											  <span><input type="date" id="start-day" name="dstart-day"></span>
 											</form>
 										  </div>
-										 <br>
+										 <br> 
 										</form>
 									</li>
 							  </ul>
@@ -171,8 +172,9 @@
 				    	</li>
 					    <li class="list-group-item">
 					    	<div class="d-grid gap-3">
-							  <button type="button" class="btn btn-primary btn-block">결제하기</button>
+							  <button onclick="requestPay()" type="button" class="btn btn-primary btn-block">결제하기</button>
 							</div>
+							
 				    	</li>
 					  </ul>
 					</div>

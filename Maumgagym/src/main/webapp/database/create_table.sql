@@ -126,7 +126,7 @@ CREATE TABLE `pay` (
 	`merchant_uid` varchar(40) NOT NULL,
 	`membership_seq` int NOT NULL,
 	`type` varchar(30) NOT NULL,
-	`imp_uid` varchar(30) NULL,
+	`imp_uid` varchar(30) NOT NULL,
 	`status` int(1) NOT NULL,
 	`pay_date` datetime NOT NULL,
 	`member_seq` int NOT NULL

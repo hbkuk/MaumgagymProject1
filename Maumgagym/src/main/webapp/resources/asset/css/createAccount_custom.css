@@ -57,6 +57,15 @@ img#logo {
     background-color: #1187CF;
     color: #fff;
 }
+.member button {
+    width: 100px;
+    padding: 15px;
+    margin-bottom: 5px;
+    border: 1px solid #dadada;
+    background-color: #1187CF;
+    color: #fff;
+}
+
 .member input:not(input[type=radio]):focus, .member select:focus {
     border: 1px solid #1187CF;
 }
@@ -140,6 +149,34 @@ img#logo {
 #email_submit, #email_confirm_btn {
 	width: 100px;
 }
+
+#mail1 {
+	width: 200px;
+	padding-top: 17px;
+}
+
+#mail2 {
+	width: 240px;
+}
+
+#pw-confirm {
+	width: 360px;
+	padding-top: 17px;
+}
+
+#check {
+	width: 100px;
+}
+
+#sample6_postcode {
+	width: 360px;
+	padding-top: 17px;
+}
+
+#search {
+	width: 100px;
+}
+
 
 
 .hasNick:before {

@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@page import="model1.MemberTO"%>
 <%
-	String userID = null;
 
-	if( request.getParameter( "userID" ) != null && !"null".equals( request.getParameter( "userID" ) ) ) {
-		userID = request.getParameter( "userID" );
-	} 
+	String id = (String) session.getAttribute("id");
+	
+	if( request.getParameter( "id" ) != null && !"null".equals( request.getParameter( "id" ) ) ) {
+		id = request.getParameter( "id" );
+	} else {
+		id = null;
+	}
 	
 %>       
     <!-- header navbar -->
@@ -24,12 +27,12 @@
 	                <li class="nav-item px-4 navbar_992_show"><a class="nav-link" href="#!">고객센터</a></li>
 	            </ul>
 	            <%
-	            	if( userID == null ) {
+	            	if( id == null ) {
 	            %>
 	            <a class="navbar-brand ps-3 navbar_992_none" href="./loginPage.jsp">
 	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>
 	            </a>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
+	            <a class="navbar-brand ps-3 navbar_992_none" href="./createAccountPage.jsp">
 	              <button type="button" class="btn btn-light rounded-pill"><span style="font-size:smaller;">회원가입</span></button>
 	            </a>
        	        <%
@@ -41,6 +44,8 @@
 	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
 	              <i class="bi bi-person"></i>
 	            </a>
+	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='./member/Action/logout.jsp'"><span style="font-size:smaller;">로그아웃</span></button>
+	            
        	        <%
 	            	}
 	            %>

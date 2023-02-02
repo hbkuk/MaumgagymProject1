@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
  
 <!DOCTYPE html>
 <html>
@@ -21,8 +22,8 @@
     
     <!-- 카카오 로그인 -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script type="text/javascript">
-	window.Kakao.init("972704b56a1c38fb7342842529694de9"); //설정한 마음가짐 javascript 고유키
+    <script>
+    window.Kakao.init("972704b56a1c38fb7342842529694de9"); //설정한 마음가짐 javascript 고유키
 
 	function kakaoLogin() {
 	    //1. 로그인 시도
@@ -39,12 +40,12 @@
 	              var account = res.kakao_account;
 	              $('#form-kakao-login input[name=email]').val(account.email);
 				  $('#form-kakao-login input[name=name]').val(account.profile.nickname);
-	             // var kakao_nickname = kakao_account.profile.nickname;
-	             // var kakao_email = kakao_account.email;
-	             // console.log(kakao_nickname);
-	             // console.log(kakao_email);
+	              var kakao_nickname = account.profile.nickname;
+	              var kakao_email = account.email;
+	              console.log(kakao_nickname);
+	             console.log(kakao_email);
 	             document.querySelector('#form-kakao-login').submit();
-				 alert('로그인성공');
+				 //alert('로그인성공');
 	              //location.href="./logininfo.jsp";
 	        		}
 	         	 })
@@ -56,6 +57,14 @@
 	    
 	}
 
+</script>
+
+<script>
+	$(document).ready(function(){
+	    $("#loginBtn").click(function(){        
+	        $("#loginForm").submit(); 
+	    });
+	});
 </script>
 </body>
 </html> 

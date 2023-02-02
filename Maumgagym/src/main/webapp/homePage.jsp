@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.io.PrintWriter" %>
 <%
-	String userID = null;
-	if( session.getAttribute("userID") != null ) {
-		userID = ( String ) session.getAttribute("userID");
-	} else {
-		userID = "tester1";
+	String id = null;
+
+	if( session.getAttribute("id") != null ) {
+		id = ( String ) session.getAttribute("id");
 	}
+	
 %>    
 <jsp:include page="./main/main.jsp">
-	<jsp:param name="userID" value="<%= userID %>"/>
+	<jsp:param name="id" value="<%= id %>"/>
 </jsp:include>

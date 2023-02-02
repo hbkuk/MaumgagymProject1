@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form action="./signUp_Json/signUp_ok.jsp" id = "sfrm" method="post" name="sfrm" >
+    
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<form action="./member/Action/joinAction1.jsp" id ="sfrm" method="post" name="sfrm" >
 	<div class="member">
 	    <!-- 1. 로고 -->
 	   	<div id = "logoContainer">
@@ -14,15 +18,20 @@
 	    </div>
 	    <div class="field">
 	        <b>아이디</b>
-	        <span class="placehold-text placehold-id hasId"><input id = "id" type="text" name = "id"></span>
+	        <span class="placehold-text placehold-id hasId"><input id="id" type="text" name="id"></span>
+	        
 	    </div>
 	    <div class="field">
-	        <b>비밀번호</b>
-	        <span class="placehold-text placehold-pw"><input id="pw" class="userpw" type="password" name = "password"></span>
-	    </div>
-	    <div class="field">
+	        <b>비밀번호</b>							<!-- onchange : 키보드로 입력 후 변화가 생겼을 때 발생하는 이벤트를 의미 -->
+	        <span class="placehold-text placehold-pw">
+	        <input id="pw" class="userpw" type="password" name ="password">
+	        </span>
+	        
 	        <b>비밀번호 재확인</b>
-	        <span class="placehold-text placehold-pw-confirm"><input id="pw-confirm" class="userpw-confirm" type="password" name = "password_confirm"></span>
+	        <span class="placehold-text placehold-pw-confirm">
+	        <input id="pw-confirm" class="userpw-confirm" type="password" name="password_confirm">
+	        <input type="button" id="check" value="일치 확인">
+	        </span> 
 	    </div>
 	    <div class="field">
 	        <b>이름</b>
@@ -31,9 +40,11 @@
 	
 	    <!-- 3. 필드(생년월일) -->
 	    <div class="field birth">
+	    <!-- type="date"는 yyyy-mm-dd 포맷으로 데이터가 저장됩니다. -->
 	        <b>생년월일</b>
-	        <div>
-	            <input id="year" type="number" name="year" placeholder="년(4자)">                
+       		<!-- <input type="date" name="birthdd"/> -->
+	      <div>
+	            <input type="text" name="year" placeholder="년(4자)">                
 	            <select id = "month" name = "month">
 	                <option value="00">월</option>
 	                <option value="01">1월</option>
@@ -49,30 +60,50 @@
 	                <option value="11">11월</option>
 	                <option value="12">12월</option>
 	            </select>
-	            <input id="day" type="number" name="day" placeholder="일">
-	        </div>
+	            <input type="text" name="day" placeholder="일">
+	        </div> 
 	    </div>
 	
 	    <!-- 4. 필드(성별) -->
-	    <div class="field gender">
+	    <!--  <div class="field gender">
 	        <b>성별</b>
 	        <div>
 	        	<label><input type="radio" name="gender" value="0">선택안함</label>
 	            <label><input type="radio" name="gender" value="1">남자</label>
 	            <label><input type="radio" name="gender" value="2">여자</label>
 	        </div>
-	    </div>
+	    </div> -->
 	
 	    <!-- 5. 이메일_전화번호 -->
 	    <div class="field email_field">
-	        <b id = "b_email">본인 확인 이메일</b>
-	        <input name="email" id = "email" type="email" placeholder="가입하기 버튼을 누르시면 이메일이 전송됩니다."><input type="button" id="email_submit" value="전송하기">
+	        <b id = "b_email">이메일</b>
+		        <input type="text" id="mail1" name="mail1"> @ 
+		        <select id="mail2" name="mail2">
+					<option>naver.com</option>
+					<option>daum.net</option>
+					<option>nate.com</option>
+					<option>gmail.com</option>
+				</select>
+	        <!--<input name="email" id ="email" type="email" placeholder="가입하기 버튼을 누르시면 이메일이 전송됩니다."><input type="button" id="email_submit" value="전송하기"> -->
 	    </div>
-	   
+	    
+	    <!-- 주소 입력 -->
+           <div class="field address_field">
+             <div class="userInput">
+                 <b>자택주소</b>
+                  	<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호">
+					<input type="button" id="search" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+					<input type="text" id="sample6_address" name="address" placeholder="주소"><br>
+					<!--  <input type="text" id="sample6_detailAddress" placeholder="상세주소">  -->
+					<input type="text" id="sample6_extraAddress" name="referAddress" placeholder="참고항목">
+               </div>
+
 	
 	    <!-- 6. 가입하기 버튼 -->
+	    <!-- <input type="hidden" name="action" value="insert_ok" />  -->
+	    <br/>
 	    <input id="joinBtn" type="submit" value="가입하기">
-	    
+	    <br/>
 	     <!-- 이동하기 링크 -->
    		<div class="caption">
    			<div>

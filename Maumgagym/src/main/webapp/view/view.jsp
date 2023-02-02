@@ -29,32 +29,37 @@
 	    <!-- nav bar -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!-- 좋아요 -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
         <!-- icon -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+		
+		<!-- star -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<!-- iamport.payment.js -->
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	
         
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	</head>
 	
 	<body>
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
 	</jsp:include>	
-	<jsp:include page="./view_source/main_search.jsp"/>
+	<jsp:include page="./view_source/pay_modal.jsp"/>
 	
+	<jsp:include page="../pay/pay.jsp"/>
 	
 	<!-- main 컨텐츠 -->
 
 	<jsp:include page="./view_source/view.jsp"/>
 	<jsp:include page="../include/footer.jsp" />
-	<jsp:include page="./jquery/view_jquery.jsp" />
-	
+    
+    
+    <script src="./view/view_source/pay.js"></script>
+    <script src="./view/view_source/view_jquery.js"></script>
     
     <!-- JAVASCRIPT FILES -->
     <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>

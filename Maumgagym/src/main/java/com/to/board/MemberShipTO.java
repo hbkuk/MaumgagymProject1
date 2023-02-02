@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class MemberShipTO {
 	
-	int seq;
+	int membership_seq;
 	String membership_name;
 	int membership_price;
 	int membership_period;

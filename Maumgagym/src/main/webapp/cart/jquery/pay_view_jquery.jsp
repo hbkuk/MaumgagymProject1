@@ -13,9 +13,9 @@
         IMP.request_pay({ // param
         	 pg: "kcp.T0000",
             pay_method: "card",
-            merchant_uid: "14",
-            name: "노르웨이 회전 의자",
-            amount: 100,
+            merchant_uid: "11",
+            name: "시청 비나이더피트니스",
+            amount: "210,000",
             buyer_email: "gildong@gmail.com",
             buyer_name: "홍길동",
             buyer_tel: "010-4242-4242",

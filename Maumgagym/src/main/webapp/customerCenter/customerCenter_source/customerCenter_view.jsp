@@ -260,32 +260,5 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- 게시 -->
-		<div class="tab-pane fade" id="pills-profile" role="tabpanel"
-			aria-labelledby="pills-profile-tab" tabindex="0">
-			<table class="table table-striped" style="table-layout: fixed">
-				<tr>
-					<th class="text-center" width="5%">글번호</th>
-					<th class="text-center" width="5%">카테고리</th>
-					<th class="text-center" width="30%">제목</th>
-					<th class="text-center" width="10%">등록일</th>
-					<th class="text-center" width="10%">상태</th>
-				</tr>
-				<tr>
-					<td class="text-center" scope="row">1</td>
-					<td class="text-center">환불</td>
-					<td class="text-start">환불문의 드립니다</td>
-					<td class="text-center">2023-01-22</td>
-					<td class="text-center">답변대기</td>
-				</tr>
-			</table>
-			<br>
-			<!-- button -->
-			<div class="col-lg-12 col-sm-12 text-lg-end text-center">
-				<button type="button" class="btn btn-outline-primary"
-					onclick="location.href='./customerCenter_writePage.jsp'">작성하기</button>
-			</div>
-		</div>
-	</div>
+	</div>		
 </div>

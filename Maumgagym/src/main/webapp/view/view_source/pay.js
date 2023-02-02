@@ -46,7 +46,7 @@
 			data: {
 				
 				//buyer_nickname : '<%=(String)session.getAttribute("buyer_nickname")%>';
-				buyer_nickname : '테스트2',
+				buyer_nickname : '닉네임2',
 				membership_seq : $("#memberShip option:checked").val()
 				
 			},
@@ -114,14 +114,16 @@
 		                  membership_seq : membership_seq,
 		                  buyer_seq : buyer_seq
 		                  },
-			          dataType: 'json', //서버에서 보내줄 데이터 타입
-			          success: function(flag){
+			          	  dataType: 'json', //서버에서 보내줄 데이터 타입
+			          	  success: function( result ){
 				        			        	
-				          if(flag == 0){
+				          if(result.flag == 0){
 							 console.log("추가성공");
+							 location.href = "./pay/paySuccess.jsp";
 							 
 				          }else{
 				             console.log("Insert Fail!!!");
+				             location.href = "./pay/payFail.jsp";
 				             
 				          }
 				        },

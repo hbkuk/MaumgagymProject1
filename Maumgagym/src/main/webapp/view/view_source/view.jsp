@@ -1,4 +1,4 @@
-mjm<%@page import="org.apache.catalina.tribes.membership.Membership"%>
+<%@page import="org.apache.catalina.tribes.membership.Membership"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.el.lang.ELSupport"%>
 <%@page import="java.util.HashMap"%>

@@ -56,9 +56,9 @@ insert into review values (0, '리뷰제목 1', '리뷰내용 1', now() , 1 , 5.
 insert into review values (0, '리뷰제목 2', '리뷰내용 2', now() , 3 , 2.0 , 1, 2 );
 
 // 이미지 첨부
-insert into image value( 0, 'test1.jsp', 0, 1 );
-insert into image value( 0, 'test2.jsp', 0, 1 );
+insert into image value( 0, 'test1.jpg', 0, 1 );
+insert into image value( 0, 'test2.jpg', 0, 1 );
 
-insert into image value( 0, 'test1.jsp', 0, 2 );
-insert into image value( 0, 'test2.jsp', 0, 2 );
+insert into image value( 0, 'test1.jpg', 0, 2 );
+insert into image value( 0, 'test2.jpg', 0, 2 );
 

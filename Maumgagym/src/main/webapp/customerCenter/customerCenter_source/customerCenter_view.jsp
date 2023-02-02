@@ -6,21 +6,11 @@
 <div class="container">
 
 
-	<!-- nav bar -->
-	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="pills-home-tab"
-				data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
-				role="tab" aria-controls="pills-home" aria-selected="true">자주
-				묻는 질문(FAQ)</button>
-		</li> &emsp;
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-				data-bs-target="#pills-profile" type="button" role="tab"
-				aria-controls="pills-profile" aria-selected="false">1:1
-				문의하기</button>
-		</li>
-	</ul>
+	  <div class="row">
+		    <div class="col-sm-5"><h3>자주 묻는 질문(FAQ)</h3></div>
+		    <div class="col-sm-5" ></div>
+		    <div class="col-sm-2" style="font-size: 15px"></div>
+		  </div>
 	<br><br><br>
 	<div class="tab-content" id="pills-tabContent">
 

@@ -13,14 +13,12 @@ public class MemberTO {
 	String password;
 	String name;
 	String birthday;
-	String gender;
 	String phone;
 	String email;
+	String type;
 	
 	String zipcode;
-	String sido;
-	String gugun;
-	String road_name;
-	String building_number;
 	String address;
+	String fulladdress;
+	String referaddress;
 }

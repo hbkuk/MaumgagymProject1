@@ -1,4 +1,4 @@
-<%@page import="org.apache.catalina.tribes.membership.Membership"%>
+mjm<%@page import="org.apache.catalina.tribes.membership.Membership"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.el.lang.ELSupport"%>
 <%@page import="java.util.HashMap"%>
@@ -50,7 +50,7 @@
 		// 우선 글번호를 통해 기업정보를 가져옵니다.
 		// member 테이블 - board 테이블 조인 후 select 
 		sbBoardInfo.append( " select b.title, b.content, " );
-		sbBoardInfo.append( " 	m.sido, m.gugun, m.road_name, m.building_number, m.address, m.phone, avg( rv.star_score )" );
+		sbBoardInfo.append( " 	m.fulladdress, m.phone, avg( rv.star_score )" );
 		sbBoardInfo.append( " 			from board b  " );
 		sbBoardInfo.append( " 				left outer join member m on ( b.write_seq = m.seq ) " );
 		sbBoardInfo.append( " 					right outer join review rv " );
@@ -82,27 +82,16 @@
 			
 			// 작성자(회원)
 			MemberTO mto = new MemberTO();
-			mto.setSido( rs.getString("m.sido") );
-			mto.setGugun( rs.getString("m.gugun") );
-			mto.setRoad_name( rs.getString("m.road_name") );
-			mto.setBuilding_number( rs.getString("m.building_number") );
-			mto.setAddress( rs.getString("m.address") );
+			mto.setFulladdress( rs.getString("m.fulladdress") );
 			mto.setPhone( rs.getString("m.phone") );
-			
 			mainMap.put( "mto", mto );
 			
 			// 리뷰
 			ReviewTO rvto = new ReviewTO();
 			rvto.setAvg_star_score( rs.getFloat("avg( rv.star_score )") );
-			
 			mainMap.put( "rvto", rvto );
 			
 		}
-		
-		//BoardTO bto = (BoardTO) mainMap.get( "bto" );
-		//System.out.println( "1" + bto.getTitle() );
-		//System.out.println( "1" + bto.getContent() );
-		
 		
 		
 		StringBuilder sbMemberShip = new StringBuilder();
@@ -142,7 +131,6 @@
 		StringBuilder sbNotice = new StringBuilder();
 		
 		// 셀프 조인을 통해 업체가 작성한 공지함으로 가져옵니다.
-		
 		sbNotice.append( " select b2.title, b2.seq" );
 		sbNotice.append( " 		from board b1 left outer join board b2 " );
 		sbNotice.append( " 			on( b1.write_seq = b2.write_seq ) " );
@@ -262,21 +250,12 @@
 	// 글 관련
 	BoardTO bto = (BoardTO) mainMap.get( "bto" );
 	String title = bto.getTitle();
-	//String 
-	
 	
 	// 글을 등록한 업체 관련 
 	MemberTO mto = (MemberTO) mainMap.get( "mto" );
-	String sido = mto.getSido();
-	String gugun = mto.getGugun();
-	String road_name = mto.getRoad_name();
-	String building_number = mto.getBuilding_number();
-	String address = mto.getAddress();
+	String fullAdress = mto.getFulladdress();
 	String phone = mto.getPhone();
 	
-	String fullAdress = String.format("%s %s %s %s %s", sido, gugun, road_name, building_number, address );
-	
-
 	// 리뷰 관련
 	ReviewTO rvto = (ReviewTO) mainMap.get("rvto");
 	Float avgStarScore = rvto.getAvg_star_score();

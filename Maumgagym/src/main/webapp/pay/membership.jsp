@@ -57,7 +57,7 @@
 		conn = dataSource.getConnection();
 		
 		// 주문서에 작성할 사용자 정보 쿼리
-		String sql = "SELECT m.seq, m.email, m.NAME, m.phone, m.sido, m.gugun, m.road_name, m.building_number, m.address, m.zipcode FROM member m WHERE nickname = ?";
+		String sql = "SELECT m.seq, m.email, m.NAME, m.phone, m.fulladdress, m.zipcode FROM member m WHERE nickname = ?";
 				
 				
 		pstmt = conn.prepareStatement(sql);
@@ -76,11 +76,7 @@
 			mto.setEmail( rs.getString("m.email") );
 			mto.setName( rs.getString("m.NAME") );
 			mto.setPhone( rs.getString("m.phone") );
-			mto.setSido( rs.getString("m.sido") );
-			mto.setGugun( rs.getString("m.gugun") );
-			mto.setRoad_name( rs.getString("m.road_name") );
-			mto.setBuilding_number( rs.getString("m.building_number") );
-			mto.setAddress( rs.getString("m.address") );
+			mto.setFulladdress( rs.getString("m.fulladdress") );
 			mto.setZipcode( rs.getString("m.zipcode") );
 			
 		} else {
@@ -151,7 +147,7 @@
 		
 		obj.put( "buyer_phone", mto.getPhone());
 		
-		obj.put( "buyer_addr", mto.getSido() + mto.getGugun() + mto.getRoad_name() + mto.getBuilding_number() + mto.getAddress() );
+		obj.put( "buyer_addr", mto.getFulladdress() );
 		
 		obj.put( "buyer_postcode", mto.getZipcode());
 		

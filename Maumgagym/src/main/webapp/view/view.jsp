@@ -38,21 +38,17 @@
 		<!-- star -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		
-		
-		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 		<!-- iamport.payment.js -->
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	
         
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  		<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	</head>
 	
 	<body>
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
 	</jsp:include>	
-	<jsp:include page="./view_source/pay_mdal_search.jsp"/>
+	<jsp:include page="./view_source/pay_modal.jsp"/>
 	
 	<jsp:include page="../pay/pay.jsp"/>
 	

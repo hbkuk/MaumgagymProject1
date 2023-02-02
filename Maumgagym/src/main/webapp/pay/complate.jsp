@@ -39,7 +39,7 @@
 		
 		conn = dataSource.getConnection();
 		
-		String sql = "insert into pay values ( ?, ?, ?, ?, ? )";
+		String sql = "insert into pay values ( ?, ?, ?, ?, 1, now(), ? )";
 				
 		pstmt = conn.prepareStatement(sql);
 		

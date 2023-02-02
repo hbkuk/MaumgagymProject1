@@ -14,7 +14,7 @@ public class BoardTO {
 	int write_seq;
 	String write_date;
 	String status;
-	int tag;
+	String tag;
 	int view_count;
 	int like_count;
 	String image;

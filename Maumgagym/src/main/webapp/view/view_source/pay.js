@@ -35,9 +35,9 @@
 	  let buyer_tel
 	  let buyer_addr
 	  let buyer_postcode
+	  let membership_seq
 	  
 	  function requestPayInfo() {
-	  
 	  
 		$.ajax({
 			url: './pay/membership.jsp',
@@ -64,7 +64,7 @@
 					buyer_postcode = jsonData.buyer_postcode;
 					
 					requestPay();
-					
+					membership_seq = $("#memberShip option:checked").val();
 					
 				} else {
 					alert( '서버 에러' );
@@ -100,15 +100,20 @@
 		        // 결제 성공 시 로직
 		    	  console.log(rsp);
 		        
+		        
 		          // jQuery로 HTTP 요청
 		          jQuery.ajax({
-		              url: "./pay/complete.jsp", // 예: https://www.myservice.com/payments/complete
+		              url: "./pay/complate.jsp", // 예: https://www.myservice.com/payments/complete
 		              method: "POST",
 		              headers: { "Content-Type": "application/json" },
+		              //headers: { "Content-Type": "application/text" },
 		              data: {
 		            	  imp_uid: rsp.imp_uid,
-		                  merchant_uid: rsp.merchant_uid
+		                  merchant_uid: rsp.merchant_uid,
+		                  pay_method: "card",
+		                  membership_seq : membership_seq
 		                  }
+		                  
 		          }).done(function (data) {	
 		            // 가맹점 서버 결제 API 성공시 로직
 		            

@@ -30,6 +30,7 @@
 	  let merchant_uid
 	  let name
 	  let amount
+	  let buyer_seq
 	  let buyer_email
 	  let buyer_name
 	  let buyer_tel
@@ -57,6 +58,7 @@
 					merchant_uid = jsonData.merchant_uid;
 					name = jsonData.name;
 					amount = jsonData.amount;
+					buyer_seq = jsonData.buyer_seq;
 					buyer_email = jsonData.buyer_email;
 					buyer_name = jsonData.buyer_name;
 					buyer_tel = jsonData.buyer_tel;
@@ -98,47 +100,41 @@
 		    }, function (rsp) { // callback
 		      if (rsp.success) {
 		        // 결제 성공 시 로직
-		    	  console.log(rsp);
+		    	  //console.log(rsp);
 		        
-		        
-		          // jQuery로 HTTP 요청
-		          jQuery.ajax({
-		              url: "./pay/complate.jsp", // 예: https://www.myservice.com/payments/complete
-		              method: "POST",
-		              headers: { "Content-Type": "application/json" },
-		              //headers: { "Content-Type": "application/text" },
+		          // 성공 후 DB insert
+		          
+		          $.ajax({
+		              url: "./pay/complate.jsp",
+		              type: "post",
 		              data: {
 		            	  imp_uid: rsp.imp_uid,
 		                  merchant_uid: rsp.merchant_uid,
 		                  pay_method: "card",
-		                  membership_seq : membership_seq
-		                  }
-		                  
-		          }).done(function (data) {	
-		            // 가맹점 서버 결제 API 성공시 로직
-		            
-                      msg = '결제가 완료되었습니다.';
-                      msg += '\n고유ID : ' + rsp.imp_uid;
-                      msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                      msg += '\결제 금액 : ' + rsp.paid_amount;
-                      msg += '카드 승인번호 : ' + rsp.apply_num;
-                      
-                      alert(msg);
-                      
-                      
-		          });
+		                  membership_seq : membership_seq,
+		                  buyer_seq : buyer_seq
+		                  },
+			          dataType: 'json', //서버에서 보내줄 데이터 타입
+			          success: function(flag){
+				        			        	
+				          if(flag == 0){
+							 console.log("추가성공");
+							 
+				          }else{
+				             console.log("Insert Fail!!!");
+				             
+				          }
+				        },
+				        error:function(){
+				          console.log("Insert ajax 통신 실패!!!");
+				        }
+					}) //ajax
+					
+				} else{//결제 실패시
+					var msg = '결제에 실패했습니다';
+					msg += '에러 : ' + rsp.error_msg
+				}
+				console.log(msg);
+			});
+		};
 		          
-                //성공시 이동할 페이지
-                //location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg;
-		        //location.href="./pay/complate.jsp";
-		        
-		      } else {
-		        // 결제 실패 시 로직
-		    	  console.log(rsp);
-		    	  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-		    	//실패시 이동할 페이지  
-		    	//location.href="<%=request.getContextPath()%>/order/payFail";
-		    	//location.href="./pay/payFail.jsp";
-		      }
-		    });
-		  }

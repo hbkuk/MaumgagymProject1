@@ -27,7 +27,7 @@
 	PreparedStatement pstmt = null;
 	
 	//String strDong = request.getParameter( "seq" );	// 컨트롤러 또는 파라미터를 통해서 받음.
-	String seq = "2";
+	String seq = "1";
 	
 	StringBuilder sbHtml = new StringBuilder();
 	

@@ -57,7 +57,7 @@
 		conn = dataSource.getConnection();
 		
 		// 주문서에 작성할 사용자 정보 쿼리
-		String sql = "SELECT m.email, m.NAME, m.phone, m.sido, m.gugun, m.road_name, m.building_number, m.address, m.zipcode FROM member m WHERE nickname = ?";
+		String sql = "SELECT m.seq, m.email, m.NAME, m.phone, m.sido, m.gugun, m.road_name, m.building_number, m.address, m.zipcode FROM member m WHERE nickname = ?";
 				
 				
 		pstmt = conn.prepareStatement(sql);
@@ -72,6 +72,7 @@
 			// 정상 
 			flag = 0;
 			
+			mto.setSeq( rs.getInt("m.seq") );
 			mto.setEmail( rs.getString("m.email") );
 			mto.setName( rs.getString("m.NAME") );
 			mto.setPhone( rs.getString("m.phone") );
@@ -141,6 +142,8 @@
 		obj.put( "name", msto.getMembership_name() );
 		
 		obj.put( "amount", msto.getMembership_price() );
+		
+		obj.put( "buyer_seq", mto.getSeq() );
 		
 		obj.put( "buyer_email", mto.getEmail() );
 		

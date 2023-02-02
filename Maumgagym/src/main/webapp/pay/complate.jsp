@@ -1,3 +1,4 @@
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="javax.naming.NamingException"%>
 <%@page import="javax.sql.DataSource"%>
@@ -16,11 +17,12 @@
 	String merchantUid = request.getParameter( "merchant_uid" );
 	String membershipSeq = request.getParameter( "membership_seq" );
 	String payMethod = request.getParameter( "pay_method" );
+	String buyerSeq = request.getParameter( "buyer_seq" );
 	
-	System.out.println( impUid );
+/* 	System.out.println( impUid );
 	System.out.println( merchantUid );
 	System.out.println( membershipSeq );
-	System.out.println( payMethod );
+	System.out.println( payMethod ); */
 	
  	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -37,7 +39,7 @@
 		
 		conn = dataSource.getConnection();
 		
-		String sql = "insert into pay values ( ?, ?, ?, ? )";
+		String sql = "insert into pay values ( ?, ?, ?, ?, ? )";
 				
 		pstmt = conn.prepareStatement(sql);
 		
@@ -46,6 +48,7 @@
 		pstmt.setString(2, membershipSeq );
 		pstmt.setString(3, payMethod );
 		pstmt.setString(4, impUid );
+		pstmt.setString(5, buyerSeq );
 		
 		if( pstmt.executeUpdate() == 1) {
 			flag = 0;
@@ -61,6 +64,12 @@
 		if( conn != null );
 		if( pstmt != null );
 	}
+ 	
+ 	JSONObject obj = new JSONObject();
+ 	
+ 	obj.put( "flag", flag);
+ 	
+ 	out.println( obj );
 			
 	
 	

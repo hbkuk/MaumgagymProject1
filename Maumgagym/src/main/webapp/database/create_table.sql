@@ -23,12 +23,8 @@ CREATE TABLE `reaction` (
 
 CREATE TABLE `tag` (
 	`seq` int NOT NULL,
-	`tag` varchar(10) NOT NULL
-);
-
-CREATE TABLE `board_tag_relation` (
-	`board_seq` int NOT NULL,
-	`tag_seq` int NOT NULL
+	`tag` varchar(100) NOT NULL,
+	`board_seq` int NOT NULL
 );
 
 CREATE TABLE `image` (
@@ -97,21 +93,18 @@ CREATE TABLE `board_delete` (
 
 CREATE TABLE `member` (
 	`seq` int NOT NULL,
-	`nickname` varchar(100) NOT NULL,
-	`id` varchar(100) NOT NULL,
-	`password` varchar(100) NOT NULL,
-	`name` varchar(20) NOT NULL,
-	`birthday` date NOT NULL,
-	`gender` char(1) NOT NULL,
-	`phone` varchar(20) NOT NULL,
-	`email` varchar(20) NOT NULL,
-	`type` varchar(1) NOT NULL,
-	`zipcode` varchar(100) NOT NULL,
-	`sido` varchar(100) NOT NULL,
-	`gugun` varchar(100) NULL,
-	`road_name` varchar(100) NOT NULL,
-	`building_number` varchar(100) NOT NULL,
-	`address` varchar(100) NOT NULL
+	`nickname` varchar(100) NULL,
+	`id` varchar(100) NULL,
+	`password` varchar(100) NULL,
+	`name` varchar(20) NULL,
+	`birthday` date NULL,
+	`phone` varchar(20) NULL,
+	`email` varchar(20) NULL,
+	`type` varchar(1) NULL,
+	`zipcode` varchar(100) NULL,
+	`address` varchar(100) NULL,
+	`fulladdress` varchar(200) NULL,
+	`referaddress` varchar(100) NULL
 );
 
 CREATE TABLE `membership` (
@@ -132,22 +125,20 @@ CREATE TABLE `cart` (
 CREATE TABLE `pay` (
 	`merchant_uid` varchar(40) NOT NULL,
 	`membership_seq` int NOT NULL,
-	`type` int(1) NOT NULL
+	`type` varchar(30) NOT NULL,
+	`imp_uid` varchar(30) NULL,
+	`status` int(1) NOT NULL,
+	`pay_date` datetime NOT NULL,
+	`member_seq` int NOT NULL
 );
+
 
 CREATE TABLE `membership_register` (
 	`seq` int NOT NULL,
 	`register_date` datetime NOT NULL,
 	`expiry_date` datetime NOT NULL,
 	`status` int(1) NOT NULL,
-	`payment detail_seq` int NOT NULL
-);
-
-CREATE TABLE `payment_detail` (
-	`seq` int NOT NULL,
-	`pay_date` datetime NOT NULL,
-	`status` int(1) NOT NULL,
-	`pay_seq` varchar(40) NOT NULL
+	`merchant_uid` varchar(40) NOT NULL
 );
 
 CREATE TABLE `membership_hold` (
@@ -173,11 +164,6 @@ ALTER TABLE `reaction` ADD CONSTRAINT `PK_REACTION` PRIMARY KEY (
 
 ALTER TABLE `tag` ADD CONSTRAINT `PK_TAG` PRIMARY KEY (
 	`seq`
-);
-
-ALTER TABLE `board_tag_relation` ADD CONSTRAINT `PK_BOARD_TAG_RELATION` PRIMARY KEY (
-	`board_seq`,
-	`tag_seq`
 );
 
 ALTER TABLE `image` ADD CONSTRAINT `PK_IMAGE` PRIMARY KEY (
@@ -236,14 +222,9 @@ ALTER TABLE `membership_register` ADD CONSTRAINT `PK_MEMBERSHIP_REGISTER` PRIMAR
 	`seq`
 );
 
-ALTER TABLE `payment_detail` ADD CONSTRAINT `PK_PAYMENT_DETAIL` PRIMARY KEY (
-	`seq`
-);
-
 ALTER TABLE `membership_hold` ADD CONSTRAINT `PK_MEMBERSHIP_HOLD` PRIMARY KEY (
 	`seq`
 );
-
 
 ALTER TABLE board MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
 
@@ -277,9 +258,8 @@ ALTER TABLE cart MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE membership_register MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE payment_detail MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE membership_hold MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
+
 
 
 ALTER TABLE `board` ADD CONSTRAINT `FK_category_TO_board_1` FOREIGN KEY (
@@ -303,17 +283,10 @@ REFERENCES `board` (
 	`seq`
 );
 
-ALTER TABLE `board_tag_relation` ADD CONSTRAINT `FK_board_TO_board_tag_relation_1` FOREIGN KEY (
+ALTER TABLE `tag` ADD CONSTRAINT `FK_board_TO_tag_1` FOREIGN KEY (
 	`board_seq`
 )
 REFERENCES `board` (
-	`seq`
-);
-
-ALTER TABLE `board_tag_relation` ADD CONSTRAINT `FK_tag_TO_board_tag_relation_1` FOREIGN KEY (
-	`tag_seq`
-)
-REFERENCES `tag` (
 	`seq`
 );
 
@@ -429,15 +402,15 @@ REFERENCES `membership` (
 	`seq`
 );
 
-ALTER TABLE `membership_register` ADD CONSTRAINT `FK_payment_detail_TO_membership_register_1` FOREIGN KEY (
-	`payment detail_seq`
+ALTER TABLE `pay` ADD CONSTRAINT `FK_member_TO_pay_1` FOREIGN KEY (
+	`member_seq`
 )
-REFERENCES `payment_detail` (
+REFERENCES `member` (
 	`seq`
 );
 
-ALTER TABLE `payment_detail` ADD CONSTRAINT `FK_pay_TO_payment_detail_1` FOREIGN KEY (
-	`pay_seq`
+ALTER TABLE `membership_register` ADD CONSTRAINT `FK_pay_TO_membership_register_1` FOREIGN KEY (
+	`merchant_uid`
 )
 REFERENCES `pay` (
 	`merchant_uid`
@@ -449,4 +422,5 @@ ALTER TABLE `membership_hold` ADD CONSTRAINT `FK_membership_register_TO_membersh
 REFERENCES `membership_register` (
 	`seq`
 );
+
 

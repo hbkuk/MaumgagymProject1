@@ -27,7 +27,7 @@
 	PreparedStatement pstmt = null;
 	
 	//String strDong = request.getParameter( "seq" );	// 컨트롤러 또는 파라미터를 통해서 받음.
-	String seq = "1";
+	String seq = "2";
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
@@ -124,7 +124,6 @@
 		ArrayList<MemberShipTO> msList = new ArrayList<>();
 		
 		while( rs.next()) {
-			
 			// 멤버쉽에 대한 정보 가져오기
 			MemberShipTO msto = new MemberShipTO();
 			msto.setMembership_seq( rs.getInt("ms.seq") );

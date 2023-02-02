@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class PayTO {
 	
-	String merchant_id;					// 마음가짐 고유 주문번호
+	String merchant_uid;					// 마음가짐 고유 주문번호
 	int membership_seq;					// 업체별 고유 회원권 번호
 	int type;							// 추후 결제방식 확정 시 1: 카드. 2: 현금 등오로 표시할 것.
 	String pay_date;					// 결제일( now() )

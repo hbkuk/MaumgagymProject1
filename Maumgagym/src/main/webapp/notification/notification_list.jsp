@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%
-	String userID = null;
-%>   
+	String id = request.getParameter("id"); 
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,7 @@
     
     <!--  header -->
 	<jsp:include page="../include/header.jsp">
-		<jsp:param name="userID" value="<%= userID %>"/>
+		<jsp:param name="id" value="<%= id %>"/>
 	</jsp:include>
 	
 	<!--  search  -->

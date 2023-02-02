@@ -18,7 +18,7 @@
  		</div>
 	</form>
 	<div class="caption">
-		<a href="./createAccountPage.jsp">고객 회원가입</a> | <a href="#">기업 회원가입</a>
+		<a href="./createAccountPage.jsp">고객 회원가입</a> | <a href="./createAccountPage_partner.jsp">기업 회원가입</a>
 	</div>
 	
 	<div class="caption">

@@ -87,7 +87,7 @@ public class MemberDAO {
 			try {
 				 conn = this.dataSource.getConnection();
 				 
-				 String sql = "insert into member values (0,?,?,?,?,?,0,?,0,?,?,?)";
+				 String sql = "insert into member values (0,?,?,?,?,?,0,?,?,?,?,?,?)";
 				 stringToDate(to);
 				 
 				 pstmt = conn.prepareStatement(sql);
@@ -97,9 +97,11 @@ public class MemberDAO {
 				 pstmt.setString(4, to.getName());
 				 pstmt.setDate(5, stringToDate(to));
 				 pstmt.setString(6, to.getMail1()+"@"+to.getMail2());
-				 pstmt.setString(7, to.getZipcode());
-				 pstmt.setString(8, to.getAddress());
-				 pstmt.setString(9, to.getReferAddress());
+				 pstmt.setString(7, to.getType());
+				 pstmt.setString(8, to.getZipcode());
+				 pstmt.setString(9, to.getAddress());
+				 pstmt.setString(10, to.getFullAddress());
+				 pstmt.setString(11, to.getReferAddress());
 				 
 				 if(pstmt.executeUpdate() == 1){
 						flag = 0; //정상

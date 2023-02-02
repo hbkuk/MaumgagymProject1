@@ -5,6 +5,7 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <form action="./member/Action/joinAction1.jsp" id ="sfrm" method="post" name="sfrm" >
+	<input type="hidden" name="type" value="M" />
 	<div class="member">
 	    <!-- 1. 로고 -->
 	   	<div id = "logoContainer">
@@ -22,7 +23,7 @@
 	        
 	    </div>
 	    <div class="field">
-	        <b>비밀번호</b>							<!-- onchange : 키보드로 입력 후 변화가 생겼을 때 발생하는 이벤트를 의미 -->
+	        <b>비밀번호</b>							
 	        <span class="placehold-text placehold-pw">
 	        <input id="pw" class="userpw" type="password" name ="password">
 	        </span>
@@ -91,16 +92,16 @@
            <div class="field address_field">
              <div class="userInput">
                  <b>자택주소</b>
-                  	<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호">
-					<input type="button" id="search" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-					<input type="text" id="sample6_address" name="address" placeholder="주소"><br>
-					<!--  <input type="text" id="sample6_detailAddress" placeholder="상세주소">  -->
-					<input type="text" id="sample6_extraAddress" name="referAddress" placeholder="참고항목">
+                  	<input type="text" id="postcode" name="zipcode" placeholder="우편번호">
+					<input type="button" id="search" onclick="execDaumPostcode()" value="우편번호 찾기">
+					<input type="text" id="address" name="address" placeholder="주소"><br>
+					<input type="hidden" id="detailAddress" name="fullAddress">
+					<input type="text" id="extraAddress" name="referAddress" placeholder="참고항목">
                </div>
 
 	
-	    <!-- 6. 가입하기 버튼 -->
-	    <!-- <input type="hidden" name="action" value="insert_ok" />  -->
+	    <!-- 6. 가입하기 버튼 --> 
+	  	<!-- <input type="hidden" id="action" value="insert_ok" />  -->
 	    <br/>
 	    <input id="joinBtn" type="submit" value="가입하기">
 	    <br/>

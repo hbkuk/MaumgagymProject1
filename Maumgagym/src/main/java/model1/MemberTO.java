@@ -16,10 +16,13 @@ public class MemberTO {
 	String email;
 	String mail1;
 	String mail2;
+	
+	String type;
 
 	
 	String zipcode;
 	String address;
+	String fullAddress;
 	String referAddress;
 	
 	public int getSeq() {
@@ -101,6 +104,14 @@ public class MemberTO {
 	public void setMail2(String mail2) {
 		this.mail2 = mail2;
 	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -114,6 +125,13 @@ public class MemberTO {
 		this.address = address;
 	}
 	
+	
+	public String getFullAddress() {
+		return fullAddress;
+	}
+	public void setFullAddress(String fullAddress) {
+		this.fullAddress = fullAddress;
+	}
 	public String getReferAddress() {
 		return referAddress;
 	}

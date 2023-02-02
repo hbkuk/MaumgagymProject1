@@ -18,6 +18,7 @@ img#logo {
 	
 }
 
+
 .member {
     /* border: 1px solid #000; */
     width: 500px;
@@ -168,7 +169,7 @@ img#logo {
 	width: 100px;
 }
 
-#sample6_postcode {
+#postcode {
 	width: 360px;
 	padding-top: 17px;
 }

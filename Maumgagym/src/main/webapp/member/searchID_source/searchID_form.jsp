@@ -17,6 +17,6 @@
 		</div>
 		</form>
 		<div class="caption linkContainer">
-			<a href="./homePage.jsp">홈</a> | <a href="./loginPage">로그인</a> | <a href="./searchPasswordPage.jsp">비밀번호 찾기</a>
+			<a href="./homePage.jsp">홈</a> | <a href="./loginPage.jsp">로그인</a> | <a href="./searchPasswordPage.jsp">비밀번호 찾기</a>
 		</div>
 	</div>

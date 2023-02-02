@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String userID = null;
+String id = (String) session.getAttribute("id");
 %>   
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,7 @@
 
 	<!--  header -->
 	<jsp:include page="../include/header.jsp">
-		<jsp:param name="userID" value="<%= userID %>"/>
+		<jsp:param name="id" value="<%= id %>"/>
 	</jsp:include>
 	
 	<!--  search  -->

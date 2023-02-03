@@ -21,13 +21,12 @@
 	    <div class="field">
 	        <b>비밀번호</b>							
 	        <span class="placehold-text placehold-pw">
-	        <input id="pw" class="userpw" type="password" name ="password">
+	        <input type="password" name="userPW" id="pw" onchange="check_pw();">
 	        </span>
 	        
 	        <b>비밀번호 재확인</b>
 	        <span class="placehold-text placehold-pw-confirm">
-	        <input id="pw-confirm" class="userpw-confirm" type="password" name="password_confirm">
-	        <input type="button" id="check" value="일치 확인">
+	        <input type="password" name="userPW2" id="pw2" onchange="check_pw();">&nbsp;<span id="check"></span>
 	        </span> 
 	    </div>
 	

@@ -139,7 +139,7 @@ public class MemberDAO {
 			try {
 				 conn = this.dataSource.getConnection();
 				 
-				 String sql = "select id from member where email=? ";
+				 String sql = "select id from member where email=?";
 				 
 				 pstmt = conn.prepareStatement(sql);
 				 pstmt.setString(1, to.getEmail());

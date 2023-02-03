@@ -10,7 +10,7 @@
 	request.setCharacterEncoding("utf-8");
 	
 	MemberTO to = new MemberTO();
-	to.setEmail(request.getParameter("email1")); 
+	to.setEmail(request.getParameter("email")); 
 %>    
 
 <!DOCTYPE html>

@@ -22,12 +22,12 @@ public class MemberTO {
 	String mail2;
 	
 	String type;
-
 	
 	String zipcode;
 	String address;
 	String fullAddress;
 	String referAddress;
+	
 	
 	int flag;
 	

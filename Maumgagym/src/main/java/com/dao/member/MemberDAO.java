@@ -129,26 +129,26 @@ public class MemberDAO {
 			
 		}
 		
-		public String checkId(MemberTO to){ // 이메일로 아이디 찾기 메서드 (id값 반환)
+		public MemberTO checkId(MemberTO to){ // 이메일로 아이디 찾기 메서드 (id값 반환)
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String userId = null;
 			try {
 				 conn = this.dataSource.getConnection();
 				 
-				 String sql = "select id from member where email=?";
+				 String sql = "select id, name from member where email=?";
 				 
 				 pstmt = conn.prepareStatement(sql);
 				 pstmt.setString(1, to.getEmail());
 				 
 				 rs = pstmt.executeQuery();
 				 
-				 if(rs.next()){
-					 System.out.println(rs.getString("id"));
-					 userId = rs.getString("id");
+				 while(rs.next()){
+					 to.setId(rs.getString("id"));
+					 to.setName(rs.getString("name"));
+					 
 					} //정상
 				 
 			} catch (SQLException e){
@@ -158,8 +158,7 @@ public class MemberDAO {
 				if(conn != null) try {conn.close();} catch(SQLException e) {}
 				if(rs != null) try {rs.close();} catch(SQLException e) {}
 			}
-			System.out.println(userId);
-			return userId;
+			return to;
 		
 		}
 }

@@ -1,5 +1,143 @@
+<%@page import="com.to.board.MemberShipTO"%>
+<%@page import="org.apache.catalina.tribes.membership.Membership"%>
+<%@page import="com.to.pay.PayTO"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
+<%@page import="com.to.member.MemberTO"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="javax.naming.NamingException"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+
+	request.setCharacterEncoding( "utf-8" );
+
+	String id = null;
+	// get id	
+	if( request.getParameter( "id" ) != null && !"null".equals( request.getParameter( "id" ) ) ) {
+		id = request.getParameter( "id" );
+	} 
+	
+	//System.out.println( id );
+	
+	Connection conn = null;
+	ResultSet rs = null;
+	PreparedStatement pstmt = null;
+	
+	MemberTO mto = null;
+	
+	try {
+		
+		Context initCtx = new InitialContext();
+		Context envCtx = (Context)initCtx.lookup( "java:comp/env" );
+		DataSource dataSource = (DataSource)envCtx.lookup( "jdbc/mariadb1" );
+		
+		conn = dataSource.getConnection();
+		
+ 		String sql = "select m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
+ 		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id );
+		
+		rs = pstmt.executeQuery();
+		
+		mto = new MemberTO();
+		
+		if( rs.next() ) {
+			
+			mto.setNickname( rs.getString("m.nickname") );
+			mto.setId( rs.getString("m.id") );
+			mto.setName( rs.getString("m.name") );
+			mto.setBirthday( rs.getString("m.birthday") );
+			mto.setPhone( rs.getString("m.phone") );
+			mto.setEmail( rs.getString("m.email") );
+			mto.setZipcode( rs.getString("m.zipcode") );
+			mto.setFullAddress( rs.getString("m.fulladdress") );
+			
+		}
+		
+ 		sql = "select m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
+ 		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id );
+		
+		rs = pstmt.executeQuery();
+		
+		mto = new MemberTO();
+		
+		if( rs.next() ) {
+			
+			mto.setNickname( rs.getString("m.nickname") );
+			mto.setId( rs.getString("m.id") );
+			mto.setName( rs.getString("m.name") );
+			mto.setBirthday( rs.getString("m.birthday") );
+			mto.setPhone( rs.getString("m.phone") );
+			mto.setEmail( rs.getString("m.email") );
+			mto.setZipcode( rs.getString("m.zipcode") );
+			mto.setFullAddress( rs.getString("m.fulladdress") );
+			
+		}
+		
+		StringBuilder sbPayMembership = new StringBuilder();
+		
+		sbPayMembership.append( "select p.pay_date AS '결제 날짜', p.type AS '결제 방식', IF( p.status = 1, '정상', '환불' ) AS '결제 상태'," );
+		sbPayMembership.append( "	ms.name AS '회원권 이름', ms.price AS '회원권 가격', ms.period AS '회원권 기간',");
+		sbPayMembership.append( "		b.title AS '게시글 타이틀',");
+		sbPayMembership.append( "			i.name AS '대표 이미지'");
+		sbPayMembership.append( "				from pay p LEFT OUTER JOIN member m");
+		sbPayMembership.append( "					ON( p.member_seq = m.seq ) LEFT OUTER JOIN membership ms");
+		sbPayMembership.append( "						ON( p.membership_seq = ms.seq ) LEFT OUTER JOIN board b");
+		sbPayMembership.append( "							ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
+		sbPayMembership.append( "								ON( b.seq = i.board_seq)");
+		sbPayMembership.append( "									WHERE m.id = ?");
+		sbPayMembership.append( "										LIMIT 0,1");
+ 				
+		
+		sql = sbPayMembership.toString();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id );
+		
+		rs = pstmt.executeQuery();
+		
+		if( rs.next() ) {
+			
+			PayTO pto = new PayTO();
+			pto.setPay_date( rs.getString("결제 날짜") );
+			pto.setType( rs.getString("결제 방식") );
+			pto.setPay_status( rs.getString("결제 상태") );
+			
+			MemberShipTO msto = new MemberShipTO();
+			msto.setMembership_name( rs.getString("회원권 이름") );
+			msto.setMembership_price( rs.getInt("회원권 가격") );
+			msto.setMembership_period( rs.getInt("회원권 기간") );
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		} catch( NamingException e) {
+			System.out.println( e.getMessage());
+		} catch( SQLException e) {
+			System.out.println( e.getMessage());
+		} finally {
+			if( conn != null );
+			if( pstmt != null );
+			if( rs != null );
+		}
+	
+	
+
+%>
 
 <div class="container-xl px-4 mt-4">
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -35,8 +173,8 @@
 							<!-- Profile picture icon-->
 							<i class="bi bi-person-circle" style="font-size: 70px;"></i>
 							<!-- Nickname and Email-->
-							<div class="fs-4 fw-semibold text-muted mb-1">닉네임</div>
-							<div class="fs-6 font-italic text-muted mb-3">abcd@abcmail.com</div>
+							<div class="fs-4 fw-semibold text-muted mb-1">사용자</div>
+							<div class="fs-6 font-italic text-muted mb-3"><%= mto.getName() %></div>
 						</div>
 					</div>
 				</div>
@@ -46,48 +184,79 @@
 						<div class="card-header fs-5 fw-bolder">정보 수정</div>
 						<div class="card-body">
 							<form>
-								<!-- Form Group (nickname)-->
-								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">닉네임</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your username" value="nickname">
-								</div>
-								<!-- Form Row-->
+							
 								<div class="row gx-3">
 									<!-- Form Group (name)-->
 									<div class="mb-3">
 										<label class="small mb-1" for="inputFirstName">이름</label> <input
 											class="form-control" id="inputFirstName" type="text"
-											placeholder="Enter your first name" value="name">
+											placeholder="Enter your first name" value="<%= mto.getName() %>" readonly>
 									</div>
 								</div>
-
+							
+								<!-- Form Group (id)-->
+								<div class="mb-3">
+									<label class="small mb-1" for="inputUsername">아이디</label> <input
+										class="form-control" id="inputUsername" type="text"
+										placeholder="Enter your id" value="<%= mto.getId() %>" readonly>
+								</div>
+								
+								<!-- Form Group (nickname)-->
+								<div class="mb-3">
+									<label class="small mb-1" for="inputUsername">닉네임</label> <input
+										class="form-control" id="inputUsername" type="text"
+										placeholder="Enter your username" value="<%= mto.getNickname() %>">
+								</div>
+								
+								<!-- Form Group (id)-->
+								<div class="mb-3">
+									<label class="small mb-1" for="inputUsername">생년월일</label> <input
+										class="form-control" id="inputUsername" type="text"
+										placeholder="Enter your id" value="<%= mto.getBirthday() %>">
+								</div>
+								
+								<!-- Form Group (id)-->
+								<div class="mb-3">
+									<label class="small mb-1" for="inputUsername">휴대전화</label> <input
+										class="form-control" id="inputUsername" type="text"
+										placeholder="Enter your id" value="<%= mto.getPhone() %>">
+								</div>
+								
 								<!-- Form Group (email address)-->
 								<div class="mb-3">
 									<label class="small mb-1" for="inputEmailAddress">이메일</label> <input
 										class="form-control" id="inputEmailAddress" type="email"
 										placeholder="Enter your email address"
-										value="name@example.com">
+										value="<%= mto.getEmail() %>">
 								</div>
+								
+								<!-- Form Group (id)-->
+								<div class="mb-3">
+									<label class="small mb-1" for="inputUsername">주소</label> <input
+										class="form-control" id="inputUsername" type="text"
+										placeholder="Enter your id" value="<%= "[" + mto.getZipcode() +"] " + mto.getFullAddress() %>">
+								</div>
+							
 								<!-- Form Row-->
 								<div class="row gx-3 mb-3">
 									<!-- Form Group (phone number)-->
 									<div class="col-md-6">
-										<label class="small mb-1" for="inputPhone">현재 비밀번호 </label> <input
+										<label class="small mb-1" for="inputPhone">비밀번호 </label> <input
 											class="form-control" id="inputPhone" type="tel"
-											placeholder="Enter your phone number" value="123456">
+											placeholder="현재 비밀번호를 입력하세요." value="">
 									</div>
 									<!-- Form Group (birthday)-->
 									<div class="col-md-6">
-										<label class="small mb-1" for="inputBirthday">변경 비밀번호</label>
+										<label class="small mb-1" for="inputBirthday">비밀번호 입력</label>
 										<input class="form-control" id="inputBirthday" type="text"
-											name="birthday" placeholder="Enter your birthday"
-											value="123456">
+											name="birthday" placeholder="변경할 비밀번호를 입력하세요."
+											value="">
 									</div>
 								</div>
 								<!-- Save changes button-->
-								<button class="btn btn-primary" type="button">Save
-									changes</button>
+								<div class="d-grid gap-2">
+									<button class="btn btn-primary mt-3" type="button"> 변경하기 </button>
+								</div>
 							</form>
 						</div>
 					</div>

@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="model1.MemberTO"%>
 <%
-
-	String id = (String) session.getAttribute("id");
+		
+	String id = null;
 	
 	if( request.getParameter( "id" ) != null && !"null".equals( request.getParameter( "id" ) ) ) {
 		id = request.getParameter( "id" );
-	} else {
-		id = null;
-	}
+	} 
 	
 %>       
     <!-- header navbar -->

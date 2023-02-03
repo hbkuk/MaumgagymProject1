@@ -2,8 +2,27 @@
     pageEncoding="UTF-8"%>
 
 <%
-	//String userID = null;
-	String userID = request.getParameter("userID");
+	String id = null;
+	
+	if( session.getAttribute("id") != null ) {
+		id = ( String ) session.getAttribute("id");
+	} else {
+		id = null;
+	}
+	
+	String type = null;
+	
+	if( session.getAttribute("type") != null ) {
+		type = ( String ) session.getAttribute("type");
+	} else {
+		type = null;
+	}
+	
+	System.out.println( id );
+	System.out.println( type );
+	
+	
+	
 %>
  
 <!DOCTYPE html>
@@ -46,7 +65,7 @@
 	
 	<body>
 	<jsp:include page="../include/header.jsp">
-		<jsp:param name="userID" value="<%= userID %>"/>
+		<jsp:param name="id" value="<%= id %>"/>
 	</jsp:include>	
 	<jsp:include page="./view_source/pay_modal.jsp"/>
 	

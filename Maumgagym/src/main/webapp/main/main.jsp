@@ -2,8 +2,15 @@
     pageEncoding="UTF-8"%>
 
 <%
-	//String id = null;
-	String id = request.getParameter("id");
+
+		String id = null;
+		
+		if( (String) session.getAttribute("id") != null && !"null".equals( (String) session.getAttribute("id") ) ) {
+			id = (String) session.getAttribute("id");
+		} else {
+			id = null;
+		}
+
 %>
 <!DOCTYPE html>
 <html>

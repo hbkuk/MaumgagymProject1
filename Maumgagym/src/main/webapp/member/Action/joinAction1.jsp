@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@page import="java.io.PrintWriter"%>
-<%@page import="model1.MemberDAO"%>
-<%@page import="model1.MemberTO"%>
+<%@page import="com.dao.member.MemberDAO"%>
+<%@page import="com.to.member.MemberTO"%>
 
 <%
 	request.setCharacterEncoding("utf-8");

@@ -39,14 +39,21 @@
 	  let membership_seq
 	  
 	  function requestPayInfo() {
+		
+		var type = '<%=(String)session.getAttribute("type")%>';
+		
+		if(type=="null"){ 
+             alert("일반 회원만 가능합니다.");
+             return false;
+          }
+		
 	  
 		$.ajax({
 			url: './pay/membership.jsp',
 			type: 'get',
 			data: {
 				
-				//buyer_nickname : '<%=(String)session.getAttribute("buyer_nickname")%>';
-				buyer_nickname : '닉네임2',
+				buyer_nickname : '<%=(String)session.getAttribute("id")%>',
 				membership_seq : $("#memberShip option:checked").val()
 				
 			},

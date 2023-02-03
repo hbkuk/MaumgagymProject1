@@ -82,7 +82,7 @@
 			
 			// 작성자(회원)
 			MemberTO mto = new MemberTO();
-			mto.setFulladdress( rs.getString("m.fulladdress") );
+			mto.setFullAddress( rs.getString("m.fulladdress") );
 			mto.setPhone( rs.getString("m.phone") );
 			mainMap.put( "mto", mto );
 			
@@ -253,7 +253,7 @@
 	
 	// 글을 등록한 업체 관련 
 	MemberTO mto = (MemberTO) mainMap.get( "mto" );
-	String fullAdress = mto.getFulladdress();
+	String fullAdress = mto.getFullAddress();
 	String phone = mto.getPhone();
 	
 	// 리뷰 관련

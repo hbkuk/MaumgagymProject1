@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <%
-	String userID = null;
-
-	if( request.getParameter( "userID" ) != null && !"null".equals( request.getParameter( "userID" ) ) ) {
-		userID = request.getParameter( "userID" );
+	
+	String id = null;
+	
+	if( request.getParameter( "id" ) != null && !"null".equals( request.getParameter( "id" ) ) ) {
+		id = request.getParameter( "id" );
 	} 
 	
 %>       
@@ -24,7 +25,7 @@
 	                <li class="nav-item px-4"><a class="nav-link" href="#!">접속통계</a></li>
 	            </ul>
 	            <%
-	            	if( userID == null ) {
+	            	if( id == null ) {
 	            %>
 	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
 	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>

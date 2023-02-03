@@ -76,7 +76,7 @@
 			mto.setEmail( rs.getString("m.email") );
 			mto.setName( rs.getString("m.NAME") );
 			mto.setPhone( rs.getString("m.phone") );
-			mto.setFulladdress( rs.getString("m.fulladdress") );
+			mto.setFullAddress( rs.getString("m.fulladdress") );
 			mto.setZipcode( rs.getString("m.zipcode") );
 			
 		} else {
@@ -147,7 +147,7 @@
 		
 		obj.put( "buyer_phone", mto.getPhone());
 		
-		obj.put( "buyer_addr", mto.getFulladdress() );
+		obj.put( "buyer_addr", mto.getFullAddress() );
 		
 		obj.put( "buyer_postcode", mto.getZipcode());
 		

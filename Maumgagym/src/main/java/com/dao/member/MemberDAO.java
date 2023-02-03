@@ -1,5 +1,6 @@
-package model1;
+package com.dao.member;
 
+import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.to.member.MemberTO;
 
 public class MemberDAO {
 	
@@ -40,7 +43,7 @@ public class MemberDAO {
 		        
 		    } 
 		
-		public int login(String id, String password) { //로그인 함수
+		public MemberTO login( MemberTO to  ) { //로그인 함수
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -50,20 +53,26 @@ public class MemberDAO {
 			try {
 				 conn = this.dataSource.getConnection();
 				 
-				 String sql = "select password from member where id = ? " ;
+				 String sql = "select password, type from member where id = ? " ;
 				 pstmt = conn.prepareStatement(sql);
-				 pstmt.setString(1, id);
+				 pstmt.setString(1, to.getId() );
 				 rs = pstmt.executeQuery();
 				 
 				 if(rs.next()) { 
-					 if(rs.getString(1).equals(password)) {
-						 return 1; //로그인 성공
+					 
+					 to.setType( rs.getString(2) );
+					 
+					 if(rs.getString(1).equals( to.getPassword() )) {
+						 to.setFlag( 1 );
+						 return to;  //로그인 성공
 					 }
 					 else {
-						 return 0; //비밀번호 불일치
+						 to.setFlag( 0 );
+						 return to; //비밀번호 불일치
 					 }
 				 }
-				 return -1; //아이디가 없음
+				 to.setFlag( -1 );
+				 return to;  //아이디가 없음
 				 
 				 
 			} catch (SQLException e){
@@ -72,7 +81,7 @@ public class MemberDAO {
 				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 				if(conn != null) try {conn.close();} catch(SQLException e) {}
 			}
-			return -2; //오류
+			return to; //오류
 			 
 		}
 		

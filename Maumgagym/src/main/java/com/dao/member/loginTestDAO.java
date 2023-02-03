@@ -1,4 +1,4 @@
-package model1kakao;
+package com.dao.member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.to.member.MemberTO;
 
 public class loginTestDAO {
 	
@@ -26,7 +28,7 @@ public class loginTestDAO {
 			}
 		}
 		
-		public int writeUser(loginTestTO to){
+		public int writeUser(MemberTO to){
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;

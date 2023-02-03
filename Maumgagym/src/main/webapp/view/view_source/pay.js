@@ -27,16 +27,16 @@
 	 const IMP = window.IMP; // 생략 가능
 	 IMP.init("imp48848665"); // 예: imp00000000a
 	 let msg;
-	  let merchant_uid
-	  let name
-	  let amount
-	  let buyer_seq
-	  let buyer_email
-	  let buyer_name
-	  let buyer_tel
-	  let buyer_addr
-	  let buyer_postcode
-	  let membership_seq
+	 let merchant_uid
+	 let name
+	 let amount
+	 let buyer_seq
+	 let buyer_email
+	 let buyer_name
+	 let buyer_tel
+	 let buyer_addr
+	 let buyer_postcode
+	 let membership_seq
 	  
 	  function requestPayInfo() {
 		

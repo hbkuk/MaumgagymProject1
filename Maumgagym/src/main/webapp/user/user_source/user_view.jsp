@@ -2,14 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <div class="container-xl px-4 mt-4">
-	<!-- Account page navigation-->
-	<!-- 
-    <nav class="nav nav-borders">
-        <a class="nav-link active ms-0" href="#" target="__blank">내 정보</a>
-        <a class="nav-link" href="#" target="__blank">내 회원권</a>
-        <a class="nav-link" href="#" target="__blank">찜 목록</a>
-    </nav>
-     -->
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
 			<button class="nav-link active" id="home-tab" data-bs-toggle="tab"

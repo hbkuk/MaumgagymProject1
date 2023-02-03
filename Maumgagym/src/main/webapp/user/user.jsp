@@ -1,14 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String userID = null;
-	//String userID = request.getParameter("userID");
+
+	String id = null;
+	
+	if( session.getAttribute("id") != null ) {
+		id = ( String ) session.getAttribute("id");
+	} else {
+		id = null;
+	}
+	
+	String type = null;
+	
+	if( session.getAttribute("type") != null ) {
+		type = ( String ) session.getAttribute("type");
+	} else {
+		type = null;
+	}
+	
+	String nickname = null;
+	
+	if( session.getAttribute("nickname") != null ) {
+		nickname = ( String ) session.getAttribute("nickname");
+	} else {
+		nickname = null;
+	}
+	
+	
+	if( session.getAttribute("id") == null || session.getAttribute("type") == null ||  session.getAttribute("nickname") == null ) {
+		out.println( "<script type = 'text/javascript'>");
+		out.println( "alert( '로그인을 하셔야 합니다.'); " );
+		out.println( "location.href='../loginPage.jsp';" );
+		out.println( "</script>" );
+	}
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마음가짐 일반회원 마이페이지</title>
 	<link href="./resources/asset/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="./resources/asset/css/user.css" rel="stylesheet" />
     <!-- Bootstrap icons-->
@@ -19,14 +50,15 @@
 	
 	<!-- header -->
 	<jsp:include page="../include/header.jsp">
-		<jsp:param name="userID" value="<%=userID%>" />
-	</jsp:include>
-	<jsp:include page="../main/main_source/main_search.jsp">
-		<jsp:param name="userID" value="<%=userID%>" />
+		<jsp:param name="id" value="<%= id %>" />
 	</jsp:include>
 	
+	<jsp:include page="../main/main_source/main_search.jsp" />
+	
 	<!-- 마이페이지 -->
-	<jsp:include page="./user_source/user_view.jsp" />
+	<jsp:include page="./user_source/user_view.jsp">
+		<jsp:param name="id" value="<%= id %>" />
+	</jsp:include>
 	
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />

@@ -34,11 +34,6 @@
 	
 	<!-- main 컨텐츠 -->
 
-	<jsp:include page="./facility_source/facility_detail1.jsp"/>
-	
-	<jsp:include page="./facility_source/facility_detail2.jsp"/>
-	
-	<jsp:include page="./facility_source/facility_detail3.jsp"/>
 	
 	<jsp:include page="../include/footer.jsp" />
 	

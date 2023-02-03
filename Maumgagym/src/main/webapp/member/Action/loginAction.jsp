@@ -32,6 +32,7 @@
 	if( to.getFlag() == 1 ) {
 		session.setAttribute("id", to.getId() );
 		session.setAttribute("type", to.getType() );
+		session.setAttribute("nickname", to.getNickname() );
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("location.href='/Maumgagym/homePage.jsp'");

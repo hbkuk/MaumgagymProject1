@@ -18,8 +18,17 @@
 		type = null;
 	}
 	
+	String nickname = null;
+	
+	if( session.getAttribute("nickname") != null ) {
+		nickname = ( String ) session.getAttribute("nickname");
+	} else {
+		nickname = null;
+	}
+	
 	System.out.println( id );
 	System.out.println( type );
+	System.out.println( nickname );
 	
 	
 	
@@ -59,32 +68,38 @@
 		
 		<!-- iamport.payment.js -->
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-	
-        
+	        
 	</head>
-	
+		
 	<body>
-	<jsp:include page="../include/header.jsp">
-		<jsp:param name="id" value="<%= id %>"/>
-	</jsp:include>	
-	<jsp:include page="./view_source/pay_modal.jsp"/>
+		<jsp:include page="../include/header.jsp">
+			<jsp:param name="id" value="<%= id %>"/>
+		</jsp:include>	
+		<jsp:include page="./view_source/pay_modal.jsp"/>
+		
+		<jsp:include page="../pay/pay.jsp"/>
+		
+		<!-- main 컨텐츠 -->
 	
-	<jsp:include page="../pay/pay.jsp"/>
-	
-	<!-- main 컨텐츠 -->
-
-	<jsp:include page="./view_source/view.jsp"/>
-	<jsp:include page="../include/footer.jsp" />
-    
-    
-    <script src="./view/view_source/pay.js"></script>
-    <script src="./view/view_source/view_jquery.js"></script>
-    
-    <!-- JAVASCRIPT FILES -->
-    <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
-    <script src="./resources/asset/js/owl.carousel.min.js"></script>
-    <script src="./resources/asset/js/custom.js"></script>
-    
+		<jsp:include page="./view_source/view.jsp"/>
+		<jsp:include page="../include/footer.jsp" />
+		
+		<!-- 세션값 전달 -->
+		<jsp:include page="./view_source/pay.jsp">
+			<jsp:param name="id" value="<%= id %>"/>
+			<jsp:param name="type" value="<%= type %>"/>
+			<jsp:param name="nickname" value="<%= nickname %>"/>
+		</jsp:include>
+	    
+	    
+	    <!--<script src="./view/view_source/pay.js"></script> -->
+	    <script src="./view/view_source/view_jquery.js"></script>
+	    
+	    <!-- JAVASCRIPT FILES -->
+	    <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
+	    <script src="./resources/asset/js/owl.carousel.min.js"></script>
+	    <script src="./resources/asset/js/custom.js"></script>
+	    
 	</body>
 </html>
 

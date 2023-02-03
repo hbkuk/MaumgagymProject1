@@ -21,24 +21,24 @@
 	                <li class="nav-item px-4"><a class="nav-link" href="./notificationPage.jsp">공지 / 이벤트</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="./communityPage.jsp">커뮤니티</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="./cartPage.jsp">회원권 만들기</a></li>
-	                <li class="nav-item px-4 navbar_992_show"><a class="nav-link" onclick="location.href='./customerCenter_viewPage.jsp'">고객센터</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" onclick="location.href='./customerCenter_viewPage.jsp'">고객센터</a></li>
 	            </ul>
 	            <%
 	            	if( id == null ) {
 	            %>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="./loginPage.jsp">
+	            <a class="navbar-brand ps-3" href="./loginPage.jsp">
 	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>
 	            </a>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="./createAccountPage.jsp">
+	            <a class="navbar-brand ps-3" href="./createAccountPage.jsp">
 	              <button type="button" class="btn btn-light rounded-pill"><span style="font-size:smaller;">회원가입</span></button>
 	            </a>
        	        <%
 	            	} else { 
 	            %>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="./searchIDPage.jsp">
+	            <a class="navbar-brand ps-3" href="./searchIDPage.jsp">
 	              <i class="bi bi-chat-left-dots"></i>
 	            </a>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
+	            <a class="navbar-brand ps-3" href="./userPage.jsp">
 	              <i class="bi bi-person"></i>
 	            </a>
 	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='./member/Action/logout.jsp'"><span style="font-size:smaller;">로그아웃</span></button>

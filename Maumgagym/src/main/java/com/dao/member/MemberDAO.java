@@ -53,7 +53,7 @@ public class MemberDAO {
 			try {
 				 conn = this.dataSource.getConnection();
 				 
-				 String sql = "select password, type from member where id = ? " ;
+				 String sql = "select password, type, nickname from member where id = ? " ;
 				 pstmt = conn.prepareStatement(sql);
 				 pstmt.setString(1, to.getId() );
 				 rs = pstmt.executeQuery();
@@ -61,6 +61,7 @@ public class MemberDAO {
 				 if(rs.next()) { 
 					 
 					 to.setType( rs.getString(2) );
+					 to.setNickname( rs.getString(3) );
 					 
 					 if(rs.getString(1).equals( to.getPassword() )) {
 						 to.setFlag( 1 );

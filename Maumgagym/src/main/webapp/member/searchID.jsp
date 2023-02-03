@@ -14,4 +14,13 @@
 	<body>
 	<jsp:include page="./searchID_source/searchID_form.jsp"/>
 	</body>
+	
+	<script>
+	$(document).ready(function(){ 
+   	 $("#loginBtn").click(function() {
+   		 $("#fIdFrm").submit(); 
+   		 });
+ 	 });
+	</script>
+	
 </html> 

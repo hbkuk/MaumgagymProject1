@@ -23,14 +23,15 @@
 
 <% 
 	PrintWriter script = response.getWriter();
-
 	MemberDAO dao = new MemberDAO();
-	String userId = dao.checkId(to);
-	if( userId != null  ) {
+	to = dao.checkId(to);
+	String userId = to.getId();
+	
+	if( to.getId() != null  ) {
 		String toEmail = to.getEmail();
-		String toName = "테스트";
-		String subject = "테스트 제목";
-		String content = "<html><head><meta charset='utf-8'><style type = 'text/css'>body {color : red;}</style></head><body style='color:blue'>내용 테스트</body></html>";
+		String toName = to.getName();
+		String subject = "[마음가짐] 요청하신 ID입니다.";
+		String content = "<html><head><meta charset='utf-8'></head><body><img src='http://localhost:8080/Maumgagym/resources/asset/images/logo_1.jpg'/><br/><h2> 고객님이 요청하신 id 는 <input type='text', value='userId'/> 입니다.</h2> </body></html>";
 		
 		MailSender mailSender = new MailSender();
 		mailSender.sendManil(toEmail, toName, subject, content);

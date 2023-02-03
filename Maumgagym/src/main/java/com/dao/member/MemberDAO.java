@@ -31,7 +31,7 @@ public class MemberDAO {
 			}
 		}
 		
-		 public Date stringToDate(MemberTO to)
+		 public Date stringToDate(MemberTO to) // string -> date 변경 메서드
 		    {
 		        String year = to.getBirthyy();
 		        String month = to.getBirthmm();
@@ -43,7 +43,7 @@ public class MemberDAO {
 		        
 		    } 
 		
-		public MemberTO login( MemberTO to  ) { //로그인 함수
+		public MemberTO login( MemberTO to  ) { //로그인 메서드
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -81,13 +81,15 @@ public class MemberDAO {
 			} finally {
 				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 				if(conn != null) try {conn.close();} catch(SQLException e) {}
+				if(rs != null) try {rs.close();} catch(SQLException e) {}
+
 			}
 			return to; //오류
 			 
 		}
 		
 		
-		public int join(MemberTO to){
+		public int join(MemberTO to){ //회원가입 메서드
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -125,5 +127,39 @@ public class MemberDAO {
 			}
 			return flag;
 			
+		}
+		
+		public String checkId(MemberTO to){ // 이메일로 아이디 찾기 메서드 (id값 반환)
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String userId = null;
+			try {
+				 conn = this.dataSource.getConnection();
+				 
+				 String sql = "select id from member where email=? ";
+				 
+				 pstmt = conn.prepareStatement(sql);
+				 pstmt.setString(1, to.getEmail());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 if(rs.next()){
+					 System.out.println(rs.getString("id"));
+					 userId = rs.getString("id");
+					} //정상
+				 
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+			} finally {
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+				if(rs != null) try {rs.close();} catch(SQLException e) {}
+			}
+			System.out.println(userId);
+			return userId;
+		
 		}
 }

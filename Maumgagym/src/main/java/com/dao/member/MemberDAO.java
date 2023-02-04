@@ -161,4 +161,75 @@ public class MemberDAO {
 			return to;
 		
 		}
+	
+		public MemberTO getTemporaryPassword(MemberTO to) { // 이메일로 회원을 확인하고, 임시비밀번호 부여 후 임시비밀번호 return
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			 
+			try {
+				 String str = "";
+				 
+				 conn = this.dataSource.getConnection();
+				 
+				 String sql = "select id, name, password from member where email=?";
+				 
+				 pstmt = conn.prepareStatement(sql);
+				 pstmt.setString(1, to.getEmail());
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 while(rs.next()){
+					 to.setId(rs.getString("id"));
+					 to.setName(rs.getString("name"));
+					 to.setPassword(rs.getString("password"));
+					 
+					 if(to.getPassword() != null) {
+						 char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+								 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+						 str = "";
+						 // 문자 배열 길이의 값을 랜덤으로 10개를 뽑아 구문을 작성함
+						 int idx = 0;
+						 for (int i = 0; i < 10; i++) {
+							 idx = (int)(charSet.length * Math.random());
+							 str += charSet[idx]; // str 에 랜덤하게 담긴 비빌번호 임시값 들어감.
+						 }
+					 }
+					 to.setTemporaryPW(str);
+					 updateTemporaryPassword(to); // 임시비밀번호 저장 메서드 호출
+				 }
+				 
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+			} finally {
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+				if(rs != null) try {rs.close();} catch(SQLException e) {}
+			}
+			return to;
+		}
+		
+		public void updateTemporaryPassword(MemberTO to) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				
+				 conn = this.dataSource.getConnection();
+				 
+				 String sql = "update member set password = ? where email = ?";
+				 pstmt = conn.prepareStatement(sql);
+				 pstmt.setString(1,to.getTemporaryPW());
+				 pstmt.setString(2,to.getEmail());
+				 pstmt.executeUpdate();
+		
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+			} finally {
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+		}
 }

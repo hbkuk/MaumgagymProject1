@@ -71,7 +71,7 @@
 	   	<!-- Bootstrap core JS-->
 	    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
 	   
-	   <!-- 비밀번호 일치 검사 -->
+	   <!-- 비밀번호 일치 검사 & 정규식 -->
 	    <script type="text/javascript">
 		
 	    function check_pw(){
@@ -84,8 +84,8 @@
                 document.getElementById('pw').value='';
             }
             for(var i=0;i<SC.length;i++){
-                if(pw.indexOf(SC[i]) != -1){
-                    check_SC = 1;
+                if(pw.indexOf(SC[i]) != -1){ //특수기호가 들어가 있으면 
+                    check_SC = 1; //정상
                 }
             }
             if(check_SC == 0){
@@ -109,7 +109,7 @@
 	    	 $("#joinBtn").click(function() {
 	    		 if(  $( "#nickName" ).val() == '' || $( "#id" ).val() == '' ||   $( "#pw" ).val() == '' 
 	    			 ||  $( "#name" ).val() == '' ){
-			    		alert("빈칸을 다 입력해주세요.");
+			    		alert("빈칸을 다 입력해주세요. ※이메일은 아이디/비밀번호 찾기시 필수 인증 단계입니다. 꼭 정확한 입력해주세요.");
 			    		return false;
 	    		 }
 	    	 });

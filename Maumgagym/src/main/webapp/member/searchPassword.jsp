@@ -13,5 +13,15 @@
 	
 	<body>
 	<jsp:include page="./searchPassword_source/searchPassword_form.jsp"/>
+	
+	<script>
+		$(document).ready(function(){
+			$("#loginBtn").click(function(){
+				$("#fPwFrm").submit();
+			});
+		});
+	
+	</script>
+	
 	</body>
 </html> 

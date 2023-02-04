@@ -1,5 +1,88 @@
+<%@page import="java.io.File"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.FileNotFoundException"%>
+<%@page import="org.jsoup.select.Elements"%>
+<%@page import="org.jsoup.Jsoup"%>
+<%@page import="org.jsoup.nodes.Document"%>
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="com.to.board.FacilityDAO"%>
+<%@page import="com.to.board.MemberShipTO"%>
+<%@page import="com.to.member.MemberTO"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.to.board.BoardTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	//System.out.println( request.getParameter( "dongAddr" ) );
+
+	// facility_map.jsp에서 동 주소 받아오기
+	String data = request.getParameter( "dongAddr" );
+	if( request.getParameter( "dongAddr" ) == null ){
+		data = "";
+	}
+
+ 	FacilityDAO dao = new FacilityDAO();
+	ArrayList facilityLists = dao.facility();
+	/*
+	BoardTO btag = dao.tag();
+	String tag = btag.getTag();
+	System.out.println( tag ); 
+	*/
+	
+	StringBuilder sb = new StringBuilder();
+	for( int i=0; i<facilityLists.size(); i++ ){
+		Map<String, Object> map0 = (Map<String, Object>) facilityLists.get(i);
+		
+		BoardTO bto = (BoardTO) map0.get("bto"+(i+1));
+		System.out.println(bto.getTitle());
+		
+		MemberTO mto = (MemberTO) map0.get("mto"+(i+1));
+		System.out.println(mto.getAddress());
+		
+		MemberShipTO msto = (MemberShipTO) map0.get("msto"+(i+1));
+		System.out.println(msto.getMembership_price());
+	
+		//String tag = bto.getTag();
+		String title = bto.getTitle();
+		String address = mto.getAddress();
+		int price =  msto.getMembership_price(); 
+		//System.out.println( tag);
+		
+		
+	
+		sb.append("	<div class='col'>");
+		sb.append("		<div class='card shadow-sm'>");
+		sb.append("			<a href='#'>");
+		sb.append("			<img src='https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg'class='card-img-top' alt='...'></a>");
+		sb.append("			<span class='label-top'>" + "tag" + "</span>");
+		sb.append("			<div class='card-body'>");
+		sb.append("				<div class='clearfix mb-3'>");
+		sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
+		sb.append("					<span class='float-end'>");
+		sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+		sb.append("					</span>");
+		sb.append("				</div>");
+		sb.append("				<h5 class='card-title'>" + title + "</h5>");
+		sb.append("				<span>" + address + "</span>");
+		sb.append("				<p class='tab'>현위치와의 거리</p>");
+		sb.append("				<div class='text-center my-4'>");
+		sb.append("					<a href='#' class='btn btn-warning'>회원권 예약</a>");
+		sb.append("				</div>");
+		sb.append("			</div>");
+		sb.append("		</div>");
+		sb.append("	</div>"); 
+		//System.out.println( sb.toString() );
+	} 
+	
+	
+	
+%>
+<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
+<script src="./resources/asset/script/jquery-3.6.0.js"></script>	
 
 <hr />
 <!-- 내 주변 운동시설-->
@@ -9,33 +92,14 @@
 	</div>
 	<div class="current-location container-xl">
 		<div class="desktop-location-view ng-star-inserted">
-			<i class="bi bi-geo-alt"><span class="ts-md flat-start">서울특별시
-					강남구 역삼동</span> </i>
+			<i class="bi bi-geo-alt" id="getAddr"><%=data %></i>
 			<div class="btn-view float-end">
-				<a href="#" class="clickable">재설정 </a> | <a href="#"
-					class="clickable"> 위치지정</a>
+				<a href="./facilityMapPage.jsp" class="clickable"> 위치지정</a>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- 
-<div class="container my-5">
-	<div class="row">
 
-		<div class="col-md-1 mb-3 mb-sm-0"></div>
-		<div class="col-md-8 mb-3 mb-sm-0">
-			<a href="./home.jsp">홈</a> &gt; 내 주변 운동시설
-		</div>
-		<div class="col-md-3">
-              <div class="row text-center op-7 w-50 float-end">
-                <div class="col p-0"> <a href="#" class="text-dark text-decoration-none"> <i class="bi bi-lungs" style="font-size: 1.5em;"></i> <span class="d-block" style="font-size: 0.8em;">운동시설</span></a> </div>
-                <div class="col p-0"> <a href="#" class="text-dark text-decoration-none"> <i class="bi bi-geo-alt" style="font-size: 1.5em;"></i> <span class="d-block" style="font-size: 0.8em;">지도로 찿기</span></a> </div>
-              </div>
-		</div>
-	</div>
-</div>
-
--->
 <hr />
 
 <!-- side navbar -->
@@ -69,166 +133,8 @@
 		style="position: relative; max-width: 1500px; margin:0 auto;">
 		-->
 
-		<div
-			class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
-			<div class="col">
-				<div class="card shadow-sm">
-					<a href="#"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg"
-						class="card-img-top" alt="...">
-					</a> <span class="label-top">24시 운영</span>
-					<div class="card-body">
-						<div class="clearfix mb-3">
-							<span class="float-start badge rounded-pill bg"> &#8361
-								100,000</span> <span class="float-end"> <a href="#"
-								class="small text-muted">Reviews</a></span>
-						</div>
-						<h5 class="card-title">역삼 엑스파인 필라테스</h5>
-						<span>서울 강남구 역삼동</span>
-						<p class="tab">0.9km</p>
-						<div class="text-center my-4">
-							<a href="#" class="btn btn-warning">회원권 예약</a>
-						</div>
-						<div class="clearfix mb-1">
-							<a href="#"><span
-								class="float-start badge rounded-pill bgtag">필라테스</span></a> <span
-								class="badge rounded-pill bgtag2">체형교정</span> <span
-								class="float-end"><i class="fas fa-plus"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card shadow-sm">
-					<a href="#"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg"
-						class="card-img-top" alt="...">
-					</a> <span class="label-top">여성 전용</span>
-					<div class="card-body">
-						<div class="clearfix mb-3">
-							<span class="float-start badge rounded-pill bg"> &#8361
-								100,000</span> <span class="float-end"> <a href="#"
-								class="small text-muted">Reviews</a></span>
-						</div>
-						<h5 class="card-title">역삼 엑스파인 필라테스</h5>
-						<span>서울 강남구 역삼동</span>
-						<p class="tab">0.9km</p>
-						<div class="text-center my-4">
-							<a href="#" class="btn btn-warning">회원권 예약</a>
-						</div>
-						<div class="clearfix mb-1">
-							<span class="float-start badge rounded-pill bgtag">필라테스</span> <span
-								class="badge rounded-pill bgtag2">체형교정</span> <span
-								class="float-end"><i class="fas fa-plus"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card shadow-sm">
-					<a href="#"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg"
-						class="card-img-top" alt="...">
-					</a> <span class="label-top">마음가짐 추천</span>
-					<div class="card-body">
-						<div class="clearfix mb-3">
-							<span class="float-start badge rounded-pill bg"> &#8361
-								100,000</span> <span class="float-end"> <a href="#"
-								class="small text-muted">Reviews</a></span>
-						</div>
-						<h5 class="card-title">역삼 엑스파인 필라테스</h5>
-						<span>서울 강남구 역삼동</span>
-						<p class="tab">0.9km</p>
-						<div class="text-center my-4">
-							<a href="#" class="btn btn-warning">회원권 예약</a>
-						</div>
-						<div class="clearfix mb-1">
-							<span class="float-start badge rounded-pill bgtag">필라테스</span> <span
-								class="badge rounded-pill bgtag2">체형교정</span> <span
-								class="float-end"><i class="fas fa-plus"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<br />
-			<div class="col">
-				<div class="card shadow-sm">
-					<a href="#"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg"
-						class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<div class="clearfix mb-3">
-							<span class="float-start badge rounded-pill bg"> &#8361
-								100,000</span> <span class="float-end"> <a href="#"
-								class="small text-muted">Reviews</a></span>
-						</div>
-						<h5 class="card-title">역삼 엑스파인 필라테스</h5>
-						<span>서울 강남구 역삼동</span>
-						<p class="tab">0.9km</p>
-						<div class="text-center my-4">
-							<a href="#" class="btn btn-warning">회원권 예약</a>
-						</div>
-						<div class="clearfix mb-1">
-							<span class="float-start badge rounded-pill bgtag">필라테스</span> <span
-								class="badge rounded-pill bgtag2">체형교정</span> <span
-								class="float-end"><i class="fas fa-plus"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card shadow-sm">
-					<a href="#"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg"
-						class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<div class="clearfix mb-3">
-							<span class="float-start badge rounded-pill bg"> &#8361
-								100,000</span> <span class="float-end"> <a href="#"
-								class="small text-muted">Reviews</a></span>
-						</div>
-						<h5 class="card-title">역삼 엑스파인 필라테스</h5>
-						<span>서울 강남구 역삼동</span>
-						<p class="tab">0.9km</p>
-						<div class="text-center my-4">
-							<a href="#" class="btn btn-warning">회원권 예약</a>
-						</div>
-						<div class="clearfix mb-1">
-							<span class="float-start badge rounded-pill bgtag">필라테스</span> <span
-								class="badge rounded-pill bgtag2">체형교정</span> <span
-								class="float-end"><i class="fas fa-plus"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card shadow-sm">
-					<a href="#"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg"
-						class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<div class="clearfix mb-3">
-							<span class="float-start badge rounded-pill bg"> &#8361
-								100,000</span> <span class="float-end"> <a href="#"
-								class="small text-muted">Reviews</a></span>
-						</div>
-						<h5 class="card-title">역삼 엑스파인 필라테스</h5>
-						<span>서울 강남구 역삼동</span>
-						<p class="tab">0.9km</p>
-						<div class="text-center my-4">
-							<a href="#" class="btn btn-warning">회원권 예약</a>
-						</div>
-						<div class="clearfix mb-1">
-							<span class="float-start badge rounded-pill bgtag">필라테스</span> <span
-								class="badge rounded-pill bgtag2">체형교정</span> <span
-								class="float-end"><i class="fas fa-plus"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
+			  <%=sb.toString() %> 
 		</div>
 	</div>
 </div>

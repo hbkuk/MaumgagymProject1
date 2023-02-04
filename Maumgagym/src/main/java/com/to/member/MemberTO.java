@@ -11,6 +11,7 @@ public class MemberTO {
 	String nickname;
 	String id;
 	String password;
+	String temporaryPW;
 	String name;
 	String birthday;
 	String Birthyy;

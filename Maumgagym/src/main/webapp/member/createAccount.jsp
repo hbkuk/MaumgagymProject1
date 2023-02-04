@@ -109,7 +109,7 @@
 	    	 $("#joinBtn").click(function() {
 	    		 if(  $( "#nickName" ).val() == '' || $( "#id" ).val() == '' ||   $( "#pw" ).val() == '' 
 	    			 ||  $( "#name" ).val() == '' ){
-			    		alert("빈칸을 다 입력해주세요.");
+			    		alert("빈칸을 다 입력해주세요. ※이메일은 아이디/비밀번호 찾기시 필수 인증 단계입니다. 꼭 정확한 입력해주세요.");
 			    		return false;
 	    		 }
 	    	 });

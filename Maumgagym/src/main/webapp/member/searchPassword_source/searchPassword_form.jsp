@@ -5,7 +5,7 @@
 		<div id = "logoContainer">
 			<a href="./homePage.jsp"><img id = "logo" src="./resources/asset/images/logo_1.jpg"/></a>
 		</div>
-		<form action="./forget_Json/forgetPw_ok.jsp" id="fPwFrm" method="post" name="fPwFrm">
+		<form action="./member/Action/emailAction_Password.jsp" id="fPwFrm" method="post" name="fPwFrm">
 			<div class="int-area">
 				<input type="text" name="email" id="email" autocomplete="off" required>
 				<label for="email">회원가입한 이메일 주소</label>

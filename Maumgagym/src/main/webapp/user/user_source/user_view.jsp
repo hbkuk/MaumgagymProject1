@@ -96,18 +96,21 @@
 		
 		StringBuilder sbPayMembership = new StringBuilder();
 		
-		sbPayMembership.append( "select p.pay_date AS '결제 날짜', p.type AS '결제 방식', IF( p.status = 1, '정상', '환불' ) AS '결제 상태'," );
+		sbPayMembership.append( "select p.pay_date AS '결제 날짜', p.type AS '결제 방식', IF( p.status = 1, '정상', '환불' ) AS '결제 상태', p.merchant_uid AS '결제 번호'," );
 		sbPayMembership.append( "	ms.name AS '회원권 이름', ms.price AS '회원권 가격', ms.period AS '회원권 기간',");
 		sbPayMembership.append( "		b.title AS '게시글 타이틀',");
-		sbPayMembership.append( "			i.name AS '대표 이미지'");
-		sbPayMembership.append( "				from pay p LEFT OUTER JOIN member m");
-		sbPayMembership.append( "					ON( p.member_seq = m.seq ) LEFT OUTER JOIN membership ms");
-		sbPayMembership.append( "						ON( p.membership_seq = ms.seq ) LEFT OUTER JOIN board b");
-		sbPayMembership.append( "							ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
-		sbPayMembership.append( "								ON( b.seq = i.board_seq)");
-		sbPayMembership.append( "									WHERE m.id = ?");
-		sbPayMembership.append( "										group BY p.merchant_uid");
-		//sbPayMembership.append( "										LIMIT 0,1");
+		sbPayMembership.append( "			i.name AS '대표 이미지', ");
+		sbPayMembership.append( "				wm.fulladdress AS '업체 주소',  wm.phone AS '업체 번호', ");
+		sbPayMembership.append( "					IFNULL( msr.status, 0 ) AS '회원권 상태'");
+		sbPayMembership.append( "						from pay p LEFT OUTER JOIN member m");
+		sbPayMembership.append( "							ON( p.member_seq = m.seq ) LEFT OUTER JOIN membership ms");
+		sbPayMembership.append( "								ON( p.membership_seq = ms.seq ) LEFT OUTER JOIN board b");
+		sbPayMembership.append( "									ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
+		sbPayMembership.append( "										ON( b.seq = i.board_seq) LEFT OUTER JOIN member wm");
+		sbPayMembership.append( "											ON( b.write_seq = wm.seq ) LEFT OUTER JOIN membership_register msr ");
+		sbPayMembership.append( "												ON ( p.merchant_uid = msr.merchant_uid )");
+		sbPayMembership.append( "													WHERE m.id = ?");
+		sbPayMembership.append( "														group BY p.merchant_uid");
  				
 		
 		sql = sbPayMembership.toString();
@@ -127,6 +130,8 @@
 			pto.setPay_date( rs.getString("결제 날짜") );
 			pto.setType( rs.getString("결제 방식") );
 			pto.setPay_status( rs.getString("결제 상태") );
+			pto.setMerchant_uid( rs.getString("결제 번호") );
+			pto.setMembership_register_status( rs.getString("회원권 상태") );
 			purchaseList.put( "pto", pto );
 			
 			MemberShipTO msto = new MemberShipTO();
@@ -139,6 +144,11 @@
 			bto.setTitle( rs.getString("게시글 타이틀") );
 			bto.setImage_name(  rs.getString("대표 이미지") );
 			purchaseList.put( "bto", bto );
+			
+			MemberTO wmto = new MemberTO();
+			wmto.setFullAddress( rs.getString("업체 주소") );
+			wmto.setPhone( rs.getString("업체 번호") );
+			purchaseList.put( "wmto", wmto );
 			
 			purchaseArrayList.add( purchaseList );
 			
@@ -155,6 +165,8 @@
 				String payDate = pto.getPay_date();		//
 				String type = pto.getType();			//
 				String payStatus = pto.getPay_status(); //
+				String merchantUid = pto.getMerchant_uid();
+				String membership_register_status = pto.getMembership_register_status();
 				
 				MemberShipTO msto = (MemberShipTO) purchaseList.get("msto");
 				String membershipName = msto.getMembership_name();	//		
@@ -165,45 +177,55 @@
 				String title = bto.getTitle();			//
 				String imageName = bto.getImage_name();	//
 				
+				MemberTO wmto = (MemberTO) purchaseList.get("wmto");
+				String facilityFullAddress = wmto.getFullAddress();
+				String phone = wmto.getPhone();
+				
 				
 				sbPurchaseList.append( "	<div class='mt-3 mb-4'>");
 				sbPurchaseList.append( "		<div class='col-xl-12'>");
 				sbPurchaseList.append( "			<div class='card mb-4'>");
-				sbPurchaseList.append( "				<div class='card-header fs-5 fw-bolder'> 등록 대기중인 회원권</div>");
+				sbPurchaseList.append( "				<div class='card-header fs-5 fw-bolder'>" + String.format( "%s (%s)", title, phone ) +"</div>");
 				sbPurchaseList.append( "				<div class='card-body'>");
 				sbPurchaseList.append( "					<div class='row g-0'>");
 				sbPurchaseList.append( "						<div class='col-md-4'>");
 				sbPurchaseList.append( "							<img src='./upload/" + imageName +"' class='owl-carousel-image img-fluid'>");
 				sbPurchaseList.append( "						</div>");
 				sbPurchaseList.append( "						<div class='col-md-8' style='padding-left: 50px'>");
-				sbPurchaseList.append( "							<h3 class='card-title fw-semibold'>" + title +"</h3>");
+				sbPurchaseList.append( "							<h3 class='card-title fw-semibold'>" + facilityFullAddress + "</h3>");
 				sbPurchaseList.append( "							<br>");
 				sbPurchaseList.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
 				sbPurchaseList.append( "							<p class='card-text fs-7'>");
-				sbPurchaseList.append( "							간단한 내용정도?");
+				sbPurchaseList.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
 				sbPurchaseList.append( "							</p>");
 				sbPurchaseList.append( "						</div>");
 				sbPurchaseList.append( "					</div>");
+				sbPurchaseList.append( "					<table class='table mt-3'>");
+				sbPurchaseList.append( "						<tbody>");
+				sbPurchaseList.append( "							<tr>");
+				sbPurchaseList.append( "								<th scope='row'>결제일</th>");
+				sbPurchaseList.append( "								<td>" + payDate + "</td>");
+				sbPurchaseList.append( "								<th>결제금액</th>");
+				sbPurchaseList.append( "								<td>" + String.format("%,d 원", membershipPrice) + "</td>");
+				sbPurchaseList.append( "							</tr>");
+				sbPurchaseList.append( "							<tr>");
+				sbPurchaseList.append( "								<th scope='row'>결제수단</th>");
+				sbPurchaseList.append( "								<td>" + type + "</td>");
+				sbPurchaseList.append( "								<th>결제상태</th>");
+				sbPurchaseList.append( "								<td>" + payStatus + "</td>");
+				sbPurchaseList.append( "							</tr>");
+				sbPurchaseList.append( "						</tbody>");
+				sbPurchaseList.append( "					</table>");
+				sbPurchaseList.append( "					<div class='d-grid gap-2'> ");
+				
+					if( membership_register_status.equals( "0" )) {
+						sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "'> 등록하기 </button>");
+					} else {
+						sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "' disabled='disabled'> 승인 대기 중입니다. 취소를 원하시면 운동시설에 연락하세요. </button>");		
+					}
+				sbPurchaseList.append( "					</div>");
 				sbPurchaseList.append( "				</div>");
 				sbPurchaseList.append( "			</div>");
-				sbPurchaseList.append( "			<br/><br/>");
-				sbPurchaseList.append( "			<h5>결제 내역</h5>");
-				sbPurchaseList.append( "			<table class='table'>");
-				sbPurchaseList.append( "				<tbody>");
-				sbPurchaseList.append( "					<tr>");
-				sbPurchaseList.append( "						<th scope='row'>결제일</th>");
-				sbPurchaseList.append( "						<td>" + payDate + "</td>");
-				sbPurchaseList.append( "						<th>결제금액</th>");
-				sbPurchaseList.append( "						<td>" + String.format("%,d 원", membershipPrice) + "</td>");
-				sbPurchaseList.append( "					</tr>");
-				sbPurchaseList.append( "					<tr>");
-				sbPurchaseList.append( "						<th scope='row'>결제수단</th>");
-				sbPurchaseList.append( "						<td>" + type + "</td>");
-				sbPurchaseList.append( "						<th>결제상태</th>");
-				sbPurchaseList.append( "						<td>" + payStatus + "</td>");
-				sbPurchaseList.append( "					</tr>");
-				sbPurchaseList.append( "				</tbody>");
-				sbPurchaseList.append( "			</table>");
 				sbPurchaseList.append( "		</div>");
 				sbPurchaseList.append( "	</div>");
 
@@ -235,8 +257,7 @@
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
 				data-bs-target="#profile-tab-pane" type="button" role="tab"
-				aria-controls="profile-tab-pane" aria-selected="false">내
-				회원권</button>
+				aria-controls="profile-tab-pane" aria-selected="false">등록 대기중인 회원권</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="contact-tab" data-bs-toggle="tab"

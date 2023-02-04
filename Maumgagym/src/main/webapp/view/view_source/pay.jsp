@@ -105,7 +105,7 @@
 				      pay_method: "card",
 				      merchant_uid: merchant_uid,
 				      name: name,
-				      amount: amount/100, 
+				      amount: amount/10000, 
 				      buyer_email: buyer_email,
 				      buyer_name: buyer_name,
 				      buyer_tel: buyer_tel,

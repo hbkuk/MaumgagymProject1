@@ -154,9 +154,19 @@
 			
 		}
 		
-		
+			// 전체 출력
+			sbPurchaseList = new StringBuilder();
+			
+			// status 0 또는 1 => 등록 대기 전
+			sbPurchaseList = new StringBuilder();
+			// status 2번 => 현재 사용 중			
+			sbPurchaseList = new StringBuilder();
+			// status 3번 => 홀딩 
+			sbPurchaseList = new StringBuilder();
+			// status 4번 => 만료된 회원권
 			sbPurchaseList = new StringBuilder();
 		
+			// 등록 대기 회원권
 			for( int i = 0; i < purchaseArrayList.size(); i++ ) {
 				
 				purchaseList = purchaseArrayList.get( i );
@@ -180,6 +190,16 @@
 				MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 				String facilityFullAddress = wmto.getFullAddress();
 				String phone = wmto.getPhone();
+				
+				// 0번이거나 1번이면 등록 대기전으로 분류하고,		==> status가 0 또는 1
+						
+				// 현재 홀딩 중인 사용중인 회원권으로 빠지고		==> status가 2번
+				
+				// 현재 홀딩 중인 정지한 회원권으로 빠지고		==> status가 3번
+				
+				// 만료된 회원권은 보고싶으면 만료된 회원권		==> status가 4번
+				
+				// 전체 목록은 전체목록						==> status가 모두 다 가능
 				
 				
 				sbPurchaseList.append( "	<div class='mt-3 mb-4'>");
@@ -217,12 +237,11 @@
 				sbPurchaseList.append( "						</tbody>");
 				sbPurchaseList.append( "					</table>");
 				sbPurchaseList.append( "					<div class='d-grid gap-2'> ");
-				
-					if( membership_register_status.equals( "0" )) {
-						sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "'> 등록하기 </button>");
-					} else {
-						sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "' disabled='disabled'> 승인 대기 중입니다. 취소를 원하시면 운동시설에 연락하세요. </button>");		
-					}
+				if( membership_register_status.equals( "0" )) {
+					sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "'> 등록하기 </button>");
+				} else {
+					sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "' disabled='disabled'> 승인 대기 중입니다. 취소를 원하시면 운동시설에 연락하세요. </button>");		
+				}
 				sbPurchaseList.append( "					</div>");
 				sbPurchaseList.append( "				</div>");
 				sbPurchaseList.append( "			</div>");

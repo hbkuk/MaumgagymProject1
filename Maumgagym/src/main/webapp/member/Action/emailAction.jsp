@@ -31,8 +31,8 @@
 	if( userId != null  ) {
 		String toEmail = to.getEmail();
 		String toName = to.getName();
-		String subject = "[마음가짐] ID 안내 이메일 입니다.";
-		String content = "<html><head><meta charset='utf-8'></head><body>";
+		String subject  = "[마음가짐] ID 안내 이메일 입니다.";
+		String content  = "<html><head><meta charset='utf-8'></head><body>";
 		       content += "<img src='http://localhost:8080/Maumgagym/resources/asset/images/logo_1.jpg'/>" ;
 		       content += "<br/><h2> 회원님의 ID는 " + userId + "입니다. 다시 로그인을 진행해주세요. </h2></body></html>";
 		   

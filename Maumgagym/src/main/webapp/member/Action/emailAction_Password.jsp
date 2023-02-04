@@ -30,10 +30,10 @@
 	if ( temporaryPW != null){
 		String toEmail = to.getEmail();
 		String toName = to.getName();
-		String subject = "[마음가짐] 임시비밀번호 안내 이메일 입니다.";
-		String content = "<html><head><meta charset='utf-8'></head><body>";
+		String subject =  "[마음가짐] 임시비밀번호 안내 이메일 입니다.";
+		String content =  "<html><head><meta charset='utf-8'></head><body>";
 			   content += "<img src='http://localhost:8080/Maumgagym/resources/asset/images/logo_1.jpg'/>" ;
-			   content +=	"<br/><h2> 임시비밀번호는" + temporaryPW + "입니다.마이페이지에서 비밀번호 수정을 진행해주세요. </h2></body></html>";
+			   content += "<br/><h2> 임시비밀번호는" + temporaryPW + "입니다.마이페이지에서 비밀번호 수정을 진행해주세요. </h2></body></html>";
 		
 		MailSender mailSender = new MailSender();
 		mailSender.sendManil(toEmail, toName, subject, content);

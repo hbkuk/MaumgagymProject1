@@ -1,3 +1,8 @@
+<%@page import="java.awt.font.ImageGraphicAttribute"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.to.board.BoardTO"%>
 <%@page import="com.to.board.MemberShipTO"%>
 <%@page import="org.apache.catalina.tribes.membership.Membership"%>
 <%@page import="com.to.pay.PayTO"%>
@@ -30,6 +35,12 @@
 	PreparedStatement pstmt = null;
 	
 	MemberTO mto = null;
+	
+	Map<String, Object> purchaseList = null;
+	
+	ArrayList< Map<String, Object> > purchaseArrayList = null; 
+	
+	StringBuilder sbPurchaseList = null;
 	
 	try {
 		
@@ -95,7 +106,8 @@
 		sbPayMembership.append( "							ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
 		sbPayMembership.append( "								ON( b.seq = i.board_seq)");
 		sbPayMembership.append( "									WHERE m.id = ?");
-		sbPayMembership.append( "										LIMIT 0,1");
+		sbPayMembership.append( "										group BY p.merchant_uid");
+		//sbPayMembership.append( "										LIMIT 0,1");
  				
 		
 		sql = sbPayMembership.toString();
@@ -105,24 +117,98 @@
 		
 		rs = pstmt.executeQuery();
 		
-		if( rs.next() ) {
+		purchaseArrayList = new ArrayList();
+		
+		while( rs.next() ) {
+			
+			purchaseList = new HashMap();
 			
 			PayTO pto = new PayTO();
 			pto.setPay_date( rs.getString("결제 날짜") );
 			pto.setType( rs.getString("결제 방식") );
 			pto.setPay_status( rs.getString("결제 상태") );
+			purchaseList.put( "pto", pto );
 			
 			MemberShipTO msto = new MemberShipTO();
 			msto.setMembership_name( rs.getString("회원권 이름") );
 			msto.setMembership_price( rs.getInt("회원권 가격") );
 			msto.setMembership_period( rs.getInt("회원권 기간") );
+			purchaseList.put( "msto", msto );
 			
+			BoardTO bto = new BoardTO();
+			bto.setTitle( rs.getString("게시글 타이틀") );
+			bto.setImage_name(  rs.getString("대표 이미지") );
+			purchaseList.put( "bto", bto );
 			
+			purchaseArrayList.add( purchaseList );
 			
 		}
 		
 		
+			sbPurchaseList = new StringBuilder();
 		
+			for( int i = 0; i < purchaseArrayList.size(); i++ ) {
+				
+				purchaseList = purchaseArrayList.get( i );
+				
+				PayTO pto = (PayTO) purchaseList.get("pto");
+				String payDate = pto.getPay_date();		//
+				String type = pto.getType();			//
+				String payStatus = pto.getPay_status(); //
+				
+				MemberShipTO msto = (MemberShipTO) purchaseList.get("msto");
+				String membershipName = msto.getMembership_name();	//		
+				int membershipPrice = msto.getMembership_price();
+				int membershipPeriod = msto.getMembership_period();	//
+				
+				BoardTO bto = (BoardTO) purchaseList.get("bto");
+				String title = bto.getTitle();			//
+				String imageName = bto.getImage_name();	//
+				
+				
+				sbPurchaseList.append( "	<div class='mt-3 mb-4'>");
+				sbPurchaseList.append( "		<div class='col-xl-12'>");
+				sbPurchaseList.append( "			<div class='card mb-4'>");
+				sbPurchaseList.append( "				<div class='card-header fs-5 fw-bolder'> 등록 대기중인 회원권</div>");
+				sbPurchaseList.append( "				<div class='card-body'>");
+				sbPurchaseList.append( "					<div class='row g-0'>");
+				sbPurchaseList.append( "						<div class='col-md-4'>");
+				sbPurchaseList.append( "							<img src='./upload/" + imageName +"' class='owl-carousel-image img-fluid'>");
+				sbPurchaseList.append( "						</div>");
+				sbPurchaseList.append( "						<div class='col-md-8' style='padding-left: 50px'>");
+				sbPurchaseList.append( "							<h3 class='card-title fw-semibold'>" + title +"</h3>");
+				sbPurchaseList.append( "							<br>");
+				sbPurchaseList.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
+				sbPurchaseList.append( "							<p class='card-text fs-7'>");
+				sbPurchaseList.append( "							간단한 내용정도?");
+				sbPurchaseList.append( "							</p>");
+				sbPurchaseList.append( "						</div>");
+				sbPurchaseList.append( "					</div>");
+				sbPurchaseList.append( "				</div>");
+				sbPurchaseList.append( "			</div>");
+				sbPurchaseList.append( "			<br/><br/>");
+				sbPurchaseList.append( "			<h5>결제 내역</h5>");
+				sbPurchaseList.append( "			<table class='table'>");
+				sbPurchaseList.append( "				<tbody>");
+				sbPurchaseList.append( "					<tr>");
+				sbPurchaseList.append( "						<th scope='row'>결제일</th>");
+				sbPurchaseList.append( "						<td>" + payDate + "</td>");
+				sbPurchaseList.append( "						<th>결제금액</th>");
+				sbPurchaseList.append( "						<td>" + String.format("%,d 원", membershipPrice) + "</td>");
+				sbPurchaseList.append( "					</tr>");
+				sbPurchaseList.append( "					<tr>");
+				sbPurchaseList.append( "						<th scope='row'>결제수단</th>");
+				sbPurchaseList.append( "						<td>" + type + "</td>");
+				sbPurchaseList.append( "						<th>결제상태</th>");
+				sbPurchaseList.append( "						<td>" + payStatus + "</td>");
+				sbPurchaseList.append( "					</tr>");
+				sbPurchaseList.append( "				</tbody>");
+				sbPurchaseList.append( "			</table>");
+				sbPurchaseList.append( "		</div>");
+				sbPurchaseList.append( "	</div>");
+
+		
+		}
 		
 		
 		} catch( NamingException e) {
@@ -263,53 +349,14 @@
 				</div>
 			</div>
 		</div>
+		
+		
 		<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
 			aria-labelledby="profile-tab" tabindex="0">
 
 			<!-- 내 회원권 -->
-			<hr class="mt-0 mb-4">
-			<div class="col-xl-12">
-				<!-- 회원권 구매 내역-->
-				<div class="card mb-4">
-					<div class="card-header fs-5 fw-bolder">회원권 구매 내역</div>
-					<div class="card-body">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img
-									src="https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Big)Xpine.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-							<div class="col-md-8" style="padding-left: 50px">
-								<h3 class="card-title fw-semibold">역삼 엑스파인 필라테스</h3>
-								<br>
-								<p class="card-text fs-5">6:1 필라테스 (주2회)</p>
-								<p class="card-text fs-7">
-									1개월 <span> (0월0일 ~ 0월0일)</span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 결제 내역 -->
-				<br/><br/>
-				<h5>결제 내역</h5>
-				<table class="table">
-					<tbody>
-						<tr>
-							<th scope="row">결제일</th>
-							<td>2023년1월26일</td>
-							<th>결제금액</th>
-							<td>200,000원</td>
-						</tr>
-						<tr>
-							<th scope="row">결제수단</th>
-							<td>신용카드</td>
-							<th>결제상태</th>
-							<td>결제완료</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<%= sbPurchaseList.toString() %>
+			
 		</div>
 		<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
 			aria-labelledby="contact-tab" tabindex="0">...</div>

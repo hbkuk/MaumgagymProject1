@@ -17,7 +17,7 @@ public class BoardTO {
 	String tag;
 	int view_count;
 	int like_count;
-	String image;
+	String image_name;
 	double image_size;
 	String membership_name;
 	int membership_price;

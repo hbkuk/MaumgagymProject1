@@ -183,7 +183,7 @@
 		while( rs.next()) {
 			
 			BoardTO bto = new BoardTO();
-			bto.setImage( rs.getString("img.name") );
+			bto.setImage_name( rs.getString("img.name") );
 			
 			imageList.add( bto );
 			
@@ -388,7 +388,7 @@
 						<div class="custom-block-icon-wrap">
 							<div
 								class="custom-block-image-wrap custom-block-image-detail-page mb-5">
-								<img src="./upload/<%=btoMainImage.getImage()%>" class="custom-block-image img-fluid mb-5"> 
+								<img src="./upload/<%=btoMainImage.getImage_name()%>" class="custom-block-image img-fluid mb-5"> 
 								<div class="mb-2 pb-3">
 									<span class="material-symbols-outlined">Home</span><small class="text-muted">&nbsp;<%= fullAdress %></small>
 								</div>
@@ -512,7 +512,7 @@
 												<div
 													class="custom-block-image-wrap custom-block-image-detail-page">
 													
-													<img src="./upload/<%=btoImage.getImage()%>" class="custom-block-image img-fluid">
+													<img src="./upload/<%=btoImage.getImage_name()%>" class="custom-block-image img-fluid">
 												</div>
 											</div> 
 											<% 	} %>

@@ -105,7 +105,7 @@
 				      pay_method: "card",
 				      merchant_uid: merchant_uid,
 				      name: name,
-				      amount: amount, 
+				      amount: amount/100, 
 				      buyer_email: buyer_email,
 				      buyer_name: buyer_name,
 				      buyer_tel: buyer_tel,
@@ -145,12 +145,14 @@
 						        },
 						        error:function(){
 						          console.log("Insert ajax 통신 실패!!!");
+						          location.href = "./pay/payFail.jsp";
 						        }
 							}) //ajax
 							
 						} else{//결제 실패시
 							var msg = '결제에 실패했습니다';
 							msg += '에러 : ' + rsp.error_msg
+							location.href = "./pay/payFail.jsp";
 						}
 						console.log(msg);
 					});

@@ -71,7 +71,7 @@
 	   	<!-- Bootstrap core JS-->
 	    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
 	   
-	   <!-- 비밀번호 일치 검사 -->
+	   <!-- 비밀번호 일치 검사 & 정규식 -->
 	    <script type="text/javascript">
 		
 	    function check_pw(){
@@ -84,8 +84,8 @@
                 document.getElementById('pw').value='';
             }
             for(var i=0;i<SC.length;i++){
-                if(pw.indexOf(SC[i]) != -1){
-                    check_SC = 1;
+                if(pw.indexOf(SC[i]) != -1){ //특수기호가 들어가 있으면 
+                    check_SC = 1; //정상
                 }
             }
             if(check_SC == 0){

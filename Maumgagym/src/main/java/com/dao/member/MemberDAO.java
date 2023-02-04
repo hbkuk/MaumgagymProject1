@@ -210,7 +210,7 @@ public class MemberDAO {
 			return to;
 		}
 		
-		public void updateTemporaryPassword(MemberTO to) {
+		public void updateTemporaryPassword(MemberTO to) { // 임시비밀번호 저장 메서드
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;

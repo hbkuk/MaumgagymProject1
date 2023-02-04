@@ -197,6 +197,7 @@ public class MemberDAO {
 						 }
 					 }
 					 to.setTemporaryPW(str);
+					 updateTemporaryPassword(to); // 임시비밀번호 저장 메서드 호출
 				 }
 				 
 			} catch (SQLException e){
@@ -207,5 +208,28 @@ public class MemberDAO {
 				if(rs != null) try {rs.close();} catch(SQLException e) {}
 			}
 			return to;
+		}
+		
+		public void updateTemporaryPassword(MemberTO to) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				
+				 conn = this.dataSource.getConnection();
+				 
+				 String sql = "update member set password = ? where email = ?";
+				 pstmt = conn.prepareStatement(sql);
+				 pstmt.setString(1,to.getTemporaryPW());
+				 pstmt.setString(2,to.getEmail());
+				 pstmt.executeUpdate();
+		
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+			} finally {
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+			}
 		}
 }

@@ -31,7 +31,7 @@ public class MemberDAO {
 			}
 		}
 		
-		 public Date stringToDate(MemberTO to) // string -> date 변경 메서드
+		public Date stringToDate(MemberTO to) // string -> date 변경 메서드
 		    {
 		        String year = to.getBirthyy();
 		        String month = to.getBirthmm();
@@ -128,6 +128,46 @@ public class MemberDAO {
 			return flag;
 			
 		}
+		
+		
+		public int joinPartner(MemberTO to){ //기업 회원가입 메서드
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			int flag = 1;
+			
+			try {
+				 conn = this.dataSource.getConnection();
+				 
+				 String sql = "insert into member values (0,?,?,?,?,0,0,?,?,?,?,?,?)";
+				 
+				 pstmt = conn.prepareStatement(sql);
+				 pstmt.setString(1, to.getNickname()); //상호명
+				 pstmt.setString(2, to.getId());
+				 pstmt.setString(3, to.getPassword());
+				 pstmt.setString(4, to.getName()); // 대표이름
+				 pstmt.setString(5, to.getMail1()+"@"+to.getMail2());
+				 pstmt.setString(6, to.getType()); //c
+				 pstmt.setString(7, to.getZipcode());
+				 pstmt.setString(8, to.getAddress());
+				 pstmt.setString(9, to.getFullAddress());
+				 pstmt.setString(10, to.getReferAddress());
+				 
+				 if(pstmt.executeUpdate() == 1){
+						flag = 0; //정상
+					}
+				 
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+			} finally {
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+			return flag;
+			
+		}
+
 		
 		public MemberTO checkId(MemberTO to){ // 이메일로 아이디 찾기 메서드 (id값 반환)
 			

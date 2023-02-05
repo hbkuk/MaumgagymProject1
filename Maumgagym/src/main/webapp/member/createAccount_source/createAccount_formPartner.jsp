@@ -4,7 +4,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
-<form action="./member/Action/joinAction1.jsp" id ="sfrm" method="post" name="sfrm" >
+<form action="./member/Action/joinAction_Partner.jsp" id ="sfrm" method="post" name="sfrm" >
 	<input type="hidden" name="type" value="C" />
 	<div class="member">
 	    <!-- 로고 -->
@@ -21,17 +21,17 @@
 	    <div class="field">
 	        <b>비밀번호</b>							
 	        <span class="placehold-text placehold-pw">
-	        <input type="password" name="userPW" id="pw" onchange="check_pw();">
+	        <input type="password" name="password" id="pw" onchange="check_pw();">
 	        </span>
 	        
 	        <b>비밀번호 재확인</b>
 	        <span class="placehold-text placehold-pw-confirm">
-	        <input type="password" name="userPW2" id="pw2" onchange="check_pw();">&nbsp;<span id="check"></span>
+	        <input type="password" name="password2" id="pw2" onchange="check_pw();">&nbsp;<span id="check"></span>
 	        </span> 
 	    </div>
 	
 	
-	    <!-- 이메일_전화번호 -->
+	    <!-- 이메일 -->
 	    <div class="field email_field">
 	        <b id = "b_email">이메일</b>
 		        <input type="text" id="mail1" name="mail1"> @ 

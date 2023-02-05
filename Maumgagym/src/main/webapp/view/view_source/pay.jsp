@@ -135,24 +135,24 @@
 						        			        	
 						          if(result.flag == 0){
 									 console.log("추가성공");
-									 //location.href = "./pay/paySuccess.jsp";
+									 location.href = "./pay/paySuccess.jsp";
 									 
 						          }else{
 						             console.log("Insert Fail!!!");
-						             //location.href = "./pay/payFail.jsp";
+						             location.href = "./pay/payFail.jsp";
 						             
 						          }
 						        },
 						        error:function(){
 						          console.log("Insert ajax 통신 실패!!!");
-						          //location.href = "./pay/payFail.jsp";
+						          location.href = "./pay/payFail.jsp";
 						        }
 							}) //ajax
 							
 						} else{//결제 실패시
 							var msg = '결제에 실패했습니다';
 							msg += '에러 : ' + rsp.error_msg
-							//location.href = "./pay/payFail.jsp";
+							location.href = "./pay/payFail.jsp";
 						}
 						console.log(msg);
 					});

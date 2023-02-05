@@ -3,6 +3,7 @@
 <%@ page import = "java.io.PrintWriter" %>
 <%
 	String id = null;
+	String type = null;
 
 	if( session.getAttribute("id") != null ) {
 		id = ( String ) session.getAttribute("id");

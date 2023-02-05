@@ -234,7 +234,7 @@
 				sbPurchaseList.append( "							</tr>");
 				sbPurchaseList.append( "							<tr>");
 				sbPurchaseList.append( "								<th scope='row'>결제수단</th>");
-				sbPurchaseList.append( "								<td>" + payType + "</td>");
+				sbPurchaseList.append( "								<td>" + type + "</td>");
 				sbPurchaseList.append( "								<th>결제상태</th>");
 				sbPurchaseList.append( "								<td>" + payStatus + "</td>");
 				sbPurchaseList.append( "							</tr>");
@@ -310,7 +310,7 @@
 				sbBeforeRegister.append( "							</tr>");
 				sbBeforeRegister.append( "							<tr>");
 				sbBeforeRegister.append( "								<th scope='row'>결제수단</th>");
-				sbBeforeRegister.append( "								<td>" + payType + "</td>");
+				sbBeforeRegister.append( "								<td>" + type + "</td>");
 				sbBeforeRegister.append( "								<th>결제상태</th>");
 				sbBeforeRegister.append( "								<td>" + payStatus + "</td>");
 				sbBeforeRegister.append( "							</tr>");
@@ -386,7 +386,7 @@
 				sbAfterRegister.append( "							</tr>");
 				sbAfterRegister.append( "							<tr>");
 				sbAfterRegister.append( "								<th scope='row'>결제수단</th>");
-				sbAfterRegister.append( "								<td>" + payType + "</td>");
+				sbAfterRegister.append( "								<td>" + type + "</td>");
 				sbAfterRegister.append( "								<th>결제상태</th>");
 				sbAfterRegister.append( "								<td>" + payStatus + "</td>");
 				sbAfterRegister.append( "							</tr>");
@@ -462,7 +462,7 @@
 			sbPauseMembership.append( "							</tr>");
 			sbPauseMembership.append( "							<tr>");
 			sbPauseMembership.append( "								<th scope='row'>결제수단</th>");
-			sbPauseMembership.append( "								<td>" + payType + "</td>");
+			sbPauseMembership.append( "								<td>" + type + "</td>");
 			sbPauseMembership.append( "								<th>결제상태</th>");
 			sbPauseMembership.append( "								<td>" + payStatus + "</td>");
 			sbPauseMembership.append( "							</tr>");
@@ -542,7 +542,7 @@
 			sbExpireMembership.append( "							</tr>");
 			sbExpireMembership.append( "							<tr>");
 			sbExpireMembership.append( "								<th scope='row'>결제수단</th>");
-			sbExpireMembership.append( "								<td>" + payType + "</td>");
+			sbExpireMembership.append( "								<td>" + type + "</td>");
 			sbExpireMembership.append( "								<th>결제상태</th>");
 			sbExpireMembership.append( "								<td>" + payStatus + "</td>");
 			sbExpireMembership.append( "							</tr>");

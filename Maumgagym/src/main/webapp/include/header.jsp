@@ -2,11 +2,19 @@
     pageEncoding="UTF-8"%>
 <%
 		
-	String id = null;
+	request.setCharacterEncoding( "utf-8" );
 	
-	if( request.getParameter( "id" ) != null && !"null".equals( request.getParameter( "id" ) ) ) {
-		id = request.getParameter( "id" );
+	String id = null;
+	String type = null;
+	// get id	
+	if( session.getAttribute("id") != null ) {
+		id = ( String ) session.getAttribute("id");
+	}
+	
+	if( session.getAttribute("type") != null ) {
+		type = ( String ) session.getAttribute( "type" );
 	} 
+	
 	
 %>       
     <!-- header navbar -->
@@ -20,7 +28,13 @@
 	                <li class="nav-item px-4 "><a class="nav-link" href="./homePage.jsp">홈</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="./notificationPage.jsp">공지 / 이벤트</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="./communityPage.jsp">커뮤니티</a></li>
+				<%	
+					if( type == null || !( type.equals( "C" ) ) ) { 
+				%>                
 	                <li class="nav-item px-4"><a class="nav-link" href="./cartPage.jsp">회원권 만들기</a></li>
+	            <%	
+	            	}  
+	            %>	                
 	                <li class="nav-item px-4"><a class="nav-link" onclick="location.href='./customerCenter_viewPage.jsp'">고객센터</a></li>
 	            </ul>
 	            <%
@@ -34,7 +48,9 @@
 	            </a>
        	        <%
 	            	} else { 
+	            		if( ( type.equals( "M" ) ) ) {
 	            %>
+	            
 	            <a class="navbar-brand ps-3" href="./searchIDPage.jsp">
 	              <i class="bi bi-chat-left-dots"></i>
 	            </a>
@@ -44,6 +60,19 @@
 	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='./member/Action/logout.jsp'"><span style="font-size:smaller;">로그아웃</span></button>
 	            
        	        <%
+	            		} else {
+	            %>
+	            
+    	        <a class="navbar-brand ps-3" href="./searchIDPage.jsp">
+	              <i class="bi bi-chat-left-dots"></i>
+	            </a>
+	            <a class="navbar-brand ps-3" href="./facilityUserPage.jsp">
+	              <i class="bi bi-person"></i>
+	            </a>
+	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='./member/Action/logout.jsp'"><span style="font-size:smaller;">로그아웃</span></button>
+	            
+	            <%
+	            		}
 	            	}
 	            %>
 	        </div>

@@ -47,7 +47,7 @@
 	     <!-- 회사명 입력 -->
 	   	 <div class="field">
 		        <b>회사/점포명</b>
-		        <span class="placehold-tex"><input id="companyname" type="text" name="president"></span>
+		        <span class="placehold-tex"><input id="companyname" type="text" name="companyname"></span>
 	     </div>
 	         
 		<!-- 대표 입력 -->

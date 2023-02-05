@@ -48,28 +48,14 @@
 	
 	
 	
-	<script>
+	<script> // Jquery
 		$('#summernote').summernote({
 			  height: 450,
 			  lang: "ko-KR"
 			});
 	 </script>
 	 
-	 <script type = "text/javascript">
-		window.onload = function () {
-			document.getElementById('wbtn').onclick = function() {
-				//alert('click');
-				// 필수 입력항목 검사 (not null인 목록들을 검사)
-				if (document.wfrm.subject.value.trim() == ''){
-					alert('제목을 입력하셔야 합니다.');
-					return false;
-				}
-				document.wfrm.submit(); //검사가 따 끝나면submit 해서 다음으로 넘어가!
-			};
-		}
-	</script>
-	
-	<script type = "text/javascript">
+	<script type = "text/javascript"> // Jquery
 		   $("select[name=category]").change(function(){
 			      
 			    console.log( $("#category option:checked").text() );
@@ -78,7 +64,23 @@
 			   });
 	</script>
 	
-	
+	<script type = "text/javascript"> 
+		window.onload = function () {
+			document.getElementById('wbtn').onclick = function() {
+			// 필수 입력항목 검사 (not null인 목록들을 검사)
+			
+			//if ($("#category".val == '')){ //Jquery
+			//	alert('카테고리를 선택하셔야 합니다.');
+			//	return false;
+			//}
+			if (document.wfrm.subject.value.trim() == ''){ // Javascript 
+				alert('제목을 입력하셔야 합니다.');
+				return false;
+			}
+			document.wfrm.submit(); //검사가 따 끝나면submit 해서 다음으로 넘어가!
+		};
+	}
+</script>
 	
 
 </body>

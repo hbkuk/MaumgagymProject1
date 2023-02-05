@@ -2,6 +2,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@page import="com.to.board.BoardTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.to.board.CommunityDAO"%>
+
+<%
+	
+	CommunityDAO dao = new CommunityDAO();
+	ArrayList<BoardTO> boardLists = dao.boardList();
+	
+	int totalRecord = boardLists.size(); //총데이터갯수
+	
+	StringBuilder sbHtml = new StringBuilder();
+			 
+			 for( BoardTO to : boardLists){
+				int seq = to.getSeq();
+				int category_seq = to.getCategory_seq();
+				int write_seq = to.getWrite_seq();
+				String title = to.getTitle();
+				String date = to.getWrite_date();
+				int like_count = to.getLike_count();
+				 
+				sbHtml.append("<tr>");
+				sbHtml.append("<td>&nbsp;</td>");
+				sbHtml.append("<td scope='row'>" + seq + "</td>");
+				sbHtml.append("<td class='text-muted'>" + category_seq + "</td>");
+				sbHtml.append("<td>" + write_seq + "</td>");
+				sbHtml.append("<td class='text-start fw-bold'>");
+				sbHtml.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbHtml.append("</td>");
+				sbHtml.append("<td>" + date + "</td>");
+				sbHtml.append("<td>" + like_count + "</td>");
+				sbHtml.append("<td>&nbsp;</td>");
+				sbHtml.append("</tr>");
+			 }
+%>    
+      
 <hr/><br/><br/>
 
 <main>
@@ -33,7 +69,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <p class="h5">실시간 전체글 <span class="count">5</span>개</p>
+                    <p class="h5">실시간 전체글 <span class="count"><%= totalRecord%></span>개</p>
                 </div>
 		        <div class="col-md-4">
 		            <div class="input-group">
@@ -59,7 +95,9 @@
 			<th scope="col">&nbsp;</th>
 		</tr>
 		</thead>	
-		<tr>
+		
+		<%= sbHtml.toString() %> <!-- 절대 디자인이 깨지면 안된다.  -->
+	<!-- <tr>
 			<td>&nbsp;</td>
 			<td scope="row">6</td>
 			<td class="text-muted">공지</td>	
@@ -117,8 +155,9 @@
 			<td>2023-01-22</td>
 			<td>5</td>
 			<td>&nbsp;</td>
-			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
+			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> 
 		</tr>
+		 -->
 	</table>
 			<div class="text-end">
 				   <input type="button" value="쓰기" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='./community_write.jsp'"/>

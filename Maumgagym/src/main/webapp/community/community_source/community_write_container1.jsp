@@ -1,6 +1,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String nickname = (String) session.getAttribute("nickname");
+%>    
 
 <hr/>
 	<br/><br/><br/>
@@ -15,25 +18,23 @@
 			 <table class="table text-start table-bordered">
 			 	<tr>
 					 <td colspan="3">
-						 <select class="form-select" aria-label="Default select example">
-						  <option selected>커뮤니티의 카테고리를 선택하세요.</option>
-						  <option value="10">운동</option>
-						  <option value="11">건강</option>
-						  <option value="12">수다</option>
+					 	 <input type="hidden" id="category_seq" name="category_seq" value=""/>
+						 <select class="form-select" aria-label="Default select example" id="category" name= "category" >
+							  <option selected>커뮤니티의 카테고리를 선택하세요.</option>
+							  <option value="10">운동</option>
+							  <option value="11">건강</option>
+							  <option value="12">수다</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<th width="15%" class="text-bg-light p-3">글쓴이</th>
-					<td class="top"><input type="text" name="writer" value="" class="form-control" /></td>
+					<td class="top"><input type="text" name="writer" id="writer" value="<%= nickname %>" class="form-control" /></td>
+					<input type="hidden" id="write_seq" name="write_seq" value=""/>
 				</tr>
 				<tr>
 					<th width="15%" class="text-bg-light p-3">제목</th>
-					<td><input type="text" name="subject" value="" class="form-control"/></td>
-				</tr>
-				<tr>
-					<th width="15%" class="text-bg-light p-3">비밀번호</th>
-					<td><input type="password" name="password" value="" class="form-control"/></td>
+					<td><input type="text" id="subject" name="subject" value="" class="form-control"/></td>
 				</tr>
 				<tr>
 					<th width="15%" class="text-bg-light p-3" >내용</th>

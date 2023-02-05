@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-String id = (String) session.getAttribute("id");
+	String id = (String) session.getAttribute("id");
+	String nickname = (String) session.getAttribute("nickname");
 %>   
 <!DOCTYPE html>
 <html>
@@ -38,7 +39,9 @@ String id = (String) session.getAttribute("id");
 	<jsp:include page="./community_source/main_search.jsp"/>
 	
 	<!-- write 페이지 -->
-	<jsp:include page="./community_source/community_write_container1.jsp"/>
+	<jsp:include page="./community_source/community_write_container1.jsp">
+			<jsp:param name="id" value="<%= nickname %>"/>
+	</jsp:include>
 
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
@@ -51,6 +54,32 @@ String id = (String) session.getAttribute("id");
 			  lang: "ko-KR"
 			});
 	 </script>
+	 
+	 <script type = "text/javascript">
+		window.onload = function () {
+			document.getElementById('wbtn').onclick = function() {
+				//alert('click');
+				// 필수 입력항목 검사 (not null인 목록들을 검사)
+				if (document.wfrm.subject.value.trim() == ''){
+					alert('제목을 입력하셔야 합니다.');
+					return false;
+				}
+				document.wfrm.submit(); //검사가 따 끝나면submit 해서 다음으로 넘어가!
+			};
+		}
+	</script>
+	
+	<script type = "text/javascript">
+		   $("select[name=category]").change(function(){
+			      
+			    console.log( $("#category option:checked").text() );
+			    console.log( $("#category option:checked").val() );
+			    $("#category_seq").val($("#category option:checked").val());
+			   });
+	</script>
+	
+	
+	
 
 </body>
 </html>

@@ -18,10 +18,10 @@
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-	                <li class="nav-item px-4 "><a class="nav-link" href="#!">홈</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="#!">기본설정</a></li>
+	                <li class="nav-item px-4 "><a class="nav-link" href="./homePage.jsp">홈</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="./managerSettingPage.jsp">기본설정</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="#!">게시판관리</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="#!">회원관리</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="./managerMemberPage.jsp">회원관리</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="#!">접속통계</a></li>
 	            </ul>
 	            <%

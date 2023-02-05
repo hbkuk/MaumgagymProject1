@@ -1,9 +1,6 @@
 <%@page import="java.io.File"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.FileNotFoundException"%>
-<%@page import="org.jsoup.select.Elements"%>
-<%@page import="org.jsoup.Jsoup"%>
-<%@page import="org.jsoup.nodes.Document"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="com.to.board.FacilityDAO"%>
@@ -27,58 +24,106 @@
 
  	FacilityDAO dao = new FacilityDAO();
 	ArrayList facilityLists = dao.facility();
-	/*
-	BoardTO btag = dao.tag();
-	String tag = btag.getTag();
-	System.out.println( tag ); 
-	*/
 	
+	BoardTO bto = new BoardTO();
+	MemberTO mto = new MemberTO();
+	MemberShipTO msto = new MemberShipTO();
+	
+	String tag ="";
+	String title = "";
+	String address = "";
+	int price =  0; 
 	StringBuilder sb = new StringBuilder();
-	for( int i=0; i<facilityLists.size(); i++ ){
-		Map<String, Object> map0 = (Map<String, Object>) facilityLists.get(i);
-		
-		BoardTO bto = (BoardTO) map0.get("bto"+(i+1));
-		System.out.println(bto.getTitle());
-		
-		MemberTO mto = (MemberTO) map0.get("mto"+(i+1));
-		System.out.println(mto.getAddress());
-		
-		MemberShipTO msto = (MemberShipTO) map0.get("msto"+(i+1));
-		System.out.println(msto.getMembership_price());
+
 	
-		//String tag = bto.getTag();
-		String title = bto.getTitle();
-		String address = mto.getAddress();
-		int price =  msto.getMembership_price(); 
-		//System.out.println( tag);
+	if( data == "") {
+		for( int i=0; i<facilityLists.size(); i++ ){
+			Map<String, Object> map0 = (Map<String, Object>) facilityLists.get(i);
+			
+			bto = (BoardTO) map0.get("bto"+(i+1));
+			System.out.println(bto.getTitle());
+			
+			mto = (MemberTO) map0.get("mto"+(i+1));
+			System.out.println(mto.getAddress());
+			
+			msto = (MemberShipTO) map0.get("msto"+(i+1));
+			System.out.println(msto.getMembership_price());
+			
+			tag = bto.getTag();
+			title = bto.getTitle();
+			address = mto.getAddress();
+			price =  msto.getMembership_price(); 
+			System.out.println( tag);
+			
 		
+			sb.append("	<div class='col'>");
+			sb.append("		<div class='card shadow-sm'>");
+			sb.append("			<a href='#'>");
+			sb.append("			<img src='https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg'class='card-img-top' alt='...'></a>");
+			sb.append("			<span class='label-top'>" + tag + "</span>");
+			sb.append("			<div class='card-body'>");
+			sb.append("				<div class='clearfix mb-3'>");
+			sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
+			sb.append("					<span class='float-end'>");
+			sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+			sb.append("					</span>");
+			sb.append("				</div>");
+			sb.append("				<h5 class='card-title'>" + title + "</h5>");
+			sb.append("				<span>" + address + "</span>");
+			sb.append("				<p class='tab'>현위치와의 거리</p>");
+			sb.append("				<div class='text-center my-4'>");
+			sb.append("					<a href='#' class='btn btn-warning'>회원권 예약</a>");
+			sb.append("				</div>");
+			sb.append("			</div>");
+			sb.append("		</div>");
+			sb.append("	</div>"); 
+			//System.out.println( sb.toString() );
+		} 
+	} else {
+		System.out.println("*********");
+		for( int i=0; i<facilityLists.size(); i++ ){
+			Map<String, Object> map0 = (Map<String, Object>) facilityLists.get(i);
+			
+			bto = (BoardTO) map0.get("bto"+(i+1));
+			System.out.println(bto.getTitle());
+			
+			mto = (MemberTO) map0.get("mto"+(i+1));
+			System.out.println(mto.getAddress());
+			
+			msto = (MemberShipTO) map0.get("msto"+(i+1));
+			System.out.println(msto.getMembership_price());
+			
+			tag = bto.getTag();
+			title = bto.getTitle();
+			address = mto.getAddress();
+			price =  msto.getMembership_price(); 
+			System.out.println( tag);
+			//address = data;
+			sb.append("	<div class='col'>");
+			sb.append("		<div class='card shadow-sm'>");
+			sb.append("			<a href='#'>");
+			sb.append("			<img src='https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg'class='card-img-top' alt='...'></a>");
+			sb.append("			<span class='label-top'>" + tag + "</span>");
+			sb.append("			<div class='card-body'>");
+			sb.append("				<div class='clearfix mb-3'>");
+			sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
+			sb.append("					<span class='float-end'>");
+			sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+			sb.append("					</span>");
+			sb.append("				</div>");
+			sb.append("				<h5 class='card-title'>" + title + "</h5>");
+			sb.append("				<span>" + address + "</span>");
+			sb.append("				<p class='tab'>현위치와의 거리</p>");
+			sb.append("				<div class='text-center my-4'>");
+			sb.append("					<a href='#' class='btn btn-warning'>회원권 예약</a>");
+			sb.append("				</div>");
+			sb.append("			</div>");
+			sb.append("		</div>");
+			sb.append("	</div>"); 
+			//System.out.println( sb.toString() );
 		
-	
-		sb.append("	<div class='col'>");
-		sb.append("		<div class='card shadow-sm'>");
-		sb.append("			<a href='#'>");
-		sb.append("			<img src='https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg'class='card-img-top' alt='...'></a>");
-		sb.append("			<span class='label-top'>" + "tag" + "</span>");
-		sb.append("			<div class='card-body'>");
-		sb.append("				<div class='clearfix mb-3'>");
-		sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
-		sb.append("					<span class='float-end'>");
-		sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
-		sb.append("					</span>");
-		sb.append("				</div>");
-		sb.append("				<h5 class='card-title'>" + title + "</h5>");
-		sb.append("				<span>" + address + "</span>");
-		sb.append("				<p class='tab'>현위치와의 거리</p>");
-		sb.append("				<div class='text-center my-4'>");
-		sb.append("					<a href='#' class='btn btn-warning'>회원권 예약</a>");
-		sb.append("				</div>");
-		sb.append("			</div>");
-		sb.append("		</div>");
-		sb.append("	</div>"); 
-		//System.out.println( sb.toString() );
-	} 
-	
-	
+			}
+	}
 	
 %>
 <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>

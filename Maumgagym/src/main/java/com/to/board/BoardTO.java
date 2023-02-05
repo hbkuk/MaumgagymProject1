@@ -11,6 +11,7 @@ public class BoardTO {
 	int category_seq;
 	String title;
 	String content;
+	String writer;
 	int write_seq;
 	String write_date;
 	String status;

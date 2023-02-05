@@ -48,7 +48,7 @@ public class FacilityDAO {
 			// 글 게시판의 title을 통한 업체 정보, 멤버 게시판의 address을 통한 주소 정보, 멤버쉽 게시판의 price를 통한 가격 정보, 이미지 게시판의 name을 통한 이미지 파일, 태그 게시판의 tag를 통한 글 태그를 가져옴
 			// 카테고리 게시판의 seq는 1~9번(운동시설)으로 가져옴
 			StringBuilder sbDatas = new StringBuilder();   			   
-			sbDatas.append( " SELECT b.seq, b.title, m.address, ms.price, i.name, t.tag" );
+			sbDatas.append( " SELECT b.seq, b.title, m.address, ms.price, i.name, t.tag, c.seq" );
 			sbDatas.append( "    FROM board b LEFT OUTER JOIN member m" );
 			sbDatas.append( "          ON ( b.write_seq = m.seq ) LEFT OUTER JOIN membership ms" );
 			sbDatas.append( "             ON( b.seq = ms.board_seq ) LEFT OUTER JOIN image i" );
@@ -73,6 +73,7 @@ public class FacilityDAO {
 				BoardTO bto = new BoardTO();
 				bto.setTitle(rs.getString( "b.title" ));
 				bto.setTag(rs.getString( "t.tag" ));
+				bto.setCategory_seq(rs.getInt( "c.seq" ));
 			
 				MemberTO mto = new MemberTO();
 				mto.setAddress(rs.getString("m.address"));

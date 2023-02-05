@@ -36,5 +36,6 @@
     <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
 	<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
     <script src="./resources/asset/js/owl.carousel.min.js"></script>
+    <script src="./facility/facility_source/facilityList.js"></script>
 </body>
 </html>

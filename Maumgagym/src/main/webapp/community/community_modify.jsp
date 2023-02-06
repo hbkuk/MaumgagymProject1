@@ -50,6 +50,19 @@ String id = (String) session.getAttribute("id");
 			  lang: "ko-KR"
 			});
 	 </script>
+	 
+	 	
+	<script type = "text/javascript"> 
+			window.onload = function () {
+				document.getElementById('mbtn').onclick = function() {
+				if (document.mfrm.password.value.trim() == ''){ // Javascript 
+					alert('비밀번호를 입력하셔야 합니다.');
+					return false;
+				}
+				document.mfrm.submit(); //검사가 따 끝나면submit 해서 다음으로 넘어가!
+			};
+		}
+	</script>
 
 </body>
 </html>

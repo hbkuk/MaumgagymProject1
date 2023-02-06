@@ -130,7 +130,7 @@ public class CommunityDAO {
 			try{
 				conn = this.dataSource.getConnection();
 				
-				String sql = "select b.title, b.write_date, m.name, b.content from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ;";
+				String sql = "select b.title, b.write_date, m.name, b.content from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ";
 				pstmt = conn.prepareStatement( sql );
 				pstmt.setInt( 1, to.getSeq() );
 				
@@ -163,7 +163,7 @@ public class CommunityDAO {
 			try {
 				conn = this.dataSource.getConnection();
 				
-				 String sql = "select b.title, b.write_date, m.name, b.content from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ;";
+				 String sql = "select b.title, b.write_date, m.name, b.content from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ";
 			     pstmt = conn.prepareStatement(sql);
 			     pstmt.setInt(1, to.getSeq());
 			      
@@ -186,5 +186,47 @@ public class CommunityDAO {
 				
 				return to;
 			}
+		
+		public int boardModifyOK(MemberTO to1, BoardTO to) {
+			
+				 Connection conn = null;
+				 PreparedStatement pstmt = null;
+				 
+				 int flag = 2;
+				 
+				   try{
+				      conn = this.dataSource.getConnection();
+				      
+				      String sql = "insert into board_modify values (0 , now() , ?) ";
+				      pstmt = conn.prepareStatement(sql);
+				      pstmt.setInt(1, to.getSeq());
+				      pstmt.executeUpdate();
+				      
+				      
+				      sql = "update board b left join member m on (b.write_seq = m.seq) set b.title = ? , b.content=? where b.seq =? and m.password =? ";
+				      pstmt = conn.prepareStatement(sql);
+				      pstmt.setString( 1, to.getTitle() );
+				      pstmt.setString( 2, to.getContent() );
+				      pstmt.setInt( 3, to.getSeq() );
+				      pstmt.setString( 4, to1.getPassword() );
+				      
+				      int result = pstmt.executeUpdate(); //수정된애들을 result 에 던진다.
+				      if( result ==0 ) {
+				         flag = 1;
+				      } else if( result ==1 ) {
+				         // 정상 동작
+				         flag = 0;
+				      }
+				      
+				   } catch( SQLException e ){
+				      System.out.println( "[에러]" +e.getMessage() );
+				   } finally {
+					   if(pstmt != null) try{pstmt.close();} catch(SQLException e) {}
+					   if(conn != null) try{conn.close();} catch(SQLException e) {}
+				      
+				   }
+				
+				return flag;
+		}
 		
 }

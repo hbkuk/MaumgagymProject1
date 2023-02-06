@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<th width="15%" class="text-bg-light p-3">글쓴이</th>
-					<td class="top"><input type="text" name="writer" id="writer" value="<%= nickname %>" class="form-control" /></td>
+					<td class="top"><input type="text" name="writer" id="writer" value="<%= nickname %>" class="form-control" readonly /></td>
 					<input type="hidden" id="write_seq" name="write_seq" value=""/>
 				</tr>
 				<tr>

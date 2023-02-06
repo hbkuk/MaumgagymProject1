@@ -91,14 +91,16 @@
 		sbSelectSql.append( "SELECT CONCAT( c.topic ) '카테고리' ," );
 		sbSelectSql.append( "	CONCAT ( '[', ms.seq, '] ', ms.name ) '회원권 정보',");
 		sbSelectSql.append( "		m.name '회원 이름', m.phone '회원 연락처',");
-		sbSelectSql.append( "			IFNULL (msr.register_date, '-' ) '회원권 등록일', IFNULL( msr.expiry_date, '-' ) '회원권 만료일', ");
+		sbSelectSql.append( "			IFNULL ( DATE_FORMAT( msr.register_date, '%Y-%m-%d'), '-' ) '회원권 등록일', IFNULL( DATE_FORMAT( msr.expiry_date ,'%Y-%m-%d'), '-' ) '회원권 만료일', ");
 		sbSelectSql.append( "				case ");
-		sbSelectSql.append( "					when msr.status IS NULL then '승인 전' ");
-		sbSelectSql.append( "					when msr.status = 1 then '사용중' ");
-		sbSelectSql.append( "					when msr.status = 2 then '사용 중지' ");
-		sbSelectSql.append( "					when msr.status = 3 then '기간 만료' ");
+		sbSelectSql.append( "					when msr.status IS NULL then '결제 완료' ");
+		sbSelectSql.append( "					when msr.status = 1 then '승인 대기' ");
+		sbSelectSql.append( "					when msr.status = 2 then '승인 완료' ");
+		sbSelectSql.append( "					when msr.status = 3 then '사용 중지' ");
+		sbSelectSql.append( "					when msr.status = 4 then '기간 만료' ");
 		sbSelectSql.append( "				END AS '회원권  상태', ");
-		sbSelectSql.append( "						IF( p.status = 1, '정상', '환불' ) AS '결제 상태', p.pay_date '결제일' ");
+		sbSelectSql.append( "					msr.merchant_uid AS '주문 번호', ");
+		sbSelectSql.append( "						IF( p.status = 1, '정상', '환불' ) AS '결제 상태', DATE_FORMAT(p.pay_date, '%Y-%m-%d') '결제일' ");
 		sbSelectSql.append( "							FROM member LEFT OUTER JOIN board b ");
 		sbSelectSql.append( "								ON (member.seq = b.write_seq ) ");
 		sbSelectSql.append( "									LEFT OUTER JOIN category c ");
@@ -147,6 +149,7 @@
 			pto.setMembership_register_status( ( rs.getString("회원권  상태") ) );
 			pto.setPay_status( ( rs.getString("결제 상태") ) );
 			pto.setPay_date( ( rs.getString("결제일") ) );
+			pto.setMerchant_uid( ( rs.getString("주문 번호") ) );
 			purchaseList.put( "pto", pto );
 			
 			purchaseArrayList.add( purchaseList );
@@ -187,6 +190,7 @@
 				String membershipRegisterStatus = pto.getMembership_register_status();
 				String pdayStatus = pto.getPay_status();
 				String payDate = pto.getPay_date();
+				String merchantUid = pto.getMerchant_uid();
 				
 				
 				sbPurchaseList.append( "	<tr class='h-100'> ");
@@ -197,9 +201,9 @@
 				sbPurchaseList.append( "		<td>" + phone + "</td> ");
 				sbPurchaseList.append( "		<td>" + membershipRegisterDate + "</td> ");
 				sbPurchaseList.append( "		<td>" + membershipExpiryDate + "</td> ");
-				if( membershipRegisterStatus.equals( "승인 전")) {
+				if( membershipRegisterStatus.equals( "승인 대기")) {
 				sbPurchaseList.append( "	    	<td><span class='badge bg-secondary'>" + membershipRegisterStatus + "</span></td>");
-				} else if ( membershipRegisterStatus.equals( "사용중")) {
+				} else if ( membershipRegisterStatus.equals( "승인 완료")) {
 				sbPurchaseList.append( "	    	<td><span class='badge bg-success'>" + membershipRegisterStatus + "</span></td>");
 				} else if ( membershipRegisterStatus.equals( "사용 중지")) {
 				sbPurchaseList.append( "	    	<td><span class='badge bg-warning '>" + membershipRegisterStatus + "</span></td>");
@@ -210,17 +214,20 @@
 				sbPurchaseList.append( "		<td>" + payDate + "</td> ");
 				sbPurchaseList.append( "		<td> ");
 				
-				if( membershipRegisterStatus.equals( "승인 전")) {
-				sbPurchaseList.append( "	    	<a id='registerBtn'><span class='badge bg-success'>승인</span></a> ");
+				if( membershipRegisterStatus.equals( "승인 대기")) {
+				sbPurchaseList.append( "	    	<button id='" + name + "' onclick='registerConfirm(this);' value='" + merchantUid +"' class='border-0 badge bg-success'>승인</button> ");
 				}
-				if( membershipRegisterStatus.equals( "승인 전")) {
+				if( membershipRegisterStatus.equals( "승인 대기")) {
 				sbPurchaseList.append( "	    	<a ><span class='badge bg-warning text-dark'>반려</span></a> ");
 				}
-				if( membershipRegisterStatus.equals( "승인 전") || membershipRegisterStatus.equals( "사용중") ) {
+				if( membershipRegisterStatus.equals( "승인 대기") || membershipRegisterStatus.equals( "승인 완료") ) {
 				sbPurchaseList.append( "	    	<a ><span class='badge bg-danger'>환불</span></a> ");
 				}
-				if( membershipRegisterStatus.equals( "사용중") ) {
-				sbPurchaseList.append( "	    	<a ><span class='badge bg-warning text-dark'>중지</span></a> ");
+				if( membershipRegisterStatus.equals( "승인 완료") ) {
+				sbPurchaseList.append( "	    	<button id='" + name + "' onclick='pauseConfirm(this);' value='" + merchantUid +"' class='border-0 badge bg-warning text-dark'>중지</button> ");
+				}
+				if( membershipRegisterStatus.equals( "사용 중지") ) {
+				sbPurchaseList.append( "	    	<a ><span class='badge bg-secondary text-white'>재개</span></a> ");
 				}
 				sbPurchaseList.append( "		</td> ");
 				sbPurchaseList.append( "	</tr> ");
@@ -237,9 +244,9 @@
 		} catch( SQLException e) {
 			System.out.println( e.getMessage());
 		} finally {
-			if( conn != null );
-			if( pstmt != null );
-			if( rs != null );
+			if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if( conn != null) try {conn.close();} catch(SQLException e) {}
+			if( rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 	
 	

@@ -72,6 +72,10 @@
 		<jsp:param name="id" value="<%= id %>" />
 	</jsp:include>
 	
+	<!-- modal -->
+	<jsp:include page="./user_source/register_modal.jsp" />
+	<jsp:include page="./user_source/pause_modal.jsp" />
+	
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 	

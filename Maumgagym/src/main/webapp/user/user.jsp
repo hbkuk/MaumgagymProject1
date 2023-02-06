@@ -65,7 +65,7 @@
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 	
-	<jsp:include page="./user_source/register_modal.jsp">
+	<jsp:include page="./user_source/register_modal.jsp" />
 	
 	<!-- script -->
     <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>

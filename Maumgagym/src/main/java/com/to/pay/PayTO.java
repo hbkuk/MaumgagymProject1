@@ -15,6 +15,8 @@ public class PayTO {
 	
 	String pay_date;						// 결제일( now() )
 	String pay_status; 						// 결제 상세 내역 상태 ==> 1: 완료 , 2: 실패, 3: 환불, 헷갈릴경우 TO 클래스 분할
+	
+	int membership_register_seq;		// 회원권 상태 ==> 1: 승인 대기, 2: 정상, 3: 홀딩, 4: 만료
 	String membership_register_date;		// 등록일
 	String membership_expiry_date;			// 만료일
 	String membership_register_status;		// 회원권 상태 ==> 1: 승인 대기, 2: 정상, 3: 홀딩, 4: 만료

@@ -236,9 +236,9 @@
 	} catch( SQLException e) {
 		System.out.println( e.getMessage());
 	} finally {
-		if( conn != null );
-		if( pstmt != null );
-		if( rs != null );
+		if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+		if( conn != null) try {conn.close();} catch(SQLException e) {}
+		if( rs != null) try {rs.close();} catch(SQLException e) {}
 	}
 	
 	

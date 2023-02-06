@@ -10,7 +10,7 @@
                         <div class="col-12 col-md-6" style="height: 420px;">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">최근 운동시설 게시물 <a><i class="bi bi-box-arrow-in-up-right text-nowrap text-end"></i></a></h4>
+                                    <h4 class="card-title">최근 운동시설 게시물 <a href="./managerFacilityBoardPage.jsp"><i class="bi bi-box-arrow-in-up-right text-nowrap text-end"></i></a></h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -60,7 +60,7 @@
                         <div class="col-12 col-md-6" style="height: 420px;">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">최근 커뮤니티 게시물 <a><i class="bi bi-box-arrow-in-up-right text-nowrap text-end"></i></a></h4>
+                                    <h4 class="card-title">최근 커뮤니티 게시물 <a href="./managerBoardPage.jsp"><i class="bi bi-box-arrow-in-up-right text-nowrap text-end"></i></a></h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">

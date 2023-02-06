@@ -7,9 +7,12 @@ import lombok.Setter;
 @Getter
 public class BoardTO {
 	
-	int seq;
-	int category_seq;
-	String title;
+	int seq;				// 게시판SEQ
+	int category_seq;		// 카테고리번
+	String category;		// 카테고리
+	String title;			// 제목
+	String topic;			//토픽
+	String nickname;  		//닉네임
 	String content;
 	String writer;
 	int write_seq;

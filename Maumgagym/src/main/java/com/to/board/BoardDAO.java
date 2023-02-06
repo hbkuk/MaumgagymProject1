@@ -46,7 +46,18 @@ public class BoardDAO {
 				
 			conn = this.dataSource.getConnection();
 			
-			String sql =  "select b.seq, c.seq, b.title, b.content, m.seq , b.write_date, r.like_count from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
+			//String sql =  "select b.seq, c.seq, b.title, b.content, m.seq , b.write_date, r.like_count from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
+			String sql = "select b.seq\n"
+					+ "     , c.category\n"
+					+ "     , c.topic\n"
+					+ "     , b.title\n"
+					+ "     , m.nickname\n"
+					+ "     , b.write_date\n"
+					+ "  from board b \n"
+					+ "  inner join category c on b.category_seq = c.seq\n"
+					+ "  inner join `member` m on b.write_seq = m.seq\n"
+					+ " where c.seq BETWEEN 10 and 14";
+			
 			pstmt = conn.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -54,13 +65,11 @@ public class BoardDAO {
 			while(rs.next()) {
 					BoardTO to = new BoardTO();
 					to.setSeq(rs.getInt("b.seq"));
-					to.setCategory_seq(rs.getInt("c.seq"));
+					to.setCategory(rs.getString("c.category"));
+					to.setTopic(rs.getString("c.topic"));
 					to.setTitle(rs.getString("b.title"));
-					to.setContent(rs.getString("b.content"));
-					to.setWrite_seq(rs.getInt("m.seq"));
+					to.setNickname(rs.getString("m.nickname"));
 					to.setWrite_date(rs.getString("b.write_date"));
-					to.setLike_count(rs.getInt("r.like_count"));
-					
 					boardLists.add(to);
 				}
 			}catch(SQLException e) {
@@ -83,7 +92,7 @@ public class BoardDAO {
 			try{
 				conn = this.dataSource.getConnection();
 				
-				String sql = "select b.title, b.write_date, m.name, b.content from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ;";
+				String sql = "";
 				pstmt = conn.prepareStatement( sql );
 				pstmt.setInt( 1, to.getSeq() );
 				

@@ -38,6 +38,7 @@
 	if( request.getParameter( "category_seq" ) != null ) {
 		categorySeq = Integer.parseInt( request.getParameter( "category_seq" ) );   // int형 변수 categorySeq에 대입
 	}
+	//System.out.println( categorySeq );
 	
  	FacilityDAO dao = new FacilityDAO();
 	ArrayList facilityLists = dao.facility();
@@ -170,8 +171,6 @@
 		}
 	
 %>
-<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
-<script src="./resources/asset/script/jquery-3.6.0.js"></script>	
 <hr/>
 <!-- 내 주변 운동시설-->
 <div class="container md-5" style="padding-left: 60px">
@@ -200,27 +199,40 @@
 				<span class="fs-3 pb-3 ">운동시설</span>
 				<hr>
 				<ul class="nav nav-pill flex-column mb-auto">
-					<li class="nav-item "><a href="#"
-						class="category nav-link active" aria-current="page">요가</a></li>
-					<li class="nav-item"><a href="#" class="nav-link active "
-						aria-current="page">수영</a></li>
-					<li class="nav-item"><a href="#" class="nav-link active "
-						aria-current="page">테니스</a></li>
-					<li class="nav-item"><a href="#" class="nav-link active "
-						aria-current="page">타바타</a></li>
-					<li class="nav-item"><a href="#" class="nav-link active "
-						aria-current="page">필라테스</a></li>
-					<li class="nav-item"><a href="#" class="nav-link active "
-						aria-current="page">골프</a></li>
-					<li class="nav-item"><a href="#" class="nav-link active "
-						aria-current="page">복싱</a></li>
-					<li class="nav-item"><a href="#" class="nav-link active "
-						aria-current="page">댄스</a></li>
+					<li class="nav-item ">
+						<a id="1" class="nav-link active" aria-current="page">피트니스</a>
+					</li>
+					<li class="nav-item ">
+						<a id="2" class="nav-link active" aria-current="page">요가</a>
+					</li>
+					<li class="nav-item">
+						<a id="3" class="nav-link active " aria-current="page">수영</a>
+					</li>
+					<li class="nav-item">
+						<a id="4" class="nav-link active " aria-current="page">테니스</a>
+					</li>
+					<li class="nav-item">
+						<a id="5" class="nav-link active " aria-current="page">타바타</a>
+					</li>
+					<li class="nav-item">
+						<a id="6" class="nav-link active " aria-current="page">필라테스</a>
+					</li>
+					<li class="nav-item">
+						<a id="7" class="nav-link active " aria-current="page">골프</a>
+					</li>
+					<li class="nav-item">
+						<a id="8" class="nav-link active " aria-current="page">복싱</a>
+					</li>
+					<li class="nav-item">
+						<a id="9" class="nav-link active " aria-current="page">댄스</a>
+					</li>
 				</ul>
 			</div>
 	
-			<div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
-				<%=sb.toString() %>
+			<div class="container">
+				<div class="row row-cols-3">
+					  <%=sb.toString() %> 
+				</div>
 			</div>
 		</div>
 	</div>

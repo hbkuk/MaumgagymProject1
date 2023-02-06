@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String userID = null;
+	String type = (String) session.getAttribute("type");
 	//String userID = request.getParameter("userID");
 %>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
 	
 	<!-- header -->
 	<jsp:include page="../include/header.jsp">
-		<jsp:param name="userID" value="<%=userID%>" />
+		<jsp:param name="type" value="<%=type%>" />
 	</jsp:include>
 	
 	<jsp:include page="../main/main_source/main_search.jsp"/>

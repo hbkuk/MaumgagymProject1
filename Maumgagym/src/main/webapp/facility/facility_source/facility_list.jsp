@@ -38,6 +38,7 @@
 	if( request.getParameter( "category_seq" ) != null ) {
 		categorySeq = Integer.parseInt( request.getParameter( "category_seq" ) );   // int형 변수 categorySeq에 대입
 	}
+	//System.out.println( categorySeq);
 	
  	FacilityDAO dao = new FacilityDAO();
 	ArrayList facilityLists = dao.facility();
@@ -170,8 +171,6 @@
 		}
 	
 %>
-<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
-<script src="./resources/asset/script/jquery-3.6.0.js"></script>	
 
 <hr />
 <!-- 내 주변 운동시설-->
@@ -232,9 +231,10 @@
 		<!--  <div class="d-flex flex-column flex-wrap my-4 p-4"
 		style="position: relative; max-width: 1500px; margin:0 auto;">
 		-->
-
-		<div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
-			  <%=sb.toString() %> 
+		<div class="container">
+			<div class="row row-cols-3">
+				  <%=sb.toString() %> 
+			</div>
 		</div>
 	</div>
 </div>

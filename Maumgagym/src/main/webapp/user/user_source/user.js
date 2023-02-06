@@ -29,3 +29,10 @@ function membershipRegister( data ){
 });
 	
 }
+
+$('#registerBtn').on( 'click', function(){
+	
+	$('#registerModal').modal("show");
+	
+	
+});

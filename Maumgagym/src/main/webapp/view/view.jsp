@@ -75,7 +75,7 @@
 		<jsp:include page="../include/header.jsp">
 			<jsp:param name="id" value="<%= id %>"/>
 		</jsp:include>	
-		<jsp:include page="./view_source/pay_modal.jsp"/>
+		<jsp:include page="../main/main_source/main_search.jsp" />
 		
 		<jsp:include page="../pay/pay.jsp"/>
 		

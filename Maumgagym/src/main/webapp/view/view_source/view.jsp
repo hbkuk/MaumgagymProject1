@@ -579,7 +579,7 @@
 							</div>
 							<p></p>
 							<div class="d-grid gap-3">
-							<button id="payBtn" type="button" form="payForm" class="btn btn-primary btn-block">결제하기</button>
+							<button id="payBtn" type="button" class="btn btn-primary btn-block">결제하기</button>
 							</div>
 						</li>
 					</ul>

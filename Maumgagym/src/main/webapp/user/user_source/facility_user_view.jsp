@@ -189,7 +189,7 @@
 				String payDate = pto.getPay_date();
 				
 				
-				sbPurchaseList.append( "	<tr> ");
+				sbPurchaseList.append( "	<tr class='h-100'> ");
 				sbPurchaseList.append( "		<td>" + (1 + i) +"</td> ");
 				sbPurchaseList.append( "		<td>" + fullCategoryString + "</td> ");
 				sbPurchaseList.append( "		<td>" + fullMembershipName + "</td> ");
@@ -211,13 +211,16 @@
 				sbPurchaseList.append( "		<td> ");
 				
 				if( membershipRegisterStatus.equals( "승인 전")) {
-				sbPurchaseList.append( "	    	<a ><span class='badge bg-success'>승인</span></a> ");
+				sbPurchaseList.append( "	    	<a id='registerBtn'><span class='badge bg-success'>승인</span></a> ");
 				}
 				if( membershipRegisterStatus.equals( "승인 전")) {
-				sbPurchaseList.append( "	    	<a ><span class='badge bg-warning '>반려</span></a> ");
+				sbPurchaseList.append( "	    	<a ><span class='badge bg-warning text-dark'>반려</span></a> ");
 				}
 				if( membershipRegisterStatus.equals( "승인 전") || membershipRegisterStatus.equals( "사용중") ) {
 				sbPurchaseList.append( "	    	<a ><span class='badge bg-danger'>환불</span></a> ");
+				}
+				if( membershipRegisterStatus.equals( "사용중") ) {
+				sbPurchaseList.append( "	    	<a ><span class='badge bg-warning text-dark'>중지</span></a> ");
 				}
 				sbPurchaseList.append( "		</td> ");
 				sbPurchaseList.append( "	</tr> ");

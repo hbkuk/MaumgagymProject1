@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="./manager/manager_source/resources/css/style.css">
     <style>
     	#table1 {
-    		font-size: 11px;
+    		font-size: 14px;
     	}
     </style>
 

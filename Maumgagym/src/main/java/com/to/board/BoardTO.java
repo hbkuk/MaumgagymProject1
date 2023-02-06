@@ -9,6 +9,7 @@ public class BoardTO {
 	
 	int seq;
 	int category_seq;
+	String fullCategoryString; 
 	String title;
 	String content;
 	String writer;

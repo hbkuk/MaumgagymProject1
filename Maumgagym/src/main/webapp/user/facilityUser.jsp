@@ -46,6 +46,16 @@
 	<link href="./resources/asset/css/user.css" rel="stylesheet" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+   
+   <!-- table css -->
+	<link rel="stylesheet" href="./manager/manager_source/resources/css/perfect-scrollbar.css">
+    <link rel="stylesheet" href="./manager/manager_source/resources/css/app.css">
+    <link rel="stylesheet" href="./manager/manager_source/resources/css/style.css">
+    <style>
+    	#table1 {
+    		font-size: 11px;
+    	}
+    </style>
 
 </head>
 <body>
@@ -70,6 +80,19 @@
 	<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
     <script src="./resources/asset/js/owl.carousel.min.js"></script>
     <script src="./user/user_source/user.js"></script>
+    
+    <!-- table script -->
+    <script src="./manager/manager_source/resources/js/perfect-scrollbar.min.js"></script>
+
+    <script src="./manager/manager_source/resources/js/simple-datatables.js"></script>
+    
+    <script src="./manager/manager_source/resources/js/main.js"></script>
+    
+    <script>
+       // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
     
 </body>
 </html>

@@ -54,7 +54,7 @@
 		script.println("</script>");
 	}else {
 		script.println("<script>");
-		script.println("alert('서버 오류')");
+		script.println("alert('서버 오류. 관리자에게 문의하세요.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}

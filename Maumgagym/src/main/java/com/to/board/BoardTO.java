@@ -13,10 +13,11 @@ public class BoardTO {
 	String title;			// 제목
 	String topic;			//토픽
 	String nickname;  		//닉네임
-	String content;
-	String writer;
-	int write_seq;
-	String write_date;
+	String name;  		//닉네임
+	String content;			//내용
+	String writer;			//글쓴이
+	int write_seq;			//글번호
+	String write_date;		//글쓴날짜
 	String status;
 	String tag;
 	int view_count;

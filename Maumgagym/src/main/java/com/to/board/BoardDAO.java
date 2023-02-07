@@ -82,40 +82,54 @@ public class BoardDAO {
 			return boardLists;
 		
 		}
-		
-		public BoardTO boardView(BoardTO to) {
-			
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null; 
-			
-			try{
-				conn = this.dataSource.getConnection();
+	public ArrayList<BoardTO> facilityBoardList(){
 				
-				String sql = "";
-				pstmt = conn.prepareStatement( sql );
-				pstmt.setInt( 1, to.getSeq() );
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null; 
 				
-				rs = pstmt.executeQuery();
+				ArrayList<BoardTO> facilityBoardLists = new ArrayList<>();
 				
-				if(rs.next()){
-					to.setTitle(rs.getString("b.title"));
-					to.setWrite_date(rs.getString("b.write_date"));
-					to.setWriter(rs.getString("m.name"));
-					to.setContent(rs.getString("b.content"));
+				try {
+					
+					conn = this.dataSource.getConnection();
+					
+					//String sql =  "select b.seq, c.seq, b.title, b.content, m.seq , b.write_date, r.like_count from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
+					String sql = "select b.seq\n"
+							+ "     , c.category\n"
+							+ "     , c.topic\n"
+							+ "     , b.title\n"
+							+ "     , m.name\n"
+							+ "     , b.write_date\n"
+							+ "  from board b \n"
+							+ "  inner join category c on b.category_seq = c.seq\n"
+							+ "  inner join `member` m on b.write_seq = m.seq\n"
+							+ " where c.seq BETWEEN 1 and 9";
+					
+					pstmt = conn.prepareStatement(sql);
+					
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						BoardTO to = new BoardTO();
+						to.setSeq(rs.getInt("b.seq"));
+						to.setCategory(rs.getString("c.category"));
+						to.setTopic(rs.getString("c.topic"));
+						to.setTitle(rs.getString("b.title"));
+						to.setName(rs.getString("m.name"));
+						to.setWrite_date(rs.getString("b.write_date"));
+						facilityBoardLists.add(to);
+					}
+				}catch(SQLException e) {
+					System.out.println( "[에러] " +  e.getMessage());
+				} finally {
+					if(conn != null) try {conn.close();} catch(SQLException e) {}
+					if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+					if(rs != null) try {rs.close();} catch(SQLException e) {}
 				}
+				return facilityBoardLists;
 				
-			} catch (SQLException e){
-				System.out.println( "[에러] " +  e.getMessage());
-				
-			} finally {
-				if(rs != null) try{rs.close();} catch(SQLException e) {}
-				if(pstmt != null) try{pstmt.close();} catch(SQLException e) {}
-				if(conn != null) try{conn.close();} catch(SQLException e) {}
 			}
-			return to;
-		}
-		
 	
 		
 }

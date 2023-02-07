@@ -374,16 +374,87 @@ function memberModifyOk( ) {
 
 
 // 리뷰 작성 관련
+let content;
+let writerSeq;
+let starScore;
+let boardSeq;
+let merchantUid;
 
-function reviewRegister( boardSeq, writerSeq, membershipName ) {
+function reviewRegister( data, boardSeq, writerSeq, membershipName, imageName, address ) {
 	
-	
-	console.log( "리뷰작성 함수 호출");
+	//console.log( "리뷰작성 함수 호출");
 	
 	$('#title').text( membershipName );
 	
+	$('#address').text( address );
+	
+	$("#membershipImage").attr("src","./upload/" + imageName + "");
+	
 	$('#reviewModal').modal("show");
-
+	
+	this.boardSeq = boardSeq;
+	
+	this.writerSeq = writerSeq;
+	
+	this.merchantUid = data.id;
+	//console.log( this.merchantUid );
 } 
+
+
+
+$("#reviewOk").on( 'click', function(){
+	
+	if ( $("input[name='rating']").is(':checked') == false ) {
+		alert( "별점을 체크해 주세요.");
+		return false;
+	}
+	
+	if ( $("#message-text").val() == '' ) {
+		alert( "내용을 작성해 주세요.");
+		return false;
+	}
+	
+	reviewRegisterOk( );
+	
+	$('#reviewModal').modal("hide"); 
+	$('input[name=rating]').prop( 'checked', false );
+	$("#message-text").val('');
+	
+ });
+ 
+ function reviewRegisterOk( ) { 
+	$.ajax({
+	url: './review/reviewRegister.jsp',
+	type: 'post',
+	data: {
+		merchant_uid : this.merchantUid,
+		content : $("#message-text").val(),
+		writer_seq : this.writerSeq,
+		star_score :  $("input[name='rating']:checked").val(),
+		board_seq : this.boardSeq
+	},
+	dataType: 'json',
+	success: function( jsonData ) {
+		if( jsonData.flag == 0 ) {
+			
+			$("#" + jsonData.merchant_uid).attr("disabled", true);			
+			$("#" + jsonData.merchant_uid).removeClass( 'btn-primary' );
+			$("#" + jsonData.merchant_uid).addClass( 'btn-secondary' );
+			$("#" + jsonData.merchant_uid).text( '리뷰가 정상적으로 등록되었습니다.' );
+			
+			
+		} else if ( jsonData.flag == 1) {
+			alert( '입력 오류' );
+			
+		} else {
+			alert( '서버 오류' );
+		}
+	},
+	error: function(err) {
+		alert( '[에러] ' + err.status);
+	}
+});
+	
+}
 
 // 리뷰 작성 관련

@@ -1,6 +1,5 @@
 package com.to.board;
 
-import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -93,7 +92,7 @@ public class CommunityDAO {
 				
 			conn = this.dataSource.getConnection();
 			
-			String sql =  "select b.seq, c.seq, b.title, b.content, m.seq , b.write_date, r.like_count from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
+			String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
 			pstmt = conn.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -101,12 +100,13 @@ public class CommunityDAO {
 			while(rs.next()) {
 					BoardTO to = new BoardTO();
 					to.setSeq(rs.getInt("b.seq"));
-					to.setCategory_seq(rs.getInt("c.seq"));
+					to.setTopic(rs.getString("c.topic"));
 					to.setTitle(rs.getString("b.title"));
 					to.setContent(rs.getString("b.content"));
-					to.setWrite_seq(rs.getInt("m.seq"));
+					to.setNickname(rs.getString("m.name"));
 					to.setWrite_date(rs.getString("b.write_date"));
 					to.setLike_count(rs.getInt("r.like_count"));
+					to.setStatus(rs.getString("b.status"));
 					
 					boardLists.add(to);
 				}

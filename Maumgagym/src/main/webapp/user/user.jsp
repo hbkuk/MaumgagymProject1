@@ -62,6 +62,9 @@
 		<jsp:param name="id" value="<%= id %>" />
 	</jsp:include>
 	
+	<!-- modal -->
+	<jsp:include page="./user_source/memberModify_modal.jsp" />
+	
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 	

@@ -255,3 +255,119 @@ function refundOk( data ) {
 });
 	
 }
+
+// 환불 관련
+
+// 회원 정보 수정 관련
+
+function memberModify( data ) {
+	
+	if ( $( "#inputNickName" ).val() == '' ) {
+		alert( "변결할 닉네임을 입력하세요.");
+		return false;
+	}
+	
+	if ( $( "#inputBirthday" ).val() == '' ) {
+		alert( "생년월일 정확히 입력하세요. (형식: yyyy-mm-dd)");
+		return false;
+	}
+	
+	if ( $( "#inputPhone" ).val() == '' ) {
+		alert( "연락가능한 번호를 입력하세요.");
+		return false;
+	}
+	
+	if ( $( "#inputEmailAddress" ).val() == '' ) {
+		alert( "이메일을 입력하세요.");
+		return false;
+	}
+	
+	if ( $( "#inputAddress" ).val() == '' ) {
+		alert( "주소를 입력하세요. (형식: [06253] 서울특별시 강남구 역삼1동 강남대로 310) ");
+		return false;
+	}
+	
+	if ( $( "#inputPassword" ).val() == '' ) {
+		alert( "현재 비밀번호를 선택하세요.");
+		return false;
+	}
+	
+	if ( $( "#inputPasswordConfirm" ).val() == '' ) {
+		alert( "변결할 비밀번호를 선택하세요.");
+		return false;
+	}
+	
+	// [ajax] 닉네임 중복검사 
+		$.ajax({
+		url: './user/user_source/nickDuplicateCheck.jsp',
+		type: 'post',
+		data: {
+			nickname : $('#inputNickName').val()
+		},
+		dataType: 'json',
+		success: function( jsonData ) {
+			if( jsonData.flag == 0 ) {
+				
+				console.log( '중복 없음 성공' );
+				
+					$('#memberModifyConfirmMessage').text( data +" 님 작성하신 내용으로 정말로 수정 하시겠습니까?" );
+	
+					$('#memberModifyModal').modal("show");
+				
+			} else {
+				alert( '오류' );
+			}
+		},
+		error: function(err) {
+			alert( '[에러] ' + err.status);
+		}
+	});
+		
+	 
+}; // refundConfirm 클릭
+
+
+
+$("#memberModifyOk").on( 'click', function(){
+
+	memberModifyOk( ); 
+	
+ });
+
+
+function memberModifyOk( ) { 
+	
+	$.ajax({
+	url: './user/user_source/memberModify_ok.jsp',
+	type: 'post',
+	data: {
+		name : $('#inputName').val(),
+		id :  $('#inputID').val(),
+		nickname :  $('#inputNickName').val(),
+		birthday :  $('#inputBirthday').val(),
+		phone :  $('#inputPhone').val(),
+		email :  $('#inputEmailAddress').val(),
+		full_address :  $('#inputAddress').val(),
+		password :  $('#inputPassword').val(),
+		change_password :  $('#inputChangePassword').val()
+	},
+	dataType: 'json',
+	success: function( jsonData ) {
+		if( jsonData.flag == 0 ) {
+			
+			location.reload();
+			
+		} else if ( jsonData.flag == 1) {
+			alert( '비밀번호 오류' );
+		} else {
+			alert( '서버 오류' );
+		}
+	},
+	error: function(err) {
+		alert( '[에러] ' + err.status);
+	}
+});
+	
+}
+
+// 회원 정보 수정 관련

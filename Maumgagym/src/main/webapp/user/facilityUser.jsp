@@ -77,6 +77,7 @@
 	<jsp:include page="./user_source/pause_modal.jsp" />
 	<jsp:include page="./user_source/restart_modal.jsp" />
 	<jsp:include page="./user_source/refund_modal.jsp" />
+	<jsp:include page="./user_source/memberModify_modal.jsp" />
 	
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />

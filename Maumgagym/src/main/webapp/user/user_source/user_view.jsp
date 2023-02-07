@@ -655,76 +655,62 @@
 							<form>
 							
 								<div class="row gx-3">
-									<!-- Form Group (name)-->
-									<div class="mb-3">
-										<label class="small mb-1" for="inputFirstName">이름</label> <input
-											class="form-control" id="inputFirstName" type="text"
-											placeholder="Enter your first name" value="<%= mto.getName() %>" readonly>
+								
+								<div class="mb-3">
+										<label class="small mb-1" for="inputName">이름</label> <input
+											class="form-control" id="inputName" type="text" value="<%= mto.getName() %>" readonly>
 									</div>
 								</div>
 							
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">아이디</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= mto.getId() %>" readonly>
+									<label class="small mb-1" for="inputID">아이디</label> <input
+										class="form-control" id="inputID" type="text" value="<%= mto.getId() %>" readonly>
 								</div>
 								
-								<!-- Form Group (nickname)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">닉네임</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your username" value="<%= mto.getNickname() %>">
+									<label class="small mb-1" for="inputNickName">닉네임</label> <input
+										class="form-control" id="inputNickName" type="text" value="<%= mto.getNickname() %>">
 								</div>
 								
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">생년월일</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= mto.getBirthday() %>">
+									<label class="small mb-1" for="inputBirthday">생년월일</label> <input
+										class="form-control" id="inputBirthday" type="text" value="<%= mto.getBirthday() %>">
 								</div>
 								
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">휴대전화</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= mto.getPhone() %>">
+									<label class="small mb-1" for="inputPhone">휴대전화</label> <input
+										class="form-control" id="inputPhone" type="text" value="<%= mto.getPhone() %>">
 								</div>
 								
-								<!-- Form Group (email address)-->
 								<div class="mb-3">
 									<label class="small mb-1" for="inputEmailAddress">이메일</label> <input
-										class="form-control" id="inputEmailAddress" type="email"
-										placeholder="Enter your email address"
-										value="<%= mto.getEmail() %>">
+										class="form-control" id="inputEmailAddress" type="email" value="<%= mto.getEmail() %>">
 								</div>
 								
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">주소</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= "[" + mto.getZipcode() +"] " + mto.getFullAddress() %>">
+									<label class="small mb-1" for="inputAddress">주소</label> <input
+										class="form-control" id="inputAddress" type="text" value="<%= "[" + mto.getZipcode() +"] " + mto.getFullAddress() %>">
 								</div>
 							
 								<!-- Form Row-->
 								<div class="row gx-3 mb-3">
 									<!-- Form Group (phone number)-->
 									<div class="col-md-6">
-										<label class="small mb-1" for="inputPhone">비밀번호 </label> <input
-											class="form-control" id="inputPhone" type="tel"
+										<label class="small mb-1" for="inputPassword">비밀번호 </label> <input
+											class="form-control" id="inputPassword" type="password"
 											placeholder="현재 비밀번호를 입력하세요." value="">
 									</div>
 									<!-- Form Group (birthday)-->
 									<div class="col-md-6">
-										<label class="small mb-1" for="inputBirthday">비밀번호 입력</label>
-										<input class="form-control" id="inputBirthday" type="text"
-											name="birthday" placeholder="변경할 비밀번호를 입력하세요."
+										<label class="small mb-1" for="inputChangePassword">비밀번호 입력</label>
+										<input class="form-control" id="inputChangePassword" type="password"
+										placeholder="변경할 비밀번호를 입력하세요."
 											value="">
 									</div>
 								</div>
 								<!-- Save changes button-->
 								<div class="d-grid gap-2">
-									<button class="btn btn-primary mt-3" type="button"> 변경하기 </button>
+									<button onclick='memberModify("<%=mto.getId() %>")' class="btn btn-primary mt-3" type="button"> 변경하기 </button>
 								</div>
 							</form>
 						</div>

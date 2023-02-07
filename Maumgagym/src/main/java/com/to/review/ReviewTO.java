@@ -15,7 +15,7 @@ public class ReviewTO {
 	int writer_seq;
 	float star_score;
 	float avg_star_score;
-	int status;
+	String status;
 	int board_seq;
 	
 

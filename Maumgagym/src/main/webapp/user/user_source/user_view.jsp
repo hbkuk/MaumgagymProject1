@@ -1,3 +1,4 @@
+<%@page import="com.to.review.ReviewTO"%>
 <%@page import="java.awt.font.ImageGraphicAttribute"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -63,7 +64,7 @@
 		
 		conn = dataSource.getConnection();
 		
- 		String sql = "select m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
+ 		String sql = "select m.seq, m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
  		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id );
@@ -74,6 +75,7 @@
 		
 		if( rs.next() ) {
 			
+			mto.setSeq( rs.getInt("m.seq"));
 			mto.setNickname( rs.getString("m.nickname") );
 			mto.setId( rs.getString("m.id") );
 			mto.setName( rs.getString("m.name") );
@@ -85,46 +87,27 @@
 			
 		}
 		
- 		sql = "select m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
- 		
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, id );
-		
-		rs = pstmt.executeQuery();
-		
-		mto = new MemberTO();
-		
-		if( rs.next() ) {
-			
-			mto.setNickname( rs.getString("m.nickname") );
-			mto.setId( rs.getString("m.id") );
-			mto.setName( rs.getString("m.name") );
-			mto.setBirthday( rs.getString("m.birthday") );
-			mto.setPhone( rs.getString("m.phone") );
-			mto.setEmail( rs.getString("m.email") );
-			mto.setZipcode( rs.getString("m.zipcode") );
-			mto.setFullAddress( rs.getString("m.fulladdress") );
-			
-		}
 		
 		StringBuilder sbPayMembership = new StringBuilder();
 		
 		sbPayMembership.append( "select p.pay_date AS '결제 날짜', p.type AS '결제 방식', IF( p.status = 1, '정상', '환불' ) AS '결제 상태', p.merchant_uid AS '결제 번호'," );
 		sbPayMembership.append( "	ms.name AS '회원권 이름', ms.price AS '회원권 가격', ms.period AS '회원권 기간',");
-		sbPayMembership.append( "		b.title AS '게시글 타이틀',");
+		sbPayMembership.append( "		b.seq AS '게시글 번호' , b.title AS '게시글 타이틀',");
 		sbPayMembership.append( "			i.name AS '대표 이미지', ");
 		sbPayMembership.append( "				wm.fulladdress AS '업체 주소',  wm.phone AS '업체 번호', ");
-		sbPayMembership.append( "					IFNULL( msr.status, 0 ) AS '회원권 상태'");
-		sbPayMembership.append( "						from pay p LEFT OUTER JOIN member m");
-		sbPayMembership.append( "							ON( p.member_seq = m.seq ) LEFT OUTER JOIN membership ms");
-		sbPayMembership.append( "								ON( p.membership_seq = ms.seq ) LEFT OUTER JOIN board b");
-		sbPayMembership.append( "									ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
-		sbPayMembership.append( "										ON( b.seq = i.board_seq) LEFT OUTER JOIN member wm");
-		sbPayMembership.append( "											ON( b.write_seq = wm.seq ) LEFT OUTER JOIN membership_register msr ");
-		sbPayMembership.append( "												ON ( p.merchant_uid = msr.merchant_uid )");
-		sbPayMembership.append( "													WHERE m.id = ?");
-		sbPayMembership.append( "														group BY p.merchant_uid");
-		sbPayMembership.append( "															ORDER BY p.pay_date desc");
+		sbPayMembership.append( "					IFNULL( msr.status, 0 ) AS '회원권 상태', ");
+		sbPayMembership.append( "						IFNULL(rv.status, 0 ) AS '리뷰 상태' ");
+		sbPayMembership.append( "							from pay p LEFT OUTER JOIN member m");
+		sbPayMembership.append( "								ON( p.member_seq = m.seq ) LEFT OUTER JOIN membership ms");
+		sbPayMembership.append( "									ON( p.membership_seq = ms.seq ) LEFT OUTER JOIN board b");
+		sbPayMembership.append( "										ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
+		sbPayMembership.append( "											ON( b.seq = i.board_seq) LEFT OUTER JOIN member wm");
+		sbPayMembership.append( "												ON( b.write_seq = wm.seq ) LEFT OUTER JOIN membership_register msr ");
+		sbPayMembership.append( "													ON ( p.merchant_uid = msr.merchant_uid )  LEFT OUTER JOIN review rv ");
+		sbPayMembership.append( "														ON ( m.seq = rv.writer_seq ) ");
+		sbPayMembership.append( "															WHERE m.id = ?");
+		sbPayMembership.append( "																group BY p.merchant_uid");
+		sbPayMembership.append( "																	ORDER BY p.pay_date desc");
  				
 		
 		sql = sbPayMembership.toString();
@@ -155,6 +138,7 @@
 			purchaseList.put( "msto", msto );
 			
 			BoardTO bto = new BoardTO();
+			bto.setSeq( rs.getInt("게시글 번호"));
 			bto.setTitle( rs.getString("게시글 타이틀") );
 			bto.setImage_name(  rs.getString("대표 이미지") );
 			purchaseList.put( "bto", bto );
@@ -163,6 +147,10 @@
 			wmto.setFullAddress( rs.getString("업체 주소") );
 			wmto.setPhone( rs.getString("업체 번호") );
 			purchaseList.put( "wmto", wmto );
+			
+			ReviewTO rvto = new ReviewTO();
+			rvto.setStatus( rs.getString("리뷰 상태") );
+			purchaseList.put( "rvto", rvto );
 			
 			purchaseArrayList.add( purchaseList );
 			
@@ -202,6 +190,9 @@
 				MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 				String facilityFullAddress = wmto.getFullAddress();
 				String phone = wmto.getPhone();
+				
+				ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+				String reviewStatus = rvto.getStatus();
 
 				
 				sbPurchaseList.append( "	<div class='mt-3 mb-4'>");
@@ -279,6 +270,9 @@
 				String facilityFullAddress = wmto.getFullAddress();
 				String phone = wmto.getPhone();
 				
+				ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+				String reviewStatus = rvto.getStatus();
+				
 				if( membership_register_status.equals( "0" ) || membership_register_status.equals( "1" ) ) {
 
 				
@@ -355,6 +349,9 @@
 				MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 				String facilityFullAddress = wmto.getFullAddress();
 				String phone = wmto.getPhone();
+				
+				ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+				String reviewStatus = rvto.getStatus();
 
 				if( membership_register_status.equals( "2" ) ) {
 				
@@ -431,6 +428,9 @@
 			MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 			String facilityFullAddress = wmto.getFullAddress();
 			String phone = wmto.getPhone();
+			
+			ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+			String reviewStatus = rvto.getStatus();
 
 			if( membership_register_status.equals( "3" ) ) {
 			
@@ -505,12 +505,16 @@
 			int membershipPeriod = msto.getMembership_period();	//
 			
 			BoardTO bto = (BoardTO) purchaseList.get("bto");
+			int boardSeq = bto.getSeq();
 			String title = bto.getTitle();			//
 			String imageName = bto.getImage_name();	//
 			
 			MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 			String facilityFullAddress = wmto.getFullAddress();
 			String phone = wmto.getPhone();
+			
+			ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+			String reviewStatus = rvto.getStatus();
 
 			if( membership_register_status.equals( "4" ) ) {
 			
@@ -549,11 +553,11 @@
 			sbExpireMembership.append( "						</tbody>");
 			sbExpireMembership.append( "					</table>");
 			sbExpireMembership.append( "					<div class='d-grid gap-2'> ");
-/* 				if( membership_register_status.equals( "0" )) {
-				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "'> 등록하기 </button>");
-			} else {
-				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "' disabled='disabled'> 승인 대기 중입니다. 취소를 원하시면 운동시설에 연락하세요. </button>");		
-			} */
+ 			if( reviewStatus.equals( "0" ) ) {
+				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='reviewRegister(" + boardSeq + ", " + mto.getSeq() + ", '" + bto.getTitle() + "')' value='" + merchantUid + "'> 리뷰쓰기 </button>");
+			} else if ( reviewStatus.equals( "1" ) ) {
+				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='reviewRegister(" + boardSeq + ", " + mto.getSeq() + ")' value='" + merchantUid + "' disabled='disabled'> 이미 리뷰를 등록했습니다. </button>");		
+			} 
 			sbExpireMembership.append( "					</div>");
 			sbExpireMembership.append( "				</div>");
 			sbExpireMembership.append( "			</div>");

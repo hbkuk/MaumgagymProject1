@@ -371,3 +371,19 @@ function memberModifyOk( ) {
 }
 
 // 회원 정보 수정 관련
+
+
+// 리뷰 작성 관련
+
+function reviewRegister( boardSeq, writerSeq, membershipName ) {
+	
+	
+	console.log( "리뷰작성 함수 호출");
+	
+	$('#title').text( membershipName );
+	
+	$('#reviewModal').modal("show");
+
+} 
+
+// 리뷰 작성 관련

@@ -9,13 +9,12 @@ public class ReviewTO {
 	
 	int seq;
 	String nickname;
-	String title;
 	String content;
 	String write_date;
 	int writer_seq;
 	float star_score;
 	float avg_star_score;
-	int status;
+	String status;
 	int board_seq;
 	
 

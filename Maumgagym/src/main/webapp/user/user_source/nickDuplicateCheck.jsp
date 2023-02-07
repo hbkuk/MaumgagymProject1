@@ -1,3 +1,4 @@
+<%@page import="java.sql.ResultSet"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="javax.naming.NamingException"%>
@@ -12,15 +13,16 @@
 		
 	request.setCharacterEncoding( "utf-8" );
 
-	String merchantUid	= request.getParameter( "merchant_uid" );
-	
+	String nickname	= request.getParameter( "nickname" );
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	
 	// flag가 0 이면 정상
-	// flag가 1 이면 서버 오류
-	int flag = 1;
+	// flag가 1 이면 중복
+	// flag가 2 이면 서버 오류
+	int flag = 2;
 	
 	try {
 		
@@ -30,15 +32,27 @@
 		
 		conn = dataSource.getConnection();
 		
-		String sql = "insert into membership_register (seq, status, merchant_uid ) values ( 0, 1, ? ) ";
+		String sql = "select nickname from member where nickname = ?";
 		
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, merchantUid );
+		pstmt.setString(1, nickname );
+		
+		rs = pstmt.executeQuery();
+		
+		if( rs.next() ) {
+			
+			flag = 1;
+			
+		} else {
+			
+			flag = 0;
+			
+		}
 		
 		if( pstmt.executeUpdate() == 1) {
-			flag = 0;
-		} else {
 			flag = 1;
+		} else {
+			flag = 0;
 		}
 		
 		} catch( NamingException e) {
@@ -48,6 +62,7 @@
 		} finally {
 			if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 			if( conn != null) try {conn.close();} catch(SQLException e) {}
+			if( rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 	 	
 	 	JSONObject obj = new JSONObject();

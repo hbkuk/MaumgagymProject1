@@ -1,3 +1,4 @@
+<%@page import="com.to.review.ReviewTO"%>
 <%@page import="java.awt.font.ImageGraphicAttribute"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -63,7 +64,7 @@
 		
 		conn = dataSource.getConnection();
 		
- 		String sql = "select m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
+ 		String sql = "select m.seq, m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
  		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id );
@@ -74,6 +75,7 @@
 		
 		if( rs.next() ) {
 			
+			mto.setSeq( rs.getInt("m.seq"));
 			mto.setNickname( rs.getString("m.nickname") );
 			mto.setId( rs.getString("m.id") );
 			mto.setName( rs.getString("m.name") );
@@ -85,46 +87,27 @@
 			
 		}
 		
- 		sql = "select m.nickname, m.id, m.name, m.birthday, m.phone, m.email, m.zipcode, m.fulladdress from member m where id = ?";
- 		
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, id );
-		
-		rs = pstmt.executeQuery();
-		
-		mto = new MemberTO();
-		
-		if( rs.next() ) {
-			
-			mto.setNickname( rs.getString("m.nickname") );
-			mto.setId( rs.getString("m.id") );
-			mto.setName( rs.getString("m.name") );
-			mto.setBirthday( rs.getString("m.birthday") );
-			mto.setPhone( rs.getString("m.phone") );
-			mto.setEmail( rs.getString("m.email") );
-			mto.setZipcode( rs.getString("m.zipcode") );
-			mto.setFullAddress( rs.getString("m.fulladdress") );
-			
-		}
 		
 		StringBuilder sbPayMembership = new StringBuilder();
 		
 		sbPayMembership.append( "select p.pay_date AS '결제 날짜', p.type AS '결제 방식', IF( p.status = 1, '정상', '환불' ) AS '결제 상태', p.merchant_uid AS '결제 번호'," );
 		sbPayMembership.append( "	ms.name AS '회원권 이름', ms.price AS '회원권 가격', ms.period AS '회원권 기간',");
-		sbPayMembership.append( "		b.title AS '게시글 타이틀',");
+		sbPayMembership.append( "		b.seq AS '게시글 번호' , b.title AS '게시글 타이틀',");
 		sbPayMembership.append( "			i.name AS '대표 이미지', ");
 		sbPayMembership.append( "				wm.fulladdress AS '업체 주소',  wm.phone AS '업체 번호', ");
-		sbPayMembership.append( "					IFNULL( msr.status, 0 ) AS '회원권 상태'");
-		sbPayMembership.append( "						from pay p LEFT OUTER JOIN member m");
-		sbPayMembership.append( "							ON( p.member_seq = m.seq ) LEFT OUTER JOIN membership ms");
-		sbPayMembership.append( "								ON( p.membership_seq = ms.seq ) LEFT OUTER JOIN board b");
-		sbPayMembership.append( "									ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
-		sbPayMembership.append( "										ON( b.seq = i.board_seq) LEFT OUTER JOIN member wm");
-		sbPayMembership.append( "											ON( b.write_seq = wm.seq ) LEFT OUTER JOIN membership_register msr ");
-		sbPayMembership.append( "												ON ( p.merchant_uid = msr.merchant_uid )");
-		sbPayMembership.append( "													WHERE m.id = ?");
-		sbPayMembership.append( "														group BY p.merchant_uid");
-		sbPayMembership.append( "															ORDER BY p.pay_date desc");
+		sbPayMembership.append( "					IFNULL( msr.status, 0 ) AS '회원권 상태', ");
+		sbPayMembership.append( "						IFNULL(rv.status, 0 ) AS '리뷰 상태' ");
+		sbPayMembership.append( "							from pay p LEFT OUTER JOIN member m");
+		sbPayMembership.append( "								ON( p.member_seq = m.seq ) LEFT OUTER JOIN membership ms");
+		sbPayMembership.append( "									ON( p.membership_seq = ms.seq ) LEFT OUTER JOIN board b");
+		sbPayMembership.append( "										ON( ms.board_seq = b.seq ) LEFT OUTER JOIN image i");
+		sbPayMembership.append( "											ON( b.seq = i.board_seq) LEFT OUTER JOIN member wm");
+		sbPayMembership.append( "												ON( b.write_seq = wm.seq ) LEFT OUTER JOIN membership_register msr ");
+		sbPayMembership.append( "													ON ( p.merchant_uid = msr.merchant_uid )  LEFT OUTER JOIN review rv ");
+		sbPayMembership.append( "														ON ( m.seq = rv.writer_seq ) ");
+		sbPayMembership.append( "															WHERE m.id = ?");
+		sbPayMembership.append( "																group BY p.merchant_uid");
+		sbPayMembership.append( "																	ORDER BY p.pay_date desc");
  				
 		
 		sql = sbPayMembership.toString();
@@ -155,6 +138,7 @@
 			purchaseList.put( "msto", msto );
 			
 			BoardTO bto = new BoardTO();
+			bto.setSeq( rs.getInt("게시글 번호"));
 			bto.setTitle( rs.getString("게시글 타이틀") );
 			bto.setImage_name(  rs.getString("대표 이미지") );
 			purchaseList.put( "bto", bto );
@@ -163,6 +147,10 @@
 			wmto.setFullAddress( rs.getString("업체 주소") );
 			wmto.setPhone( rs.getString("업체 번호") );
 			purchaseList.put( "wmto", wmto );
+			
+			ReviewTO rvto = new ReviewTO();
+			rvto.setStatus( rs.getString("리뷰 상태") );
+			purchaseList.put( "rvto", rvto );
 			
 			purchaseArrayList.add( purchaseList );
 			
@@ -202,6 +190,9 @@
 				MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 				String facilityFullAddress = wmto.getFullAddress();
 				String phone = wmto.getPhone();
+				
+				ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+				String reviewStatus = rvto.getStatus();
 
 				
 				sbPurchaseList.append( "	<div class='mt-3 mb-4'>");
@@ -279,6 +270,9 @@
 				String facilityFullAddress = wmto.getFullAddress();
 				String phone = wmto.getPhone();
 				
+				ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+				String reviewStatus = rvto.getStatus();
+				
 				if( membership_register_status.equals( "0" ) || membership_register_status.equals( "1" ) ) {
 
 				
@@ -295,9 +289,6 @@
 				sbBeforeRegister.append( "							<h3 class='card-title fw-semibold'>" + facilityFullAddress + "</h3>");
 				sbBeforeRegister.append( "							<br>");
 				sbBeforeRegister.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
-				sbBeforeRegister.append( "							<p class='card-text fs-7'>");
-				sbBeforeRegister.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
-				sbBeforeRegister.append( "							</p>");
 				sbBeforeRegister.append( "						</div>");
 				sbBeforeRegister.append( "					</div>");
 				sbBeforeRegister.append( "					<table class='table mt-3'>");
@@ -355,6 +346,9 @@
 				MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 				String facilityFullAddress = wmto.getFullAddress();
 				String phone = wmto.getPhone();
+				
+				ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+				String reviewStatus = rvto.getStatus();
 
 				if( membership_register_status.equals( "2" ) ) {
 				
@@ -371,9 +365,6 @@
 				sbAfterRegister.append( "							<h3 class='card-title fw-semibold'>" + facilityFullAddress + "</h3>");
 				sbAfterRegister.append( "							<br>");
 				sbAfterRegister.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
-				sbAfterRegister.append( "							<p class='card-text fs-7'>");
-				sbAfterRegister.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
-				sbAfterRegister.append( "							</p>");
 				sbAfterRegister.append( "						</div>");
 				sbAfterRegister.append( "					</div>");
 				sbAfterRegister.append( "					<table class='table mt-3'>");
@@ -431,6 +422,9 @@
 			MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 			String facilityFullAddress = wmto.getFullAddress();
 			String phone = wmto.getPhone();
+			
+			ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+			String reviewStatus = rvto.getStatus();
 
 			if( membership_register_status.equals( "3" ) ) {
 			
@@ -447,9 +441,6 @@
 			sbPauseMembership.append( "							<h3 class='card-title fw-semibold'>" + facilityFullAddress + "</h3>");
 			sbPauseMembership.append( "							<br>");
 			sbPauseMembership.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
-			sbPauseMembership.append( "							<p class='card-text fs-7'>");
-			sbPauseMembership.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
-			sbPauseMembership.append( "							</p>");
 			sbPauseMembership.append( "						</div>");
 			sbPauseMembership.append( "					</div>");
 			sbPauseMembership.append( "					<table class='table mt-3'>");
@@ -505,12 +496,16 @@
 			int membershipPeriod = msto.getMembership_period();	//
 			
 			BoardTO bto = (BoardTO) purchaseList.get("bto");
+			int boardSeq = bto.getSeq();
 			String title = bto.getTitle();			//
 			String imageName = bto.getImage_name();	//
 			
 			MemberTO wmto = (MemberTO) purchaseList.get("wmto");
 			String facilityFullAddress = wmto.getFullAddress();
 			String phone = wmto.getPhone();
+			
+			ReviewTO rvto = (ReviewTO) purchaseList.get("rvto");
+			String reviewStatus = rvto.getStatus();
 
 			if( membership_register_status.equals( "4" ) ) {
 			
@@ -527,9 +522,6 @@
 			sbExpireMembership.append( "							<h3 class='card-title fw-semibold'>" + facilityFullAddress + "</h3>");
 			sbExpireMembership.append( "							<br>");
 			sbExpireMembership.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
-			sbExpireMembership.append( "							<p class='card-text fs-7'>");
-			sbExpireMembership.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
-			sbExpireMembership.append( "							</p>");
 			sbExpireMembership.append( "						</div>");
 			sbExpireMembership.append( "					</div>");
 			sbExpireMembership.append( "					<table class='table mt-3'>");
@@ -549,11 +541,11 @@
 			sbExpireMembership.append( "						</tbody>");
 			sbExpireMembership.append( "					</table>");
 			sbExpireMembership.append( "					<div class='d-grid gap-2'> ");
-/* 				if( membership_register_status.equals( "0" )) {
-				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "'> 등록하기 </button>");
-			} else {
-				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "' disabled='disabled'> 승인 대기 중입니다. 취소를 원하시면 운동시설에 연락하세요. </button>");		
-			} */
+ 			if( reviewStatus.equals( "0" ) ) {
+				sbExpireMembership.append( "						<button id='" + merchantUid + "' class='btn btn-primary mt-1' type='button' onclick='reviewRegister(this, " + boardSeq + ", " + mto.getSeq() + ", `" + bto.getTitle() + "`, `" + imageName + "`, `" + facilityFullAddress + "` )' value='" + merchantUid + "'> 리뷰쓰기 </button>");
+			} else if ( reviewStatus.equals( "1" ) ) {
+				sbExpireMembership.append( "						<button id='" + merchantUid + "' class='btn btn-secondary mt-1' type='button' onclick='reviewRegister(" + boardSeq + ", " + mto.getSeq() + ")' value='" + merchantUid + "' disabled='disabled'> 이미 리뷰를 등록했습니다. </button>");		
+			} 
 			sbExpireMembership.append( "					</div>");
 			sbExpireMembership.append( "				</div>");
 			sbExpireMembership.append( "			</div>");
@@ -572,9 +564,9 @@
 		} catch( SQLException e) {
 			System.out.println( e.getMessage());
 		} finally {
-			if( conn != null );
-			if( pstmt != null );
-			if( rs != null );
+			if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if( conn != null) try {conn.close();} catch(SQLException e) {}
+			if( rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 	
 	
@@ -655,76 +647,62 @@
 							<form>
 							
 								<div class="row gx-3">
-									<!-- Form Group (name)-->
-									<div class="mb-3">
-										<label class="small mb-1" for="inputFirstName">이름</label> <input
-											class="form-control" id="inputFirstName" type="text"
-											placeholder="Enter your first name" value="<%= mto.getName() %>" readonly>
+								
+								<div class="mb-3">
+										<label class="small mb-1" for="inputName">이름</label> <input
+											class="form-control" id="inputName" type="text" value="<%= mto.getName() %>" readonly>
 									</div>
 								</div>
 							
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">아이디</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= mto.getId() %>" readonly>
+									<label class="small mb-1" for="inputID">아이디</label> <input
+										class="form-control" id="inputID" type="text" value="<%= mto.getId() %>" readonly>
 								</div>
 								
-								<!-- Form Group (nickname)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">닉네임</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your username" value="<%= mto.getNickname() %>">
+									<label class="small mb-1" for="inputNickName">닉네임</label> <input
+										class="form-control" id="inputNickName" type="text" value="<%= mto.getNickname() %>">
 								</div>
 								
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">생년월일</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= mto.getBirthday() %>">
+									<label class="small mb-1" for="inputBirthday">생년월일</label> <input
+										class="form-control" id="inputBirthday" type="text" value="<%= mto.getBirthday() %>">
 								</div>
 								
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">휴대전화</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= mto.getPhone() %>">
+									<label class="small mb-1" for="inputPhone">휴대전화</label> <input
+										class="form-control" id="inputPhone" type="text" value="<%= mto.getPhone() %>">
 								</div>
 								
-								<!-- Form Group (email address)-->
 								<div class="mb-3">
 									<label class="small mb-1" for="inputEmailAddress">이메일</label> <input
-										class="form-control" id="inputEmailAddress" type="email"
-										placeholder="Enter your email address"
-										value="<%= mto.getEmail() %>">
+										class="form-control" id="inputEmailAddress" type="email" value="<%= mto.getEmail() %>">
 								</div>
 								
-								<!-- Form Group (id)-->
 								<div class="mb-3">
-									<label class="small mb-1" for="inputUsername">주소</label> <input
-										class="form-control" id="inputUsername" type="text"
-										placeholder="Enter your id" value="<%= "[" + mto.getZipcode() +"] " + mto.getFullAddress() %>">
+									<label class="small mb-1" for="inputAddress">주소</label> <input
+										class="form-control" id="inputAddress" type="text" value="<%= "[" + mto.getZipcode() +"] " + mto.getFullAddress() %>">
 								</div>
 							
 								<!-- Form Row-->
 								<div class="row gx-3 mb-3">
 									<!-- Form Group (phone number)-->
 									<div class="col-md-6">
-										<label class="small mb-1" for="inputPhone">비밀번호 </label> <input
-											class="form-control" id="inputPhone" type="tel"
+										<label class="small mb-1" for="inputPassword">비밀번호 </label> <input
+											class="form-control" id="inputPassword" type="password"
 											placeholder="현재 비밀번호를 입력하세요." value="">
 									</div>
 									<!-- Form Group (birthday)-->
 									<div class="col-md-6">
-										<label class="small mb-1" for="inputBirthday">비밀번호 입력</label>
-										<input class="form-control" id="inputBirthday" type="text"
-											name="birthday" placeholder="변경할 비밀번호를 입력하세요."
+										<label class="small mb-1" for="inputChangePassword">비밀번호 입력</label>
+										<input class="form-control" id="inputChangePassword" type="password"
+										placeholder="변경할 비밀번호를 입력하세요."
 											value="">
 									</div>
 								</div>
 								<!-- Save changes button-->
 								<div class="d-grid gap-2">
-									<button class="btn btn-primary mt-3" type="button"> 변경하기 </button>
+									<button onclick='memberModify("<%=mto.getId() %>")' class="btn btn-primary mt-3" type="button"> 변경하기 </button>
 								</div>
 							</form>
 						</div>

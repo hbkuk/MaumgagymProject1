@@ -1,3 +1,5 @@
+<%@page import="com.to.board.MemberShipTO"%>
+<%@page import="com.to.pay.PayTO"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="javax.naming.NamingException"%>
@@ -13,19 +15,12 @@
 	request.setCharacterEncoding( "utf-8" );	
 
 	// post로 온 요청을 받기
-	String impUid = request.getParameter( "imp_uid" );
 	String merchantUid = request.getParameter( "merchant_uid" );
-	String membershipSeq = request.getParameter( "membership_seq" );
-	String payMethod = request.getParameter( "pay_method" );
-	String buyerSeq = request.getParameter( "buyer_seq" );
-	
-/* 	System.out.println( impUid );
-	System.out.println( merchantUid );
-	System.out.println( membershipSeq );
-	System.out.println( payMethod ); */
+	int price = 0;
 	
  	Connection conn = null;
 	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	
 	// flag가 0 이면 정상
 	// flag가 1 이면 서버 오류
@@ -39,21 +34,21 @@
 		
 		conn = dataSource.getConnection();
 		
-		String sql = "insert into pay values ( ?, ?, ?, ?, 1, now(), ? )";
-				
+		String sql = "SELECT ms.price FROM pay p LEFT OUTER JOIN membership ms ON ( p.membership_seq = ms.seq ) WHERE p.merchant_uid = ? ";
+		
 		pstmt = conn.prepareStatement(sql);
-		
-		
 		pstmt.setString(1, merchantUid );
-		pstmt.setString(2, membershipSeq );
-		pstmt.setString(3, payMethod );
-		pstmt.setString(4, impUid );
-		pstmt.setString(5, buyerSeq );
 		
-		if( pstmt.executeUpdate() == 1) {
+		rs = pstmt.executeQuery();
+		
+		MemberShipTO msto = new MemberShipTO();
+		
+		if( rs.next() ) {
+			
 			flag = 0;
-		} else {
-			flag = 1;
+			msto.setMembership_price( rs.getInt( "ms.price" ));
+			price = msto.getMembership_price();
+			
 		}
 		
 	} catch( NamingException e) {
@@ -63,11 +58,13 @@
 	} finally {
 		if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 		if( conn != null) try {conn.close();} catch(SQLException e) {}
+		if( rs != null) try {rs.close();} catch(SQLException e) {}
 	}
  	
  	JSONObject obj = new JSONObject();
  	
- 	obj.put( "flag", flag);
+ 	obj.put( "flag", flag );
+ 	obj.put( "price", price );
  	
  	out.println( obj );
 			

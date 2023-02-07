@@ -46,7 +46,10 @@
 	<link href="./resources/asset/css/user.css" rel="stylesheet" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-
+	
+	<!-- review css -->
+	<link href="./user/user_source/review.css" rel="stylesheet" />
+	
 </head>
 <body>
 	
@@ -62,8 +65,14 @@
 		<jsp:param name="id" value="<%= id %>" />
 	</jsp:include>
 	
+	<!-- modal -->
+	<jsp:include page="./user_source/memberModify_modal.jsp" />
+	<jsp:include page="./user_source/review_modal.jsp" />
+	
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
+	
+	<jsp:include page="./user_source/register_modal.jsp" />
 	
 	<!-- script -->
     <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>

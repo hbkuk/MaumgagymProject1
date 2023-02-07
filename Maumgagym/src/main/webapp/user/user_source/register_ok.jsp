@@ -1,3 +1,5 @@
+<%@page import="com.to.board.MemberShipTO"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="javax.naming.NamingException"%>
@@ -14,9 +16,9 @@
 
 	String merchantUid	= request.getParameter( "merchant_uid" );
 	
-	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	
 	// flag가 0 이면 정상
 	// flag가 1 이면 서버 오류
@@ -30,10 +32,28 @@
 		
 		conn = dataSource.getConnection();
 		
-		String sql = "insert into membership_register (seq, status, merchant_uid ) values ( 0, 1, ? ) ";
-		
+		// 회원권 개월수 확인하기
+ 		String sql = "SELECT ms.period FROM pay p LEFT OUTER JOIN membership ms ON( p.membership_seq = ms.seq ) WHERE p.merchant_uid = ?";
+ 		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, merchantUid );
+		
+		rs = pstmt.executeQuery();
+		
+		MemberShipTO msto = new MemberShipTO();
+		
+		if( rs.next() ) {
+			
+			msto.setMembership_period( rs.getInt("ms.period") );
+			
+		}
+		
+		
+		sql = "update membership_register SET register_date = NOW(), expiry_date = date_add( now(), INTERVAL ? MONTH ), status = 2 where merchant_uid = ? ";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, msto.getMembership_period() );
+		pstmt.setString(2, merchantUid );
 		
 		if( pstmt.executeUpdate() == 1) {
 			flag = 0;
@@ -48,6 +68,7 @@
 		} finally {
 			if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 			if( conn != null) try {conn.close();} catch(SQLException e) {}
+			if( rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 	 	
 	 	JSONObject obj = new JSONObject();

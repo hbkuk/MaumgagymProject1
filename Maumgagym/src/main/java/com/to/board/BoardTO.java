@@ -18,6 +18,7 @@ public class BoardTO {
 	String writer;			//글쓴이
 	int write_seq;			//글번호
 	String write_date;		//글쓴날짜
+	
 	String status;
 	String tag;
 	int view_count;
@@ -27,5 +28,6 @@ public class BoardTO {
 	String membership_name;
 	int membership_price;
 	int membership_period;
+	String fullCategoryString; 
 
 }

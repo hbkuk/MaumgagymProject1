@@ -1,3 +1,5 @@
+<%@page import="com.to.board.MemberShipTO"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="javax.naming.NamingException"%>
@@ -14,13 +16,15 @@
 
 	String merchantUid	= request.getParameter( "merchant_uid" );
 	
-	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	
 	// flag가 0 이면 정상
-	// flag가 1 이면 서버 오류
-	int flag = 1;
+	// flag가 1 이면 pay 테이블 update 오류
+	// flag가 2 이면 register 테이블 update 오류
+	// flag가 3 이면 서버 오류
+	int flag = 3;
 	
 	try {
 		
@@ -30,13 +34,26 @@
 		
 		conn = dataSource.getConnection();
 		
-		String sql = "insert into membership_register (seq, status, merchant_uid ) values ( 0, 1, ? ) ";
+		// pay 테이블에서 환불로 변경
+		String sql = "update pay SET status = 2 where merchant_uid = ? ";
 		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, merchantUid );
 		
 		if( pstmt.executeUpdate() == 1) {
 			flag = 0;
+			
+				sql = "update membership_register SET status = 5 where merchant_uid = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, merchantUid );
+				
+				if( pstmt.executeUpdate() == 1) {
+					flag = 0;
+				} else {
+					flag = 2;
+				}
+			
 		} else {
 			flag = 1;
 		}
@@ -48,6 +65,7 @@
 		} finally {
 			if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 			if( conn != null) try {conn.close();} catch(SQLException e) {}
+			if( rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 	 	
 	 	JSONObject obj = new JSONObject();

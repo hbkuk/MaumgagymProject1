@@ -98,6 +98,7 @@
 		sbSelectSql.append( "					when msr.status = 2 then '승인 완료' ");
 		sbSelectSql.append( "					when msr.status = 3 then '사용 중지' ");
 		sbSelectSql.append( "					when msr.status = 4 then '기간 만료' ");
+		sbSelectSql.append( "					when msr.status = 5 then '환불' ");
 		sbSelectSql.append( "				END AS '회원권  상태', ");
 		sbSelectSql.append( "					msr.merchant_uid AS '주문 번호', ");
 		sbSelectSql.append( "						IF( p.status = 1, '정상', '환불' ) AS '결제 상태', DATE_FORMAT(p.pay_date, '%Y-%m-%d') '결제일' ");
@@ -209,6 +210,8 @@
 				sbPurchaseList.append( "	    	<td><span class='badge bg-warning '>" + membershipRegisterStatus + "</span></td>");
 				} else if ( membershipRegisterStatus.equals( "기간 만료")) {
 				sbPurchaseList.append( "	    	<td><span class='badge bg-danger '>" + membershipRegisterStatus + "</span></td>");
+				} else if ( membershipRegisterStatus.equals( "환불")) {
+				sbPurchaseList.append( "	    	<td><span class='badge bg-danger '>" + membershipRegisterStatus + "</span></td>");
 				}
 				sbPurchaseList.append( "		<td>" + pdayStatus + "</td> ");
 				sbPurchaseList.append( "		<td>" + payDate + "</td> ");
@@ -221,13 +224,13 @@
 				sbPurchaseList.append( "	    	<a ><span class='badge bg-warning text-dark'>반려</span></a> ");
 				}
 				if( membershipRegisterStatus.equals( "승인 대기") || membershipRegisterStatus.equals( "승인 완료") ) {
-				sbPurchaseList.append( "	    	<a ><span class='badge bg-danger'>환불</span></a> ");
+				sbPurchaseList.append( "	    	<button id='" + name + "' onclick='refundConfirm(this);' value='" + merchantUid +"' class='border-0 badge bg-danger'>환불</button> ");
 				}
 				if( membershipRegisterStatus.equals( "승인 완료") ) {
 				sbPurchaseList.append( "	    	<button id='" + name + "' onclick='pauseConfirm(this);' value='" + merchantUid +"' class='border-0 badge bg-warning text-dark'>중지</button> ");
 				}
 				if( membershipRegisterStatus.equals( "사용 중지") ) {
-				sbPurchaseList.append( "	    	<a ><span class='badge bg-secondary text-white'>재개</span></a> ");
+				sbPurchaseList.append( "	    	<button id='" + name + "' onclick='restartConfirm(this);' value='" + merchantUid +"' class='border-0 badge bg-secondary text-white'>재개</button> ");
 				}
 				sbPurchaseList.append( "		</td> ");
 				sbPurchaseList.append( "	</tr> ");
@@ -257,13 +260,13 @@
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	
 		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+			<button class="nav-link" id="home-tab" data-bs-toggle="tab"
 				data-bs-target="#home-tab-pane" type="button" role="tab"
 				aria-controls="home-tab-pane" aria-selected="true">내 정보</button>
 		</li>
 		
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="purchase-list-tab" data-bs-toggle="tab"
+			<button class="nav-link active" id="purchase-list-tab" data-bs-toggle="tab"
 				data-bs-target="#purchase-list-tab-pane" type="button" role="tab"
 				aria-controls="purchase-list-tab-pane" aria-selected="false">전체 결제 회원권</button>
 		</li>
@@ -300,7 +303,7 @@
 		
 	</ul>
 	<div class="tab-content" id="myTabContent">
-		<div class="tab-pane fade show active" id="home-tab-pane"
+		<div class="tab-pane fade show" id="home-tab-pane"
 			role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
 			<!-- 내 정보 -->
@@ -405,7 +408,7 @@
 			</div>
 		</div>
 		
-		<div class="tab-pane fade" id="purchase-list-tab-pane" role="tabpanel"
+		<div class="tab-pane fade show active" id="purchase-list-tab-pane" role="tabpanel"
 			aria-labelledby="purchase-list-tab-pane-tab" tabindex="1">
 
 			<!--  %= sbPurchaseList.toString() %> -->

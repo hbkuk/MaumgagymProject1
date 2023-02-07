@@ -17,8 +17,6 @@
         <link href="./resources/asset/css/bootstrap.min.css" rel="stylesheet" />
         <link href="./resources/asset/css/facility_list.css" rel="stylesheet" />
         
-        
-
 	</head>
 
 	<body>
@@ -27,9 +25,7 @@
 			<jsp:param name="userID" value="<%=userID%>" />
 		</jsp:include>
 	
-		<jsp:include page="../main/main_source/main_search.jsp">
-			<jsp:param name="userID" value="<%=userID%>" />
-		</jsp:include>
+		<jsp:include page="../main/main_source/main_search.jsp"/>
 	
 		<!-- 검색 결과 게시판 -->
 		<jsp:include page="./search_source/search_list.jsp" />
@@ -40,5 +36,6 @@
 		
 	<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
     <script src="./resources/asset/js/owl.carousel.min.js"></script>
+    <script src="./search/search_source/searchList.js"></script>
 	</body>
 </html>

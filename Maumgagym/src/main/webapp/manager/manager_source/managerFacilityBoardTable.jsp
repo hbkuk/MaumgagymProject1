@@ -10,7 +10,7 @@
 	
 	int totalRecord = facilityBoardLists.size(); //총데이터갯수
 	
-	StringBuilder sbHtml = new StringBuilder();
+	StringBuilder sbFacility = new StringBuilder();
 			 
 			 for( BoardTO to : facilityBoardLists){
 				int seq = to.getSeq();
@@ -21,17 +21,17 @@
 				int write_seq = to.getWrite_seq();
 				String date = to.getWrite_date();
 				 
-				sbHtml.append("<tr>");
-				sbHtml.append("<td scope='row'>" + seq + "</td>");
-				sbHtml.append("<td class='text-muted'>" + category + "</td>");
-				sbHtml.append("<td>" + topic + "</td>");
-				sbHtml.append("<td class='text-start fw-bold'>");
-				sbHtml.append("<a href='viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
-				sbHtml.append("</td>");
-				sbHtml.append("<td>" + name + "</td>");
-				sbHtml.append("<td>" + date + "</td>");
-				sbHtml.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
-				sbHtml.append("</tr>");
+				sbFacility.append("<tr>");
+				sbFacility.append("<td scope='row'>" + seq + "</td>");
+				sbFacility.append("<td class='text-muted'>" + category + "</td>");
+				sbFacility.append("<td>" + topic + "</td>");
+				sbFacility.append("<td class='text-start fw-bold'>");
+				sbFacility.append("<a href='viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbFacility.append("</td>");
+				sbFacility.append("<td>" + name + "</td>");
+				sbFacility.append("<td>" + date + "</td>");
+				sbFacility.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
+				sbFacility.append("</tr>");
 			 }
 %>    
 <hr/>
@@ -65,9 +65,7 @@ function deleteboard(deleteSeq) {
                                         <th>기능</th>
                                     </tr>
                                 </thead>
-                                <%= sbHtml.toString() %>
-                              
-                                </tbody>
+                                <%= sbFacility.toString() %>
                             </table>
                         </div>
                     </div>

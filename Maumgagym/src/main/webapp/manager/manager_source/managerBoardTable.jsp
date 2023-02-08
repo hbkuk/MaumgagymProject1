@@ -10,7 +10,7 @@
 	
 	int totalRecord = boardLists.size(); //총데이터갯수
 	
-	StringBuilder sbHtml = new StringBuilder();
+	StringBuilder sbBoard = new StringBuilder();
 			 /*
 			 					BoardTO to = new BoardTO();
 					to.setSeq(rs.getInt("b.seq"));
@@ -29,17 +29,17 @@
 				String nickname = to.getNickname();
 				String date = to.getWrite_date();
 				 
-				sbHtml.append("<tr>");
-				sbHtml.append("<td scope='row'>" + seq + "</td>");
-				sbHtml.append("<td class='text-muted'>" + category + "</td>");
-				sbHtml.append("<td>" + topic + "</td>");
-				sbHtml.append("<td class='text-start fw-bold'>");
-				sbHtml.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
-				sbHtml.append("</td>");
-				sbHtml.append("<td>" + nickname + "</td>");
-				sbHtml.append("<td>" + date + "</td>");
-				sbHtml.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
-				sbHtml.append("</tr>");
+				sbBoard.append("<tr>");
+				sbBoard.append("<td scope='row'>" + seq + "</td>");
+				sbBoard.append("<td>" + category + "</td>");
+				sbBoard.append("<td>" + topic + "</td>");
+				sbBoard.append("<td class='text-start fw-bold'>");
+				sbBoard.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbBoard.append("</td>");
+				sbBoard.append("<td>" + nickname + "</td>");
+				sbBoard.append("<td>" + date + "</td>");
+				sbBoard.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
+				sbBoard.append("</tr>");
 			 }
 %>    
 <hr/>
@@ -74,7 +74,7 @@ function deleteboard(deleteSeq) {
                                         <th>기능</th>
                                     </tr>
                                 </thead>
-                                <%= sbHtml.toString() %>
+                                <%= sbBoard.toString() %>
                           
                             </table>
                         </div>
